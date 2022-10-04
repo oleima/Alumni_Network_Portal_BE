@@ -22,11 +22,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Models\DTOs\Group\" />
-    <Folder Include="Models\DTOs\Event\" />
-    <Folder Include="Models\DTOs\Topic\" />
-    <Folder Include="Models\DTOs\User\" />
-    <Folder Include="Models\DTOs\Post\" />
     <Folder Include="Profiles\" />
     <Folder Include="Services\EventServices\" />
     <Folder Include="Services\GroupServices\" />
