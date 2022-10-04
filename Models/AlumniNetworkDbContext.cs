@@ -19,7 +19,15 @@ namespace Alumni_Network_Portal_BE.Models
         //overriding OnModelCreating to create seeddata for all object models 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<User>()
+            .HasMany(e => e.AuthoredEvents)
+            .WithOne(e => e.Author)
+            .OnDelete(DeleteBehavior.Restrict);
 
+            modelBuilder.Entity<User>()
+            .HasMany(e => e.AuthoredPosts)
+            .WithOne(e => e.Author)
+            .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

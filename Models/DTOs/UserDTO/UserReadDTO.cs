@@ -1,25 +1,17 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Alumni_Network_Portal_BE.Models.Domain;
+using System.ComponentModel.DataAnnotations;
 
-namespace Alumni_Network_Portal_BE.Models.Domain
+namespace Alumni_Network_Portal_BE.Models.DTOs.UserDTO
 {
-    public class User
+    public class UserReadDTO
     {
-        // PK
+        //Fields
         public int Id { get; set; }
-        // Fields
-        [MaxLength(255)]
-        [Required]
         public string Username { get; set; }
-        [MaxLength(255)]
-        [Required]
         public string Status { get; set; }
-        [MaxLength(255)]
-        public string? Bio { get; set; }
-        [MaxLength(255)]
-        public string? FunFact { get; set; }
+        public string? Bio { get; set; } //Nullable
+        public string? FunFact { get; set; } //Nullable
         public byte[]? Picture { get; set; }
-
-        // Relationships
         public ICollection<Post>? AuthoredPosts { get; set; } //One-Many
         public ICollection<Post>? RecievedPosts { get; set; } //One-Many
         public ICollection<Event>? AuthoredEvents { get; set; } //One-Many
