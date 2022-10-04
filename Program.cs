@@ -3,6 +3,9 @@ using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using static System.Net.WebRequestMethods;
 
+using Alumni_Network_Portal_BE.Models;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -33,6 +36,9 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 // Add services to the container.
 builder.Services.AddControllers();
+builder.Services.AddDbContext<AlumniNetworkDbContext>(
+    opt => opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

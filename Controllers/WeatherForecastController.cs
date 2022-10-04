@@ -1,6 +1,7 @@
+using Alumni_Network_Portal_BE;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Alumni_Network_Portal_BE.Controllers
+namespace WebApplication1.Controllers
 {
     [ApiController]
     [Route("[controller]")]
