@@ -15,6 +15,20 @@ namespace Alumni_Network_Portal_BE.Models.Domain
         public string? Body { get; set; } //Nullable
 
         // Relationships
+        public int? AuthorId { get; set; }
+        public User? Author { get; set; }
+        public int? RecieverId { get; set; }
+        public User? Reciever { get; set; }
+        public int? TopicId { get; set; }
+        public Topic? Topic { get; set; }
+        public int? GroupId { get; set; }
+        public Topic? Group { get; set; }
+        public int? EventId { get; set; }
+        public Event? Event { get; set; }
+        public int? ParentId { get; set; }
+        public Post? Parent { get; set; }
+
+
     }
 
 }
