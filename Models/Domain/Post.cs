@@ -22,7 +22,7 @@ namespace Alumni_Network_Portal_BE.Models.Domain
         public int? TopicId { get; set; }
         public Topic? Topic { get; set; }
         public int? GroupId { get; set; }
-        public Topic? Group { get; set; }
+        public Group? Group { get; set; }
         public int? EventId { get; set; }
         public Event? Event { get; set; }
         public int? ParentId { get; set; }
