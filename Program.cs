@@ -5,6 +5,8 @@ using static System.Net.WebRequestMethods;
 
 using Alumni_Network_Portal_BE.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -41,7 +43,54 @@ builder.Services.AddDbContext<AlumniNetworkDbContext>(
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(options =>
+{
+    options.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Version = "v1",
+        Title = "Alumni Network API",
+        Description = "Get information about users, posts, groups and events",
+        TermsOfService = new Uri("https://example.com/terms"), //TODO
+        Contact = new OpenApiContact
+        {
+            Name = "Example Contact",
+            Url = new Uri("https://example.com/contact")
+        },
+        License = new OpenApiLicense
+        {
+            Name = "Example License",
+            Url = new Uri("https://example.com/license")
+        }
+    });
+    options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Description = "JWT Token",
+        Name = "Authorization",
+        In = ParameterLocation.Header,
+        Type = SecuritySchemeType.Http,
+        Scheme = "Bearer"
+    });
+    options.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Name = "Bearer",
+                In = ParameterLocation.Header,
+                Reference = new OpenApiReference
+                {
+                    Id = "Bearer",
+                    Type = ReferenceType.SecurityScheme
+                }
+            },
+            new List<string>()
+        }
+    });
+});
+
+
+
+
 
 var app = builder.Build();
 
