@@ -2,8 +2,8 @@
 
 namespace Alumni_Network_Portal_BE.Services.UserServices
 {
-    public interface IUserService : IRepositoryService<User>
+    public interface IUserService : IRepository<User>
     {
-
+        public Task UpdateAsync(User user);
     }
 }

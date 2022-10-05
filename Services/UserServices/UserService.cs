@@ -15,19 +15,19 @@ namespace Alumni_Network_Portal_BE.Services.UserServices
 
         public bool Exists(int id)
         {
-            return _context.User.Any(e => e.Id == id);
+            return _context.Users.Any(e => e.Id == id);
         }
 
         public async Task<IEnumerable<User>> GetAllAsync()
         {
-            return await _context.User
+            return await _context.Users
             .Include(c => c.Groups)
             .ToListAsync();
         }
 
         public async Task<User> GetByIdAsync(int id)
         {
-            return await _context.User
+            return await _context.Users
                 .Include(c => c.Groups)
                 .Where(c => c.Id == id)
                 .FirstOrDefaultAsync();

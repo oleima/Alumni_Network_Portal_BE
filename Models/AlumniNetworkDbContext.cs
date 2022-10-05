@@ -9,11 +9,11 @@ namespace Alumni_Network_Portal_BE.Models
         {
         }
 
-        public DbSet<Event> Event { get; set; }
-        public DbSet<Group> Group { get; set; }
-        public DbSet<Post> Post { get; set; }
-        public DbSet<Topic> Topic { get; set; }
-        public DbSet<User> User { get; set; }
+        public DbSet<Event> Events { get; set; }
+        public DbSet<Group> Groups { get; set; }
+        public DbSet<Post> Posts { get; set; }
+        public DbSet<Topic> Topics { get; set; }
+        public DbSet<User> Users { get; set; }
 
 
         //overriding OnModelCreating to create seeddata for all object models 

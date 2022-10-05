@@ -5,12 +5,12 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Alumni_Network_Portal_BE.Migrations
 {
-    public partial class InitialDb : Migration
+    public partial class InitialDbSetup : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Group",
+                name: "Groups",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -21,11 +21,11 @@ namespace Alumni_Network_Portal_BE.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Group", x => x.Id);
+                    table.PrimaryKey("PK_Groups", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Topic",
+                name: "Topics",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -35,11 +35,11 @@ namespace Alumni_Network_Portal_BE.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Topic", x => x.Id);
+                    table.PrimaryKey("PK_Topics", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "User",
+                name: "Users",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -52,11 +52,11 @@ namespace Alumni_Network_Portal_BE.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_User", x => x.Id);
+                    table.PrimaryKey("PK_Users", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Event",
+                name: "Events",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -71,11 +71,11 @@ namespace Alumni_Network_Portal_BE.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Event", x => x.Id);
+                    table.PrimaryKey("PK_Events", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Event_User_AuthorId",
+                        name: "FK_Events_Users_AuthorId",
                         column: x => x.AuthorId,
-                        principalTable: "User",
+                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -91,15 +91,15 @@ namespace Alumni_Network_Portal_BE.Migrations
                 {
                     table.PrimaryKey("PK_GroupUser", x => new { x.GroupsId, x.UserId });
                     table.ForeignKey(
-                        name: "FK_GroupUser_Group_GroupsId",
+                        name: "FK_GroupUser_Groups_GroupsId",
                         column: x => x.GroupsId,
-                        principalTable: "Group",
+                        principalTable: "Groups",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_GroupUser_User_UserId",
+                        name: "FK_GroupUser_Users_UserId",
                         column: x => x.UserId,
-                        principalTable: "User",
+                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -115,15 +115,15 @@ namespace Alumni_Network_Portal_BE.Migrations
                 {
                     table.PrimaryKey("PK_TopicUser", x => new { x.TopicsId, x.UsersId });
                     table.ForeignKey(
-                        name: "FK_TopicUser_Topic_TopicsId",
+                        name: "FK_TopicUser_Topics_TopicsId",
                         column: x => x.TopicsId,
-                        principalTable: "Topic",
+                        principalTable: "Topics",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_TopicUser_User_UsersId",
+                        name: "FK_TopicUser_Users_UsersId",
                         column: x => x.UsersId,
-                        principalTable: "User",
+                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -139,15 +139,15 @@ namespace Alumni_Network_Portal_BE.Migrations
                 {
                     table.PrimaryKey("PK_EventGroup", x => new { x.EventId, x.GroupsId });
                     table.ForeignKey(
-                        name: "FK_EventGroup_Event_EventId",
+                        name: "FK_EventGroup_Events_EventId",
                         column: x => x.EventId,
-                        principalTable: "Event",
+                        principalTable: "Events",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_EventGroup_Group_GroupsId",
+                        name: "FK_EventGroup_Groups_GroupsId",
                         column: x => x.GroupsId,
-                        principalTable: "Group",
+                        principalTable: "Groups",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -163,15 +163,15 @@ namespace Alumni_Network_Portal_BE.Migrations
                 {
                     table.PrimaryKey("PK_EventTopic", x => new { x.EventsId, x.TopicsId });
                     table.ForeignKey(
-                        name: "FK_EventTopic_Event_EventsId",
+                        name: "FK_EventTopic_Events_EventsId",
                         column: x => x.EventsId,
-                        principalTable: "Event",
+                        principalTable: "Events",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_EventTopic_Topic_TopicsId",
+                        name: "FK_EventTopic_Topics_TopicsId",
                         column: x => x.TopicsId,
-                        principalTable: "Topic",
+                        principalTable: "Topics",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -187,21 +187,21 @@ namespace Alumni_Network_Portal_BE.Migrations
                 {
                     table.PrimaryKey("PK_EventUser", x => new { x.RespondedEventsId, x.UsersRespondedId });
                     table.ForeignKey(
-                        name: "FK_EventUser_Event_RespondedEventsId",
+                        name: "FK_EventUser_Events_RespondedEventsId",
                         column: x => x.RespondedEventsId,
-                        principalTable: "Event",
+                        principalTable: "Events",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_EventUser_User_UsersRespondedId",
+                        name: "FK_EventUser_Users_UsersRespondedId",
                         column: x => x.UsersRespondedId,
-                        principalTable: "User",
+                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Post",
+                name: "Posts",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -217,49 +217,49 @@ namespace Alumni_Network_Portal_BE.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Post", x => x.Id);
+                    table.PrimaryKey("PK_Posts", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Post_Event_EventId",
+                        name: "FK_Posts_Events_EventId",
                         column: x => x.EventId,
-                        principalTable: "Event",
+                        principalTable: "Events",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Post_Group_GroupId",
+                        name: "FK_Posts_Groups_GroupId",
                         column: x => x.GroupId,
-                        principalTable: "Group",
+                        principalTable: "Groups",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Post_Post_ParentId",
+                        name: "FK_Posts_Posts_ParentId",
                         column: x => x.ParentId,
-                        principalTable: "Post",
+                        principalTable: "Posts",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Post_Topic_TopicId",
+                        name: "FK_Posts_Topics_TopicId",
                         column: x => x.TopicId,
-                        principalTable: "Topic",
+                        principalTable: "Topics",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Post_User_AuthorId",
+                        name: "FK_Posts_Users_AuthorId",
                         column: x => x.AuthorId,
-                        principalTable: "User",
+                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Post_User_RecieverId",
+                        name: "FK_Posts_Users_RecieverId",
                         column: x => x.RecieverId,
-                        principalTable: "User",
+                        principalTable: "Users",
                         principalColumn: "Id");
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Event_AuthorId",
-                table: "Event",
-                column: "AuthorId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_EventGroup_GroupsId",
                 table: "EventGroup",
                 column: "GroupsId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Events_AuthorId",
+                table: "Events",
+                column: "AuthorId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_EventTopic_TopicsId",
@@ -277,33 +277,33 @@ namespace Alumni_Network_Portal_BE.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Post_AuthorId",
-                table: "Post",
+                name: "IX_Posts_AuthorId",
+                table: "Posts",
                 column: "AuthorId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Post_EventId",
-                table: "Post",
+                name: "IX_Posts_EventId",
+                table: "Posts",
                 column: "EventId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Post_GroupId",
-                table: "Post",
+                name: "IX_Posts_GroupId",
+                table: "Posts",
                 column: "GroupId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Post_ParentId",
-                table: "Post",
+                name: "IX_Posts_ParentId",
+                table: "Posts",
                 column: "ParentId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Post_RecieverId",
-                table: "Post",
+                name: "IX_Posts_RecieverId",
+                table: "Posts",
                 column: "RecieverId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Post_TopicId",
-                table: "Post",
+                name: "IX_Posts_TopicId",
+                table: "Posts",
                 column: "TopicId");
 
             migrationBuilder.CreateIndex(
@@ -327,22 +327,22 @@ namespace Alumni_Network_Portal_BE.Migrations
                 name: "GroupUser");
 
             migrationBuilder.DropTable(
-                name: "Post");
+                name: "Posts");
 
             migrationBuilder.DropTable(
                 name: "TopicUser");
 
             migrationBuilder.DropTable(
-                name: "Event");
+                name: "Events");
 
             migrationBuilder.DropTable(
-                name: "Group");
+                name: "Groups");
 
             migrationBuilder.DropTable(
-                name: "Topic");
+                name: "Topics");
 
             migrationBuilder.DropTable(
-                name: "User");
+                name: "Users");
         }
     }
 }

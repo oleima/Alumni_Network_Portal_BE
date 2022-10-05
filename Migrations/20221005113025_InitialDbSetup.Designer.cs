@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Alumni_Network_Portal_BE.Migrations
 {
     [DbContext(typeof(AlumniNetworkDbContext))]
-    [Migration("20221004115643_InitialDb")]
-    partial class InitialDb
+    [Migration("20221005113025_InitialDbSetup")]
+    partial class InitialDbSetup
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -60,7 +60,7 @@ namespace Alumni_Network_Portal_BE.Migrations
 
                     b.HasIndex("AuthorId");
 
-                    b.ToTable("Event");
+                    b.ToTable("Events");
                 });
 
             modelBuilder.Entity("Alumni_Network_Portal_BE.Models.Domain.Group", b =>
@@ -85,7 +85,7 @@ namespace Alumni_Network_Portal_BE.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Group");
+                    b.ToTable("Groups");
                 });
 
             modelBuilder.Entity("Alumni_Network_Portal_BE.Models.Domain.Post", b =>
@@ -137,7 +137,7 @@ namespace Alumni_Network_Portal_BE.Migrations
 
                     b.HasIndex("TopicId");
 
-                    b.ToTable("Post");
+                    b.ToTable("Posts");
                 });
 
             modelBuilder.Entity("Alumni_Network_Portal_BE.Models.Domain.Topic", b =>
@@ -159,7 +159,7 @@ namespace Alumni_Network_Portal_BE.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Topic");
+                    b.ToTable("Topics");
                 });
 
             modelBuilder.Entity("Alumni_Network_Portal_BE.Models.Domain.User", b =>
@@ -193,7 +193,7 @@ namespace Alumni_Network_Portal_BE.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("User");
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("EventGroup", b =>

@@ -26,7 +26,6 @@
   <ItemGroup>
     <Folder Include="Services\EventServices\" />
     <Folder Include="Services\GroupServices\" />
-    <Folder Include="Services\TopicServices\" />
     <Folder Include="Services\PostServices\" />
   </ItemGroup>
 
