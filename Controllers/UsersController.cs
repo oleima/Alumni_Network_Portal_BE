@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Alumni_Network_Portal_BE.Models;
 using Alumni_Network_Portal_BE.Models.Domain;
+using AutoMapper;
+using Alumni_Network_Portal_BE.Services.UserServices;
+using Alumni_Network_Portal_BE.Models.DTOs.UserDTO;
 
 namespace Alumni_Network_Portal_BE.Controllers
 {
@@ -14,95 +17,54 @@ namespace Alumni_Network_Portal_BE.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        private readonly AlumniNetworkDbContext _context;
-
-        public UsersController(AlumniNetworkDbContext context)
+        private readonly IUserService _userService;
+        private readonly IMapper _mapper;
+        public UsersController(IMapper mapper, IUserService userService)
         {
-            _context = context;
+            _userService = userService;
+            _mapper = mapper;
         }
 
         // GET: api/Users
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<User>>> GetUser()
+        public async Task<ActionResult<IEnumerable<UserReadDTO>>> GetUser()
         {
-            return await _context.User.ToListAsync();
+            return _mapper.Map<List<UserReadDTO>>(await _userService.GetAllAsync());
         }
 
         // GET: api/Users/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUser(int id)
+        public async Task<ActionResult<UserReadDTO>> GetUser(int id)
         {
-            var user = await _context.User.FindAsync(id);
+            User user = await _userService.GetByIdAsync(id);
 
             if (user == null)
             {
                 return NotFound();
             }
 
-            return user;
+            return _mapper.Map<UserReadDTO>(user);
         }
 
-        // PUT: api/Users/5
+        // PATCH: api/Users
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutUser(int id, User user)
+        [HttpPatch("{id}")]
+        public async Task<ActionResult> PatchUser(int id, UserUpdateDTO userDTO)
         {
-            if (id != user.Id)
+            if (id != userDTO.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(user).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!UserExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
-        }
-
-        // POST: api/Users
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<User>> PostUser(User user)
-        {
-            _context.User.Add(user);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetUser", new { id = user.Id }, user);
-        }
-
-        // DELETE: api/Users/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteUser(int id)
-        {
-            var user = await _context.User.FindAsync(id);
-            if (user == null)
+            if (!_userService.Exists(id))
             {
                 return NotFound();
             }
 
-            _context.User.Remove(user);
-            await _context.SaveChangesAsync();
+            User domainCharacter = _mapper.Map<User>(userDTO);
+            await _userService.UpdateAsync(domainCharacter);
 
             return NoContent();
-        }
-
-        private bool UserExists(int id)
-        {
-            return _context.User.Any(e => e.Id == id);
         }
     }
 }

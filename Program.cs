@@ -5,6 +5,7 @@ using static System.Net.WebRequestMethods;
 
 using Alumni_Network_Portal_BE.Models;
 using Microsoft.EntityFrameworkCore;
+using Alumni_Network_Portal_BE.Services.UserServices;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 
@@ -40,6 +41,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 builder.Services.AddControllers();
 builder.Services.AddDbContext<AlumniNetworkDbContext>(
     opt => opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddAutoMapper(typeof(Program).Assembly);
+builder.Services.AddScoped(typeof(IUserService), typeof(UserService));
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
