@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Alumni_Network_Portal_BE.Models;
+﻿using Microsoft.AspNetCore.Mvc;
 using Alumni_Network_Portal_BE.Models.Domain;
 using AutoMapper;
 using Alumni_Network_Portal_BE.Services.UserServices;
@@ -61,8 +54,8 @@ namespace Alumni_Network_Portal_BE.Controllers
                 return NotFound();
             }
 
-            User domainCharacter = _mapper.Map<User>(userDTO);
-            await _userService.UpdateAsync(domainCharacter);
+            User domainUser = _mapper.Map<User>(userDTO);
+            await _userService.UpdateAsync(domainUser);
 
             return NoContent();
         }

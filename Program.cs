@@ -9,6 +9,7 @@ using Alumni_Network_Portal_BE.Services.UserServices;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using Alumni_Network_Portal_BE.Services.TopicServices;
+using Alumni_Network_Portal_BE.Services.GroupServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -45,6 +46,8 @@ builder.Services.AddDbContext<AlumniNetworkDbContext>(
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 builder.Services.AddScoped(typeof(ITopicService), typeof(TopicService));
 builder.Services.AddScoped(typeof(IUserService), typeof(UserService));
+builder.Services.AddScoped(typeof(IGroupService), typeof(GroupService));
+
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
