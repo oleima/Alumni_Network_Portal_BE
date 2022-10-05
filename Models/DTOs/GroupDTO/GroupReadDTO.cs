@@ -1,21 +1,14 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Alumni_Network_Portal_BE.Models.Domain;
+using System.ComponentModel.DataAnnotations;
 
-namespace Alumni_Network_Portal_BE.Models.Domain
+namespace Alumni_Network_Portal_BE.Models.DTOs.GroupDTO
 {
-    public class Group
+    public class GroupReadDTO
     {
-        // PK
         public int Id { get; set; }
-        // Fields
-        [MaxLength(255)]
-        [Required]
         public string Title { get; set; }
-        [MaxLength(255)]
-        public string? Body { get; set; } //Nullable
-        [Required]
+        public string? Body { get; set; }
         public bool IsPrivate { get; set; }
-
-        // Relationships
         public ICollection<Post>? Posts { get; set; } //One-Many
         public ICollection<User>? Users { get; set; }  //Many-Many
         public ICollection<Event>? Events { get; set; }//Many-Many

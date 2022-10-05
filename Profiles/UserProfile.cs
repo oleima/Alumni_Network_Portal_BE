@@ -9,7 +9,8 @@ namespace Alumni_Network_Portal_BE.Profiles
         public UserProfile()
         {
             //Mapping from user to the respective DTOs
-            CreateMap<User, UserReadDTO>();
+            CreateMap<User, UserReadDTO>()
+                .PreserveReferences();
 
             CreateMap<UserCreateDTO, User>();
 
