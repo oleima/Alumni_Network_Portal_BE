@@ -3,6 +3,8 @@ using Alumni_Network_Portal_BE.Models.Domain;
 using AutoMapper;
 using Alumni_Network_Portal_BE.Models.DTOs.GroupDTO;
 using Alumni_Network_Portal_BE.Services.GroupServices;
+using Alumni_Network_Portal_BE.Helpers;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace Alumni_Network_Portal_BE.Controllers
 {
@@ -22,18 +24,25 @@ namespace Alumni_Network_Portal_BE.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<GroupReadDTO>>> GetGroup()
         {
-            return _mapper.Map<List<GroupReadDTO>>(await _groupService.GetAllAsync());
+            var keycloakId = this.User.GetId();
+            return _mapper.Map<List<GroupReadDTO>>(await _groupService.GetAllAsync(keycloakId));
         }
 
         // GET: api/Groups/5
         [HttpGet("{id}")]
         public async Task<ActionResult<GroupReadDTO>> GetGroup(int id)
         {
-            Group group = await _groupService.GetByIdAsync(id);
+            var keycloakId = this.User.GetId();
+            Group group = await _groupService.GetByIdAsync(id,keycloakId);
 
             if (group == null)
             {
                 return NotFound();
+            }
+
+            if(group.Id == 0)
+            {
+                return Forbid();
             }
 
             return _mapper.Map<GroupReadDTO>(group);
