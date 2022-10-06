@@ -35,15 +35,13 @@ namespace Alumni_Network_Portal_BE.Services.TopicServices
             return topic;
         }
 
-        public async Task<Topic> JoinTopic(int topicId, int userId)
+        public async Task<Topic> JoinTopic(int topicId, string keycloakId)
         {
-            //FIXME
             Topic topic = _context.Topics
                 .Include(t => t.Users)
-                .First();
+                .First(t => t.Id == topicId);
 
-            User user = _context.Users
-                .Single(u => u.Id == userId);
+            User user = _context.Users.First(u => u.KeycloakId == keycloakId)
             topic.Users.Add(user);
             await _context.SaveChangesAsync();
             return topic;

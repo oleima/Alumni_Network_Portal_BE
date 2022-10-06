@@ -25,10 +25,37 @@ namespace Alumni_Network_Portal_BE.Controllers
             _mapper = mapper;
         }
 
+        //TODO Authorization and exception handling
+
         [HttpGet]
         public async Task<ActionResult<IEnumerable<TopicReadDTO>>> GetTopics()
         {
             return _mapper.Map<List<TopicReadDTO>>(await _topicService.GetTopics());
+        }
+
+        
+        [HttpGet("{id}")]
+        public async Task<ActionResult<IEnumerable<TopicReadDTO>>> GetTopic()
+        {
+            return _mapper.Map<List<TopicReadDTO>>(await _topicService.GetTopics());
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> PostTopic([FromBody] string json)
+        {
+
+            return _mapper.Map<List<TopicReadDTO>>(await _topicService.GetTopics());
+        }
+
+        [HttpPost("{id}/join")]
+        public async Task<ActionResult> JoinTopic(int id)
+        {
+            if(!_topicService.Exists(id))
+            {
+                return NotFound();
+            }
+
+             
         }
 
     }
