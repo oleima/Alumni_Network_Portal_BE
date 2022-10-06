@@ -3,6 +3,7 @@ using Alumni_Network_Portal_BE.Models.Domain;
 using AutoMapper;
 using Alumni_Network_Portal_BE.Services.UserServices;
 using Alumni_Network_Portal_BE.Models.DTOs.UserDTO;
+using Alumni_Network_Portal_BE.Helpers;
 
 namespace Alumni_Network_Portal_BE.Controllers
 {
@@ -56,6 +57,27 @@ namespace Alumni_Network_Portal_BE.Controllers
 
             User domainUser = _mapper.Map<User>(userDTO);
             await _userService.UpdateAsync(domainUser);
+
+            return NoContent();
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> PostUser()
+        {
+            //FIXME 
+            var keycloakID = this.User.GetId();
+            if (keycloakID == null)
+            {
+                return NotFound();
+            }
+            
+            User user = new User {
+                Username = "",
+                Status = "",
+                KeycloakId = keycloakID
+            };
+
+            await _userService.PostAsync(user);
 
             return NoContent();
         }

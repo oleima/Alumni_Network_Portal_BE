@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Alumni_Network_Portal_BE.Migrations
 {
-    public partial class InitialDbSetup : Migration
+    public partial class DbSetup : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -44,6 +44,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    KeycloakId = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Username = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     Status = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     Bio = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
@@ -85,11 +86,11 @@ namespace Alumni_Network_Portal_BE.Migrations
                 columns: table => new
                 {
                     GroupsId = table.Column<int>(type: "int", nullable: false),
-                    UserId = table.Column<int>(type: "int", nullable: false)
+                    UsersId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_GroupUser", x => new { x.GroupsId, x.UserId });
+                    table.PrimaryKey("PK_GroupUser", x => new { x.GroupsId, x.UsersId });
                     table.ForeignKey(
                         name: "FK_GroupUser_Groups_GroupsId",
                         column: x => x.GroupsId,
@@ -97,8 +98,8 @@ namespace Alumni_Network_Portal_BE.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_GroupUser_Users_UserId",
-                        column: x => x.UserId,
+                        name: "FK_GroupUser_Users_UsersId",
+                        column: x => x.UsersId,
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -132,15 +133,15 @@ namespace Alumni_Network_Portal_BE.Migrations
                 name: "EventGroup",
                 columns: table => new
                 {
-                    EventId = table.Column<int>(type: "int", nullable: false),
+                    EventsId = table.Column<int>(type: "int", nullable: false),
                     GroupsId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_EventGroup", x => new { x.EventId, x.GroupsId });
+                    table.PrimaryKey("PK_EventGroup", x => new { x.EventsId, x.GroupsId });
                     table.ForeignKey(
-                        name: "FK_EventGroup_Events_EventId",
-                        column: x => x.EventId,
+                        name: "FK_EventGroup_Events_EventsId",
+                        column: x => x.EventsId,
                         principalTable: "Events",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -272,9 +273,9 @@ namespace Alumni_Network_Portal_BE.Migrations
                 column: "UsersRespondedId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_GroupUser_UserId",
+                name: "IX_GroupUser_UsersId",
                 table: "GroupUser",
-                column: "UserId");
+                column: "UsersId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Posts_AuthorId",

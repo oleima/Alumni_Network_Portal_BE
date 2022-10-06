@@ -37,6 +37,7 @@ namespace Alumni_Network_Portal_BE.Services.TopicServices
 
         public async Task<Topic> JoinTopic(int topicId, int userId)
         {
+            //FIXME
             Topic topic = _context.Topics
                 .Include(t => t.Users)
                 .First();
