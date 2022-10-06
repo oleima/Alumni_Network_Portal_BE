@@ -1,5 +1,6 @@
 ﻿using Alumni_Network_Portal_BE.Models;
 using Alumni_Network_Portal_BE.Models.Domain;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 
 namespace Alumni_Network_Portal_BE.Services.GroupServices
@@ -55,17 +56,26 @@ namespace Alumni_Network_Portal_BE.Services.GroupServices
             _context.Groups.Add(group);
             await _context.SaveChangesAsync();
 
-            UpdateGroupUserAsync(group.Id, list);
+            UpdateGroupUserAsync(group.Id, list, keycloakId);
 
             return group;
         }
 
-        public async Task UpdateGroupUserAsync(int groupId, List<int> users)
+        public async Task UpdateGroupUserAsync(int groupId, List<int> users, string keycloakId)
         {
+            User userUpdating = _context.Users.First(u => u.KeycloakId == keycloakId);
+
             Group groupToUpdate = await _context.Groups
                .Include(c => c.Users)
                .Where(c => c.Id == groupId)
                .FirstAsync();
+
+            if (!groupToUpdate.Users.Contains(userUpdating) 
+                && groupToUpdate.IsPrivate 
+                && groupToUpdate.Users.Count>0)
+            {
+                throw new Exception();
+            }
 
 
             List<User> usersList = new();

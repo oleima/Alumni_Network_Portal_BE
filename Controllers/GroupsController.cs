@@ -69,6 +69,7 @@ namespace Alumni_Network_Portal_BE.Controllers
         [HttpPut("{id}/Users")]
         public async Task<IActionResult> UpdateGroupUser(int id, List<int> usersId)
         {
+            var keycloakId = this.User.GetId();
             if (!_groupService.Exists(id))
             {
                 return NotFound();
@@ -76,7 +77,7 @@ namespace Alumni_Network_Portal_BE.Controllers
 
             try
             {
-                await _groupService.UpdateGroupUserAsync(id, usersId);
+                await _groupService.UpdateGroupUserAsync(id, usersId, keycloakId);
             }
             catch (KeyNotFoundException)
             {
