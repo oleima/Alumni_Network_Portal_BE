@@ -96,6 +96,17 @@ builder.Services.AddSwaggerGen(options =>
     });
 });
 
+//TODO Add cors specific to frontend
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: "AllowAll", builder =>
+    {
+        builder
+        .AllowAnyOrigin()
+        .AllowAnyMethod()
+        .AllowAnyHeader();
+    });
+});
 
 
 
@@ -111,6 +122,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseCors("AllowAll"); //TOO Cors specific to frontend
 app.UseAuthentication();
 app.UseAuthorization();
 
