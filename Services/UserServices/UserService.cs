@@ -23,6 +23,7 @@ namespace Alumni_Network_Portal_BE.Services.UserServices
         {
             return await _context.Users
             .Include(c => c.Groups)
+            .Include(c => c.Topics)
             .ToListAsync();
         }
 
