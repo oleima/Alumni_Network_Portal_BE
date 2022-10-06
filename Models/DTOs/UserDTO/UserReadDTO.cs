@@ -12,11 +12,11 @@ namespace Alumni_Network_Portal_BE.Models.DTOs.UserDTO
         public string? Bio { get; set; } //Nullable
         public string? FunFact { get; set; } //Nullable
         public byte[]? Picture { get; set; }
-        public ICollection<Post>? AuthoredPosts { get; set; } //One-Many
-        public ICollection<Post>? RecievedPosts { get; set; } //One-Many
-        public ICollection<Event>? AuthoredEvents { get; set; } //One-Many
-        public ICollection<Topic>? Topics { get; set; } //Many-Many
-        public ICollection<Group>? Groups { get; set; } //Many-Many
-        public ICollection<Event>? RespondedEvents { get; set; } //Many-Many
+        public List<string>? AuthoredPosts { get; set; } //One-Many
+        public List<string>? RecievedPosts { get; set; } //One-Many
+        public List<string>? AuthoredEvents { get; set; } //One-Many
+        public List<string>? Topics { get; set; } //Many-Many
+        public List<string>? Groups { get; set; } //Many-Many
+        public List<string>? RespondedEvents { get; set; } //Many-Many
     }
 }

@@ -28,22 +28,23 @@ namespace Alumni_Network_Portal_BE.Services.TopicServices
                 .Where(c => c.Id == id)
                 .FirstOrDefaultAsync();
         }
-        public async Task<Topic> AddTopic(Topic topic)
+        public async Task<Topic> AddTopic(Topic topic, string keycloakId) //FIXME: User location displays instead of user data
         {
+            User user = getUserFromKeyCloak(keycloakId);
+            var userList = new List<User> { user };
+            topic.Users = userList;
             _context.Topics.Add(topic);
             await _context.SaveChangesAsync();
             return topic;
         }
 
-        public async Task<Topic> JoinTopic(int topicId, int userId)
+        public async Task<Topic> JoinTopic(int topicId, string keycloakId)
         {
-            //FIXME
             Topic topic = _context.Topics
                 .Include(t => t.Users)
-                .First();
+                .FirstOrDefaultAsync(t => t.Id == topicId).Result;
 
-            User user = _context.Users
-                .Single(u => u.Id == userId);
+            User user = getUserFromKeyCloak(keycloakId);
             topic.Users.Add(user);
             await _context.SaveChangesAsync();
             return topic;
@@ -51,6 +52,12 @@ namespace Alumni_Network_Portal_BE.Services.TopicServices
         public bool Exists(int id)
         {
             return _context.Topics.Any(e => e.Id == id);
+        }
+
+        public User getUserFromKeyCloak(string keycloakId)
+        {
+            User user = _context.Users.FirstOrDefaultAsync(u => u.KeycloakId == keycloakId).Result;
+            return user;
         }
 
     }

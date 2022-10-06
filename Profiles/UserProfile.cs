@@ -10,7 +10,8 @@ namespace Alumni_Network_Portal_BE.Profiles
         {
             //Mapping from user to the respective DTOs
             CreateMap<User, UserReadDTO>()
-                .PreserveReferences();
+                .ForMember(cdto => cdto.Topics, opt => opt
+                .MapFrom(u => u.Topics.Select(t => t.Name).ToArray()));
 
             CreateMap<UserCreateDTO, User>();
 
