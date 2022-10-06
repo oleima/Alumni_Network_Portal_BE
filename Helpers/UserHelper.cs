@@ -1,4 +1,5 @@
-﻿using System.Security.Claims;
+﻿using Alumni_Network_Portal_BE.Models.Domain;
+using System.Security.Claims;
 
 namespace Alumni_Network_Portal_BE.Helpers
 {
