@@ -4,8 +4,8 @@ namespace Alumni_Network_Portal_BE.Models.DTOs.GroupDTO
 {
     public class GroupCreateDTO
     {
-        [MaxLength(255)]
-        [Required]
         public string Title { get; set; }
+        public string? Body { get; set; }
+        public bool IsPrivate { get; set; }
     }
 }

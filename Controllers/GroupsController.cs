@@ -48,25 +48,45 @@ namespace Alumni_Network_Portal_BE.Controllers
             return _mapper.Map<GroupReadDTO>(group);
         }
 
-        // PAtch: api/Groups/5
+        // Put: api/Groups/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPatch("{id}")]
-        public async Task<ActionResult> PatchGroup(int id, GroupUpdateDTO groupDTO)
+        [HttpPost]
+        public async Task<ActionResult<Group>> CreateGroup(GroupCreateDTO groupDTO)
         {
-            if (id != groupDTO.Id)
-            {
-                return BadRequest();
-            }
+            var keycloakId = this.User.GetId();
+            Group domainGroup = _mapper.Map<Group>(groupDTO);
 
+            domainGroup = await _groupService.AddGroupAsync(domainGroup, keycloakId);
+
+            return CreatedAtAction("GetGroup",
+                new { id = domainGroup.Id },
+                _mapper.Map<GroupCreateDTO>(domainGroup));
+        }
+
+        #region Updating linking table
+
+        /// Post users to a specific movie in linking table
+        [HttpPut("{id}/Users")]
+        public async Task<IActionResult> UpdateGroupUser(int id, List<int> usersId)
+        {
             if (!_groupService.Exists(id))
             {
                 return NotFound();
             }
 
-            Group domainGroup = _mapper.Map<Group>(groupDTO);
-            await _groupService.UpdateAsync(domainGroup);
+            try
+            {
+                await _groupService.UpdateGroupUserAsync(id, usersId);
+            }
+            catch (KeyNotFoundException)
+            {
+                return BadRequest("Invalid user.");
+            }
 
             return NoContent();
         }
+
+        #endregion
+
     }
 }

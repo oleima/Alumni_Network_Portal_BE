@@ -45,10 +45,42 @@ namespace Alumni_Network_Portal_BE.Services.GroupServices
             return group;
         }
 
-        public async Task UpdateAsync(Group group)
+        public async Task<Group> AddGroupAsync(Group group, string keycloakId)
         {
-            _context.Entry(group).State = EntityState.Modified;
+            User user = _context.Users.First(u => u.KeycloakId == keycloakId);
+
+            List<int> list = new List<int>();
+            list.Add(user.Id);
+
+            _context.Groups.Add(group);
+            await _context.SaveChangesAsync();
+
+            UpdateGroupUserAsync(group.Id, list);
+
+            return group;
+        }
+
+        public async Task UpdateGroupUserAsync(int groupId, List<int> users)
+        {
+            Group groupToUpdate = await _context.Groups
+               .Include(c => c.Users)
+               .Where(c => c.Id == groupId)
+               .FirstAsync();
+
+
+            List<User> usersList = new();
+
+            foreach(int userId in users)
+            {
+                User user = await _context.Users.FindAsync(userId);
+                if (user == null)
+                    throw new KeyNotFoundException();
+                usersList.Add(user);
+            }
+
+            groupToUpdate.Users = usersList;
             await _context.SaveChangesAsync();
         }
+
     }
 }
