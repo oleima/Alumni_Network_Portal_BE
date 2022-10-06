@@ -1,4 +1,5 @@
-﻿using Alumni_Network_Portal_BE.Models;
+﻿using Alumni_Network_Portal_BE.Helpers;
+using Alumni_Network_Portal_BE.Models;
 using Alumni_Network_Portal_BE.Models.Domain;
 using Microsoft.EntityFrameworkCore;
 
@@ -36,6 +37,12 @@ namespace Alumni_Network_Portal_BE.Services.UserServices
         public async Task UpdateAsync(User user)
         {
             _context.Entry(user).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task PostAsync(User user)
+        {
+            _context.Add(user);
             await _context.SaveChangesAsync();
         }
     }

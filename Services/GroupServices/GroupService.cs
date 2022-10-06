@@ -15,12 +15,12 @@ namespace Alumni_Network_Portal_BE.Services.GroupServices
 
         public bool Exists(int id)
         {
-            return _context.Group.Any(e => e.Id == id);
+            return _context.Groups.Any(e => e.Id == id);
         }
 
         public async Task<IEnumerable<Group>> GetAllAsync()
         {
-            List<Group> myList = await _context.Group.ToListAsync();
+            List<Group> myList = await _context.Groups.ToListAsync();
             foreach(var group in myList)
             {
                 if (group.IsPrivate)
@@ -33,7 +33,7 @@ namespace Alumni_Network_Portal_BE.Services.GroupServices
 
         public async Task<Group> GetByIdAsync(int id)
         {
-            return await _context.Group
+            return await _context.Groups
                 .Include(c => c.Users)
                 .Where(c => c.Id == id)
                 .FirstOrDefaultAsync();

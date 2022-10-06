@@ -176,6 +176,10 @@ namespace Alumni_Network_Portal_BE.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
+                    b.Property<string>("KeycloakId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<byte[]>("Picture")
                         .HasColumnType("varbinary(max)");
 
@@ -196,13 +200,13 @@ namespace Alumni_Network_Portal_BE.Migrations
 
             modelBuilder.Entity("EventGroup", b =>
                 {
-                    b.Property<int>("EventId")
+                    b.Property<int>("EventsId")
                         .HasColumnType("int");
 
                     b.Property<int>("GroupsId")
                         .HasColumnType("int");
 
-                    b.HasKey("EventId", "GroupsId");
+                    b.HasKey("EventsId", "GroupsId");
 
                     b.HasIndex("GroupsId");
 
@@ -244,12 +248,12 @@ namespace Alumni_Network_Portal_BE.Migrations
                     b.Property<int>("GroupsId")
                         .HasColumnType("int");
 
-                    b.Property<int>("UserId")
+                    b.Property<int>("UsersId")
                         .HasColumnType("int");
 
-                    b.HasKey("GroupsId", "UserId");
+                    b.HasKey("GroupsId", "UsersId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UsersId");
 
                     b.ToTable("GroupUser");
                 });
@@ -323,7 +327,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                 {
                     b.HasOne("Alumni_Network_Portal_BE.Models.Domain.Event", null)
                         .WithMany()
-                        .HasForeignKey("EventId")
+                        .HasForeignKey("EventsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -374,7 +378,7 @@ namespace Alumni_Network_Portal_BE.Migrations
 
                     b.HasOne("Alumni_Network_Portal_BE.Models.Domain.User", null)
                         .WithMany()
-                        .HasForeignKey("UserId")
+                        .HasForeignKey("UsersId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
