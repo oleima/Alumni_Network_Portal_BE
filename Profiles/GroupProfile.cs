@@ -9,7 +9,9 @@ namespace Alumni_Network_Portal_BE.Profiles
         public GroupProfile()
         {
             //Mapping from group to the respective DTOs
-            CreateMap<Group, GroupReadDTO>().MaxDepth(1);
+            CreateMap<Group, GroupReadDTO>()
+                .ForMember(cdto => cdto.Users, opt => opt
+                .MapFrom(c => c.Users.Select(c => c.Id).ToArray()));
 
             CreateMap<GroupCreateDTO, Group>();
 
