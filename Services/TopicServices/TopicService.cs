@@ -18,6 +18,7 @@ namespace Alumni_Network_Portal_BE.Services.TopicServices
             return await _context.Topics
                 .Include(t => t.Posts)
                 .Include(t => t.Events)
+                .Include(t => t.Users)
                 .ToListAsync();
         }
         public async Task<Topic> GetTopicById(int id)
@@ -25,10 +26,11 @@ namespace Alumni_Network_Portal_BE.Services.TopicServices
             return await _context.Topics
                 .Include(t => t.Posts)
                 .Include(t => t.Events)
+                .Include(t => t.Users)
                 .Where(c => c.Id == id)
                 .FirstOrDefaultAsync();
         }
-        public async Task<Topic> AddTopic(Topic topic, string keycloakId) //FIXME: User location displays instead of user data
+        public async Task<Topic> AddTopic(Topic topic, string keycloakId)
         {
             User user = getUserFromKeyCloak(keycloakId);
             var userList = new List<User> { user };
