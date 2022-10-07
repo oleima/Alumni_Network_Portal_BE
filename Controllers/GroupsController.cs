@@ -66,7 +66,7 @@ namespace Alumni_Network_Portal_BE.Controllers
         #region Updating linking table
 
         /// Post users to a specific movie in linking table
-        [HttpPut("{id}/Users")]
+        [HttpPut("{id}/Join")]
         public async Task<IActionResult> UpdateGroupUser(int id, List<int> usersId)
         {
             var keycloakId = this.User.GetId();
@@ -82,6 +82,10 @@ namespace Alumni_Network_Portal_BE.Controllers
             catch (KeyNotFoundException)
             {
                 return BadRequest("Invalid user.");
+            }
+            catch (Exception)
+            {
+                return Forbid();
             }
 
             return NoContent();
