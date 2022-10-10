@@ -22,6 +22,7 @@ namespace Alumni_Network_Portal_BE.Models.Domain
         public bool AllowGuests { get; set; }
 
         // Relationships
+        public ICollection<User>? UserInvited { get; set; } //Many-Many
         public ICollection<User>? UsersResponded { get; set; } //Many-Many
         public ICollection<Topic>? Topics { get; set; } //Many-Many
         public ICollection<Group>? Groups { get; set; } //Many-Many

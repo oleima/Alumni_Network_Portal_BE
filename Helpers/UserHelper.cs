@@ -8,7 +8,7 @@ namespace Alumni_Network_Portal_BE.Helpers
         public static string GetId(this ClaimsPrincipal principal)
         {
             var claims = principal.Claims;
-            if(claims.Count() > 0)
+            if(claims.Any())
             {
                 return claims.ToList()[5].Value;
             }
