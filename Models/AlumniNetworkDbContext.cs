@@ -106,6 +106,94 @@ namespace Alumni_Network_Portal_BE.Models
                             new { EventId = 3, UserId = 4 }
                             );
                     });
+
+            modelBuilder.Entity<User>()
+            .HasMany(e => e.Topics)
+            .WithMany(e => e.Users)
+            .UsingEntity<Dictionary<string, object>>(
+                    "Subscribe_Topic",
+                    r => r.HasOne<Topic>().WithMany().HasForeignKey("TopicId"),
+                    l => l.HasOne<User>().WithMany().HasForeignKey("UserId"),
+                    je =>
+                    {
+                        je.HasKey("TopicId", "UserId");
+                        je.HasData(
+                            new { TopicId = 1, UserId = 1 },
+                            new { TopicId = 1, UserId = 2 },
+                            new { TopicId = 1, UserId = 3 },
+                            new { TopicId = 2, UserId = 1 },
+                            new { TopicId = 2, UserId = 2 },
+                            new { TopicId = 2, UserId = 4 },
+                            new { TopicId = 3, UserId = 1 },
+                            new { TopicId = 3, UserId = 3 },
+                            new { TopicId = 3, UserId = 4 },
+                            new { TopicId = 4, UserId = 2 },
+                            new { TopicId = 4, UserId = 3 },
+                            new { TopicId = 4, UserId = 4 }
+                            );
+                    });
+
+            modelBuilder.Entity<User>()
+            .HasMany(e => e.Groups)
+            .WithMany(e => e.Users)
+            .UsingEntity<Dictionary<string, object>>(
+                    "GroupMember",
+                    r => r.HasOne<Group>().WithMany().HasForeignKey("GroupId"),
+                    l => l.HasOne<User>().WithMany().HasForeignKey("UserId"),
+                    je =>
+                    {
+                        je.HasKey("GroupId", "UserId");
+                        je.HasData(
+                            new { GroupId = 1, UserId = 1 },
+                            new { GroupId = 1, UserId = 2 },
+                            new { GroupId = 1, UserId = 3 },
+                            new { GroupId = 2, UserId = 1 },
+                            new { GroupId = 2, UserId = 2 },
+                            new { GroupId = 2, UserId = 4 },
+                            new { GroupId = 3, UserId = 1 },
+                            new { GroupId = 3, UserId = 3 },
+                            new { GroupId = 3, UserId = 4 },
+                            new { GroupId = 4, UserId = 2 },
+                            new { GroupId = 4, UserId = 3 },
+                            new { GroupId = 4, UserId = 4 }
+                            );
+                    });
+
+            modelBuilder.Entity<Event>()
+            .HasMany(e => e.Groups)
+            .WithMany(e => e.Events)
+            .UsingEntity<Dictionary<string, object>>(
+                    "Event_Group",
+                    r => r.HasOne<Group>().WithMany().HasForeignKey("GroupId"),
+                    l => l.HasOne<Event>().WithMany().HasForeignKey("EventId"),
+                    je =>
+                    {
+                        je.HasKey("GroupId", "EventId");
+                        je.HasData(
+                            new { GroupId = 2, EventId = 1 },
+                            new { GroupId = 3, EventId = 1 },
+                            new { GroupId = 1, EventId = 2 },
+                            new { GroupId = 3, EventId = 3 },
+                            new { GroupId = 4, EventId = 3 }
+                            );
+                    });
+
+            modelBuilder.Entity<Event>()
+            .HasMany(e => e.Topics)
+            .WithMany(e => e.Events)
+            .UsingEntity<Dictionary<string, object>>(
+                "Event_Topic",
+                r => r.HasOne<Topic>().WithMany().HasForeignKey("TopicId"),
+                l => l.HasOne<Event>().WithMany().HasForeignKey("EventId"),
+                je =>
+                {
+                    je.HasKey("TopicId", "EventId");
+                    je.HasData(
+                        new { TopicId = 2, EventId = 1 },
+                        new { TopicId = 2, EventId = 3 }
+                    );
+                });
+
         }
     }
 }

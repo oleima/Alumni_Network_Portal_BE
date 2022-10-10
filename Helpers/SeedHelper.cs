@@ -87,7 +87,7 @@ namespace Alumni_Network_Portal_BE.Helpers
                 Id = 1,
                 Title = "Fun fact",
                 Body = "I love peaches",
-                AuthorId = 2,
+                AuthorId = 1,
                 GroupId = 1,
             }) ;
             posts.Add(new Post()
@@ -96,23 +96,87 @@ namespace Alumni_Network_Portal_BE.Helpers
                 Title = "Fun fact",
                 Body = "I love beaches",
                 AuthorId = 2,
-                GroupId = 1,
+                GroupId = 2,
             });
             posts.Add(new Post()
             {
                 Id = 3,
                 Title = "Fun fact",
                 Body = "I love leaches",
-                AuthorId = 2,
-                GroupId = 1,
+                AuthorId = 3,
+                GroupId = 3,
             });
             posts.Add(new Post()
             {
                 Id = 4,
                 Title = "Fun fact",
                 Body = "I love breaches",
+                AuthorId = 4,
+                GroupId = 4,
+            });
+            posts.Add(new Post()
+            {
+                Id = 5,
+                Title = "Fun fact",
+                Body = "I love peaches",
+                AuthorId = 1,
+                TopicId = 1,
+            });
+            posts.Add(new Post()
+            {
+                Id = 6,
+                Title = "Fun fact",
+                Body = "I love beaches",
                 AuthorId = 2,
-                GroupId = 1,
+                TopicId = 2,
+            });
+            posts.Add(new Post()
+            {
+                Id = 7,
+                Title = "Fun fact",
+                Body = "I love leaches",
+                AuthorId = 3,
+                TopicId = 3,
+            });
+            posts.Add(new Post()
+            {
+                Id = 8,
+                Title = "Fun fact",
+                Body = "I love breaches",
+                AuthorId = 4,
+                TopicId = 4,
+            });
+            posts.Add(new Post()
+            {
+                Id = 9,
+                Title = "Message",
+                Body = "From fred to olem",
+                AuthorId = 1,
+                RecieverId = 2,
+            });
+            posts.Add(new Post()
+            {
+                Id = 10,
+                Title = "Message",
+                Body = "From olem to fred",
+                AuthorId = 2,
+                RecieverId = 1,
+            });
+            posts.Add(new Post()
+            {
+                Id = 11,
+                Title = "Message",
+                Body = "From solo to johnny",
+                AuthorId = 3,
+                RecieverId = 4,
+            });
+            posts.Add(new Post()
+            {
+                Id = 12,
+                Title = "Message",
+                Body = "From johnny to solo",
+                AuthorId = 4,
+                RecieverId = 3,
             });
             return posts;
         }

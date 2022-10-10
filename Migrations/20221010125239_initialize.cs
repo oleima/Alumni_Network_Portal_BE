@@ -82,96 +82,96 @@ namespace Alumni_Network_Portal_BE.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "GroupUser",
+                name: "GroupMember",
                 columns: table => new
                 {
-                    GroupsId = table.Column<int>(type: "int", nullable: false),
-                    UsersId = table.Column<int>(type: "int", nullable: false)
+                    GroupId = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_GroupUser", x => new { x.GroupsId, x.UsersId });
+                    table.PrimaryKey("PK_GroupMember", x => new { x.GroupId, x.UserId });
                     table.ForeignKey(
-                        name: "FK_GroupUser_Groups_GroupsId",
-                        column: x => x.GroupsId,
+                        name: "FK_GroupMember_Groups_GroupId",
+                        column: x => x.GroupId,
                         principalTable: "Groups",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_GroupUser_Users_UsersId",
-                        column: x => x.UsersId,
+                        name: "FK_GroupMember_Users_UserId",
+                        column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "TopicUser",
+                name: "Subscribe_Topic",
                 columns: table => new
                 {
-                    TopicsId = table.Column<int>(type: "int", nullable: false),
-                    UsersId = table.Column<int>(type: "int", nullable: false)
+                    TopicId = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TopicUser", x => new { x.TopicsId, x.UsersId });
+                    table.PrimaryKey("PK_Subscribe_Topic", x => new { x.TopicId, x.UserId });
                     table.ForeignKey(
-                        name: "FK_TopicUser_Topics_TopicsId",
-                        column: x => x.TopicsId,
+                        name: "FK_Subscribe_Topic_Topics_TopicId",
+                        column: x => x.TopicId,
                         principalTable: "Topics",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_TopicUser_Users_UsersId",
-                        column: x => x.UsersId,
+                        name: "FK_Subscribe_Topic_Users_UserId",
+                        column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "EventGroup",
+                name: "Event_Group",
                 columns: table => new
                 {
-                    EventsId = table.Column<int>(type: "int", nullable: false),
-                    GroupsId = table.Column<int>(type: "int", nullable: false)
+                    GroupId = table.Column<int>(type: "int", nullable: false),
+                    EventId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_EventGroup", x => new { x.EventsId, x.GroupsId });
+                    table.PrimaryKey("PK_Event_Group", x => new { x.GroupId, x.EventId });
                     table.ForeignKey(
-                        name: "FK_EventGroup_Events_EventsId",
-                        column: x => x.EventsId,
+                        name: "FK_Event_Group_Events_EventId",
+                        column: x => x.EventId,
                         principalTable: "Events",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_EventGroup_Groups_GroupsId",
-                        column: x => x.GroupsId,
+                        name: "FK_Event_Group_Groups_GroupId",
+                        column: x => x.GroupId,
                         principalTable: "Groups",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "EventTopic",
+                name: "Event_Topic",
                 columns: table => new
                 {
-                    EventsId = table.Column<int>(type: "int", nullable: false),
-                    TopicsId = table.Column<int>(type: "int", nullable: false)
+                    TopicId = table.Column<int>(type: "int", nullable: false),
+                    EventId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_EventTopic", x => new { x.EventsId, x.TopicsId });
+                    table.PrimaryKey("PK_Event_Topic", x => new { x.TopicId, x.EventId });
                     table.ForeignKey(
-                        name: "FK_EventTopic_Events_EventsId",
-                        column: x => x.EventsId,
+                        name: "FK_Event_Topic_Events_EventId",
+                        column: x => x.EventId,
                         principalTable: "Events",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_EventTopic_Topics_TopicsId",
-                        column: x => x.TopicsId,
+                        name: "FK_Event_Topic_Topics_TopicId",
+                        column: x => x.TopicId,
                         principalTable: "Topics",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -281,9 +281,9 @@ namespace Alumni_Network_Portal_BE.Migrations
                 columns: new[] { "Id", "AllowGuests", "AuthorId", "Description", "EndTime", "LastUpdated", "Name", "StartTime" },
                 values: new object[,]
                 {
-                    { 1, true, null, "Get your cowboy boots on and bourbon ready", new DateTime(2023, 7, 5, 3, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2022, 10, 10, 13, 45, 21, 24, DateTimeKind.Local).AddTicks(9076), "Party in the USA", new DateTime(2023, 7, 4, 16, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 2, true, null, "The Noroff course presentation of the case project", new DateTime(2023, 10, 28, 16, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2022, 10, 10, 13, 45, 21, 24, DateTimeKind.Local).AddTicks(9123), "Project Presentation", new DateTime(2023, 10, 28, 12, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 3, true, null, "Get your socks on and rock on! The case period is over and we need to forget everything we have learned", new DateTime(2023, 10, 28, 22, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2022, 10, 10, 13, 45, 21, 24, DateTimeKind.Local).AddTicks(9127), "After Work Beer", new DateTime(2023, 10, 28, 16, 0, 0, 0, DateTimeKind.Unspecified) }
+                    { 1, true, null, "Get your cowboy boots on and bourbon ready", new DateTime(2023, 7, 5, 3, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2022, 10, 10, 14, 52, 38, 894, DateTimeKind.Local).AddTicks(5508), "Party in the USA", new DateTime(2023, 7, 4, 16, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 2, true, null, "The Noroff course presentation of the case project", new DateTime(2023, 10, 28, 16, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2022, 10, 10, 14, 52, 38, 894, DateTimeKind.Local).AddTicks(5556), "Project Presentation", new DateTime(2023, 10, 28, 12, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 3, true, null, "Get your socks on and rock on! The case period is over and we need to forget everything we have learned", new DateTime(2023, 10, 28, 22, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2022, 10, 10, 14, 52, 38, 894, DateTimeKind.Local).AddTicks(5559), "After Work Beer", new DateTime(2023, 10, 28, 16, 0, 0, 0, DateTimeKind.Unspecified) }
                 });
 
             migrationBuilder.InsertData(
@@ -339,15 +339,67 @@ namespace Alumni_Network_Portal_BE.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "Event_Group",
+                columns: new[] { "EventId", "GroupId" },
+                values: new object[,]
+                {
+                    { 2, 1 },
+                    { 1, 2 },
+                    { 1, 3 },
+                    { 3, 3 },
+                    { 3, 4 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Event_Topic",
+                columns: new[] { "EventId", "TopicId" },
+                values: new object[,]
+                {
+                    { 1, 2 },
+                    { 3, 2 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "GroupMember",
+                columns: new[] { "GroupId", "UserId" },
+                values: new object[,]
+                {
+                    { 1, 1 },
+                    { 1, 2 },
+                    { 1, 3 },
+                    { 2, 1 },
+                    { 2, 2 },
+                    { 2, 4 },
+                    { 3, 1 },
+                    { 3, 3 },
+                    { 3, 4 },
+                    { 4, 2 },
+                    { 4, 3 },
+                    { 4, 4 }
+                });
+
+            migrationBuilder.InsertData(
                 table: "Posts",
                 columns: new[] { "Id", "AuthorId", "Body", "EventId", "GroupId", "ParentId", "RecieverId", "Title", "TopicId" },
                 values: new object[,]
                 {
-                    { 1, 2, "I love peaches", null, 1, null, null, "Fun fact", null },
-                    { 2, 2, "I love beaches", null, 1, null, null, "Fun fact", null },
-                    { 3, 2, "I love leaches", null, 1, null, null, "Fun fact", null },
-                    { 4, 2, "I love breaches", null, 1, null, null, "Fun fact", null }
+                    { 1, 1, "I love peaches", null, 1, null, null, "Fun fact", null },
+                    { 2, 2, "I love beaches", null, 2, null, null, "Fun fact", null },
+                    { 3, 3, "I love leaches", null, 3, null, null, "Fun fact", null },
+                    { 4, 4, "I love breaches", null, 4, null, null, "Fun fact", null },
+                    { 5, 1, "I love peaches", null, null, null, null, "Fun fact", 1 },
+                    { 6, 2, "I love beaches", null, null, null, null, "Fun fact", 2 },
+                    { 7, 3, "I love leaches", null, null, null, null, "Fun fact", 3 },
+                    { 8, 4, "I love breaches", null, null, null, null, "Fun fact", 4 },
+                    { 9, 1, "From fred to olem", null, null, null, 2, "Message", null },
+                    { 10, 2, "From olem to fred", null, null, null, 1, "Message", null },
+                    { 11, 3, "From solo to johnny", null, null, null, 4, "Message", null }
                 });
+
+            migrationBuilder.InsertData(
+                table: "Posts",
+                columns: new[] { "Id", "AuthorId", "Body", "EventId", "GroupId", "ParentId", "RecieverId", "Title", "TopicId" },
+                values: new object[] { 12, 4, "From johnny to solo", null, null, null, 3, "Message", null });
 
             migrationBuilder.InsertData(
                 table: "RSVP",
@@ -365,10 +417,34 @@ namespace Alumni_Network_Portal_BE.Migrations
                     { 3, 4 }
                 });
 
+            migrationBuilder.InsertData(
+                table: "Subscribe_Topic",
+                columns: new[] { "TopicId", "UserId" },
+                values: new object[,]
+                {
+                    { 1, 1 },
+                    { 1, 2 },
+                    { 1, 3 },
+                    { 2, 1 },
+                    { 2, 2 },
+                    { 2, 4 },
+                    { 3, 1 },
+                    { 3, 3 },
+                    { 3, 4 },
+                    { 4, 2 },
+                    { 4, 3 },
+                    { 4, 4 }
+                });
+
             migrationBuilder.CreateIndex(
-                name: "IX_EventGroup_GroupsId",
-                table: "EventGroup",
-                column: "GroupsId");
+                name: "IX_Event_Group_EventId",
+                table: "Event_Group",
+                column: "EventId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Event_Topic_EventId",
+                table: "Event_Topic",
+                column: "EventId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Events_AuthorId",
@@ -376,19 +452,14 @@ namespace Alumni_Network_Portal_BE.Migrations
                 column: "AuthorId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_EventTopic_TopicsId",
-                table: "EventTopic",
-                column: "TopicsId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_EventUserInvitation_UserId",
                 table: "EventUserInvitation",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_GroupUser_UsersId",
-                table: "GroupUser",
-                column: "UsersId");
+                name: "IX_GroupMember_UserId",
+                table: "GroupMember",
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Posts_AuthorId",
@@ -426,24 +497,24 @@ namespace Alumni_Network_Portal_BE.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TopicUser_UsersId",
-                table: "TopicUser",
-                column: "UsersId");
+                name: "IX_Subscribe_Topic_UserId",
+                table: "Subscribe_Topic",
+                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "EventGroup");
+                name: "Event_Group");
 
             migrationBuilder.DropTable(
-                name: "EventTopic");
+                name: "Event_Topic");
 
             migrationBuilder.DropTable(
                 name: "EventUserInvitation");
 
             migrationBuilder.DropTable(
-                name: "GroupUser");
+                name: "GroupMember");
 
             migrationBuilder.DropTable(
                 name: "Posts");
@@ -452,7 +523,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                 name: "RSVP");
 
             migrationBuilder.DropTable(
-                name: "TopicUser");
+                name: "Subscribe_Topic");
 
             migrationBuilder.DropTable(
                 name: "Groups");
