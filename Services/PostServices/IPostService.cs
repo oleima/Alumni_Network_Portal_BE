@@ -1,4 +1,5 @@
 ﻿using Alumni_Network_Portal_BE.Models.Domain;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Alumni_Network_Portal_BE.Services.PostServices
 {
@@ -8,6 +9,11 @@ namespace Alumni_Network_Portal_BE.Services.PostServices
         public Task<IEnumerable<Post>> GetMessagesAsync(string keycloakId);
         public Task<IEnumerable<Post>> GetMessagesFromAuthorAsync(int id, string keycloakId);
         public Task<IEnumerable<Post>> GetGroupPostsAsync(int groupId, string keycloakId);
-        
+        public Task<IEnumerable<Post>> GetTopicPostsAsync(int topicId, string keycloakId);
+        public Task<IEnumerable<Post>> GetEventPostsAsync(int eventId, string keycloakId);
+        public Task<Post> AddPostAsync(Post domainPost, string keycloakId);
+        public Task UpdateAsync(Post post);
+
+
     }
 }

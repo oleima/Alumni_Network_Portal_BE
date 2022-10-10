@@ -4,6 +4,7 @@ using AutoMapper;
 using Alumni_Network_Portal_BE.Services.UserServices;
 using Alumni_Network_Portal_BE.Models.DTOs.UserDTO;
 using Alumni_Network_Portal_BE.Helpers;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Alumni_Network_Portal_BE.Controllers
 {
@@ -20,6 +21,7 @@ namespace Alumni_Network_Portal_BE.Controllers
         }
 
         // GET: api/Users
+        [Authorize]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<UserReadDTO>>> GetUser()
         {
@@ -27,6 +29,7 @@ namespace Alumni_Network_Portal_BE.Controllers
         }
 
         // GET: api/Users/5
+        [Authorize]
         [HttpGet("{id}")]
         public async Task<ActionResult<UserReadDTO>> GetUser(int id)
         {
@@ -42,6 +45,7 @@ namespace Alumni_Network_Portal_BE.Controllers
 
         // PATCH: api/Users
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [Authorize]
         [HttpPatch("{id}")]
         public async Task<ActionResult> PatchUser(int id, UserUpdateDTO userDTO)
         {
@@ -61,6 +65,7 @@ namespace Alumni_Network_Portal_BE.Controllers
             return NoContent();
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<ActionResult> PostUser()
         {

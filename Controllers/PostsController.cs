@@ -3,6 +3,8 @@ using AutoMapper;
 using Alumni_Network_Portal_BE.Models.DTOs.PostDTO;
 using Alumni_Network_Portal_BE.Services.PostServices;
 using Alumni_Network_Portal_BE.Helpers;
+using Alumni_Network_Portal_BE.Models.Domain;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Alumni_Network_Portal_BE.Controllers
 {
@@ -19,7 +21,7 @@ namespace Alumni_Network_Portal_BE.Controllers
         }
 
         #region Generic CRUD with DTOs
-
+        [Authorize]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<PostReadDTO>>> GetPosts()
         {
@@ -27,7 +29,7 @@ namespace Alumni_Network_Portal_BE.Controllers
 
             return _mapper.Map<List<PostReadDTO>>(await _postService.GetAllAsync(keycloakId));
         }
-
+        [Authorize]
         [HttpGet("user")]
         public async Task<ActionResult<IEnumerable<PostReadDTO>>> GetRecievedPosts()
         {
@@ -35,7 +37,7 @@ namespace Alumni_Network_Portal_BE.Controllers
 
             return _mapper.Map<List<PostReadDTO>>(await _postService.GetMessagesAsync(keycloakId));
         }
-
+        [Authorize]
         [HttpGet("user/{{id}}")]
         public async Task<ActionResult<IEnumerable<PostReadDTO>>> GetRecievedFromAuthorPosts(int id)
         {
@@ -43,7 +45,7 @@ namespace Alumni_Network_Portal_BE.Controllers
 
             return _mapper.Map<List<PostReadDTO>>(await _postService.GetMessagesFromAuthorAsync(id,keycloakId));
         }
-
+        [Authorize]
         [HttpGet("group/{{id}}")]
         public async Task<ActionResult<IEnumerable<PostReadDTO>>> GetGroupPosts(int id)
         {
@@ -51,7 +53,58 @@ namespace Alumni_Network_Portal_BE.Controllers
 
             return _mapper.Map<List<PostReadDTO>>(await _postService.GetGroupPostsAsync(id, keycloakId));
         }
+        [Authorize]
+        [HttpGet("topic/{{id}}")]
+        public async Task<ActionResult<IEnumerable<PostReadDTO>>> GetTopicPosts(int id)
+        {
+            var keycloakId = this.User.GetId();
 
+            return _mapper.Map<List<PostReadDTO>>(await _postService.GetTopicPostsAsync(id, keycloakId));
+        }
+        [Authorize]
+        [HttpGet("event/{{id}}")]
+        public async Task<ActionResult<IEnumerable<PostReadDTO>>> GetEventPosts(int id)
+        {
+            var keycloakId = this.User.GetId();
+
+            return _mapper.Map<List<PostReadDTO>>(await _postService.GetEventPostsAsync(id, keycloakId));
+        }
+        [Authorize]
+        [HttpPost]
+        public async Task<ActionResult<Post>> CreatePost(PostCreateDTO dtoPost)
+        {
+            string keycloakId = this.User.GetId();
+
+            Post domainPost = _mapper.Map<Post>(dtoPost);
+
+            try
+            {
+                domainPost = await _postService.AddPostAsync(domainPost, keycloakId);
+                return CreatedAtAction("addPost",
+                    new { id = domainPost.Id },
+                    _mapper.Map<PostReadDTO>(domainPost));
+            }
+            catch (KeyNotFoundException)
+            {
+                return BadRequest("Invalid audience");
+            }
+            catch (Exception)
+            {
+                return Forbid();
+            }
+
+        }
+
+        [Authorize]
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdatePost(PostCreateDTO dtoPost)
+        {
+            Post domainPost = _mapper.Map<Post>(dtoPost);
+
+            await _postService.UpdateAsync(domainPost);
+
+            return NoContent();
+        }
 
 
         #endregion

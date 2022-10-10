@@ -5,6 +5,7 @@ using Alumni_Network_Portal_BE.Models.DTOs.GroupDTO;
 using Alumni_Network_Portal_BE.Services.GroupServices;
 using Alumni_Network_Portal_BE.Helpers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Alumni_Network_Portal_BE.Controllers
 {
@@ -21,6 +22,7 @@ namespace Alumni_Network_Portal_BE.Controllers
         }
 
         // GET: api/Groups
+        [Authorize]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<GroupReadDTO>>> GetGroup()
         {
@@ -29,6 +31,7 @@ namespace Alumni_Network_Portal_BE.Controllers
         }
 
         // GET: api/Groups/5
+        [Authorize]
         [HttpGet("{id}")]
         public async Task<ActionResult<GroupReadDTO>> GetGroup(int id)
         {
@@ -50,6 +53,7 @@ namespace Alumni_Network_Portal_BE.Controllers
 
         // Put: api/Groups/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [Authorize]
         [HttpPost]
         public async Task<ActionResult<Group>> CreateGroup(GroupCreateDTO groupDTO)
         {
@@ -65,7 +69,8 @@ namespace Alumni_Network_Portal_BE.Controllers
 
         #region Updating linking table
 
-        /// Post users to a specific movie in linking table
+        // Post users to a specific movie in linking table
+        [Authorize]
         [HttpPut("{id}/Join")]
         public async Task<IActionResult> UpdateGroupUser(int id, List<int> usersId)
         {
