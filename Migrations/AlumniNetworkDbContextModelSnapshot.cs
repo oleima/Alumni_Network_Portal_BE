@@ -59,6 +59,38 @@ namespace Alumni_Network_Portal_BE.Migrations
                     b.HasIndex("AuthorId");
 
                     b.ToTable("Events");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AllowGuests = true,
+                            Description = "Get your cowboy boots on and bourbon ready",
+                            EndTime = new DateTime(2023, 7, 5, 3, 0, 0, 0, DateTimeKind.Unspecified),
+                            LastUpdated = new DateTime(2022, 10, 10, 13, 45, 21, 24, DateTimeKind.Local).AddTicks(9076),
+                            Name = "Party in the USA",
+                            StartTime = new DateTime(2023, 7, 4, 16, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 2,
+                            AllowGuests = true,
+                            Description = "The Noroff course presentation of the case project",
+                            EndTime = new DateTime(2023, 10, 28, 16, 0, 0, 0, DateTimeKind.Unspecified),
+                            LastUpdated = new DateTime(2022, 10, 10, 13, 45, 21, 24, DateTimeKind.Local).AddTicks(9123),
+                            Name = "Project Presentation",
+                            StartTime = new DateTime(2023, 10, 28, 12, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 3,
+                            AllowGuests = true,
+                            Description = "Get your socks on and rock on! The case period is over and we need to forget everything we have learned",
+                            EndTime = new DateTime(2023, 10, 28, 22, 0, 0, 0, DateTimeKind.Unspecified),
+                            LastUpdated = new DateTime(2022, 10, 10, 13, 45, 21, 24, DateTimeKind.Local).AddTicks(9127),
+                            Name = "After Work Beer",
+                            StartTime = new DateTime(2023, 10, 28, 16, 0, 0, 0, DateTimeKind.Unspecified)
+                        });
                 });
 
             modelBuilder.Entity("Alumni_Network_Portal_BE.Models.Domain.Group", b =>
@@ -84,6 +116,36 @@ namespace Alumni_Network_Portal_BE.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Groups");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Body = "The noroff group",
+                            IsPrivate = false,
+                            Title = "Noroff"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Body = "We learn about C#",
+                            IsPrivate = false,
+                            Title = "C# learning group"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Body = "For members of Experis",
+                            IsPrivate = true,
+                            Title = "Experis Academy"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Body = "Anyone can be part of this group",
+                            IsPrivate = false,
+                            Title = "Group for everyone"
+                        });
                 });
 
             modelBuilder.Entity("Alumni_Network_Portal_BE.Models.Domain.Post", b =>
@@ -136,6 +198,40 @@ namespace Alumni_Network_Portal_BE.Migrations
                     b.HasIndex("TopicId");
 
                     b.ToTable("Posts");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AuthorId = 2,
+                            Body = "I love peaches",
+                            GroupId = 1,
+                            Title = "Fun fact"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            AuthorId = 2,
+                            Body = "I love beaches",
+                            GroupId = 1,
+                            Title = "Fun fact"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            AuthorId = 2,
+                            Body = "I love leaches",
+                            GroupId = 1,
+                            Title = "Fun fact"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            AuthorId = 2,
+                            Body = "I love breaches",
+                            GroupId = 1,
+                            Title = "Fun fact"
+                        });
                 });
 
             modelBuilder.Entity("Alumni_Network_Portal_BE.Models.Domain.Topic", b =>
@@ -158,6 +254,32 @@ namespace Alumni_Network_Portal_BE.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Topics");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Description = "Discussion of news",
+                            Name = "News"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Description = "Discuss anything that is related to fun things!",
+                            Name = "Fun"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Description = "We talk about anything related to animals",
+                            Name = "Animals"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Description = "Food talk, recipes and anything that involves food",
+                            Name = "Food"
+                        });
                 });
 
             modelBuilder.Entity("Alumni_Network_Portal_BE.Models.Domain.User", b =>
@@ -196,6 +318,44 @@ namespace Alumni_Network_Portal_BE.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Bio = "Likes football",
+                            FunFact = "None",
+                            KeycloakId = "4f1bd04c-7e5a-406f-952d-756ed92933bc",
+                            Status = "Online",
+                            Username = "fred"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Bio = "Likes backend and peaches",
+                            FunFact = "None",
+                            KeycloakId = "14b7a32e-27a4-488b-89d4-e411bec2ba2f",
+                            Status = "Online",
+                            Username = "olem"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Bio = "Fan of sodas",
+                            FunFact = "None",
+                            KeycloakId = "a23f6e10-697d-4f53-bd1d-f38157e3ef54",
+                            Status = "Online",
+                            Username = "solo"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Bio = "Mr.Bean lover",
+                            FunFact = "None",
+                            KeycloakId = "14b7a32e-27a4-488b-89d4-e411bec2ba2f",
+                            Status = "Online",
+                            Username = "johnny"
+                        });
                 });
 
             modelBuilder.Entity("EventGroup", b =>
@@ -228,19 +388,81 @@ namespace Alumni_Network_Portal_BE.Migrations
                     b.ToTable("EventTopic");
                 });
 
-            modelBuilder.Entity("EventUser", b =>
+            modelBuilder.Entity("EventUserInvitation", b =>
                 {
-                    b.Property<int>("RespondedEventsId")
+                    b.Property<int>("EventId")
                         .HasColumnType("int");
 
-                    b.Property<int>("UsersRespondedId")
+                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
-                    b.HasKey("RespondedEventsId", "UsersRespondedId");
+                    b.HasKey("EventId", "UserId");
 
-                    b.HasIndex("UsersRespondedId");
+                    b.HasIndex("UserId");
 
-                    b.ToTable("EventUser");
+                    b.ToTable("EventUserInvitation");
+
+                    b.HasData(
+                        new
+                        {
+                            EventId = 1,
+                            UserId = 1
+                        },
+                        new
+                        {
+                            EventId = 1,
+                            UserId = 2
+                        },
+                        new
+                        {
+                            EventId = 1,
+                            UserId = 3
+                        },
+                        new
+                        {
+                            EventId = 1,
+                            UserId = 4
+                        },
+                        new
+                        {
+                            EventId = 2,
+                            UserId = 1
+                        },
+                        new
+                        {
+                            EventId = 2,
+                            UserId = 2
+                        },
+                        new
+                        {
+                            EventId = 2,
+                            UserId = 3
+                        },
+                        new
+                        {
+                            EventId = 2,
+                            UserId = 4
+                        },
+                        new
+                        {
+                            EventId = 3,
+                            UserId = 1
+                        },
+                        new
+                        {
+                            EventId = 3,
+                            UserId = 2
+                        },
+                        new
+                        {
+                            EventId = 3,
+                            UserId = 3
+                        },
+                        new
+                        {
+                            EventId = 3,
+                            UserId = 4
+                        });
                 });
 
             modelBuilder.Entity("GroupUser", b =>
@@ -256,6 +478,68 @@ namespace Alumni_Network_Portal_BE.Migrations
                     b.HasIndex("UsersId");
 
                     b.ToTable("GroupUser");
+                });
+
+            modelBuilder.Entity("RSVP", b =>
+                {
+                    b.Property<int>("EventId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("EventId", "UserId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("RSVP");
+
+                    b.HasData(
+                        new
+                        {
+                            EventId = 1,
+                            UserId = 1
+                        },
+                        new
+                        {
+                            EventId = 1,
+                            UserId = 3
+                        },
+                        new
+                        {
+                            EventId = 1,
+                            UserId = 4
+                        },
+                        new
+                        {
+                            EventId = 2,
+                            UserId = 1
+                        },
+                        new
+                        {
+                            EventId = 2,
+                            UserId = 3
+                        },
+                        new
+                        {
+                            EventId = 2,
+                            UserId = 4
+                        },
+                        new
+                        {
+                            EventId = 3,
+                            UserId = 1
+                        },
+                        new
+                        {
+                            EventId = 3,
+                            UserId = 3
+                        },
+                        new
+                        {
+                            EventId = 3,
+                            UserId = 4
+                        });
                 });
 
             modelBuilder.Entity("TopicUser", b =>
@@ -353,17 +637,17 @@ namespace Alumni_Network_Portal_BE.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("EventUser", b =>
+            modelBuilder.Entity("EventUserInvitation", b =>
                 {
                     b.HasOne("Alumni_Network_Portal_BE.Models.Domain.Event", null)
                         .WithMany()
-                        .HasForeignKey("RespondedEventsId")
+                        .HasForeignKey("EventId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Alumni_Network_Portal_BE.Models.Domain.User", null)
                         .WithMany()
-                        .HasForeignKey("UsersRespondedId")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -379,6 +663,21 @@ namespace Alumni_Network_Portal_BE.Migrations
                     b.HasOne("Alumni_Network_Portal_BE.Models.Domain.User", null)
                         .WithMany()
                         .HasForeignKey("UsersId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("RSVP", b =>
+                {
+                    b.HasOne("Alumni_Network_Portal_BE.Models.Domain.Event", null)
+                        .WithMany()
+                        .HasForeignKey("EventId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Alumni_Network_Portal_BE.Models.Domain.User", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
