@@ -17,7 +17,7 @@ namespace Alumni_Network_Portal_BE.Models.Domain
 
         // Relationships
         public ICollection<Post>? Posts { get; set; } //One-Many
-        public ICollection<User>? User { get; set; }  //Many-Many
-        public ICollection<Event>? Event { get; set; }//Many-Many
+        public ICollection<User>? Users { get; set; }  //Many-Many
+        public ICollection<Event>? Events { get; set; }//Many-Many
     }
 }

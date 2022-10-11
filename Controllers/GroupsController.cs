@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Alumni_Network_Portal_BE.Models;
+﻿using Microsoft.AspNetCore.Mvc;
 using Alumni_Network_Portal_BE.Models.Domain;
+using AutoMapper;
+using Alumni_Network_Portal_BE.Models.DTOs.GroupDTO;
+using Alumni_Network_Portal_BE.Services.GroupServices;
+using Alumni_Network_Portal_BE.Helpers;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Alumni_Network_Portal_BE.Controllers
 {
@@ -14,95 +13,90 @@ namespace Alumni_Network_Portal_BE.Controllers
     [ApiController]
     public class GroupsController : ControllerBase
     {
-        private readonly AlumniNetworkDbContext _context;
-
-        public GroupsController(AlumniNetworkDbContext context)
+        private readonly IGroupService _groupService;
+        private readonly IMapper _mapper;
+        public GroupsController(IMapper mapper, IGroupService groupService)
         {
-            _context = context;
+            _groupService = groupService;
+            _mapper = mapper;
         }
 
         // GET: api/Groups
+        [Authorize]
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Group>>> GetGroup()
+        public async Task<ActionResult<IEnumerable<GroupReadDTO>>> GetGroup()
         {
-            return await _context.Group.ToListAsync();
+            var keycloakId = this.User.GetId();
+            return _mapper.Map<List<GroupReadDTO>>(await _groupService.GetAllAsync(keycloakId));
         }
 
         // GET: api/Groups/5
+        [Authorize]
         [HttpGet("{id}")]
-        public async Task<ActionResult<Group>> GetGroup(int id)
+        public async Task<ActionResult<GroupReadDTO>> GetGroup(int id)
         {
-            var @group = await _context.Group.FindAsync(id);
+            var keycloakId = this.User.GetId();
+            Group group = await _groupService.GetByIdAsync(id,keycloakId);
 
-            if (@group == null)
+            if (group == null)
             {
                 return NotFound();
             }
 
-            return @group;
-        }
-
-        // PUT: api/Groups/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutGroup(int id, Group @group)
-        {
-            if (id != @group.Id)
+            if(group.Id == 0)
             {
-                return BadRequest();
+                return Forbid();
             }
 
-            _context.Entry(@group).State = EntityState.Modified;
+            return _mapper.Map<GroupReadDTO>(group);
+        }
+
+        // Put: api/Groups/5
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [Authorize]
+        [HttpPost]
+        public async Task<ActionResult<Group>> CreateGroup(GroupCreateDTO groupDTO)
+        {
+            var keycloakId = this.User.GetId();
+            Group domainGroup = _mapper.Map<Group>(groupDTO);
+
+            domainGroup = await _groupService.AddGroupAsync(domainGroup, keycloakId);
+
+            return CreatedAtAction("GetGroup",
+                new { id = domainGroup.Id },
+                _mapper.Map<GroupCreateDTO>(domainGroup));
+        }
+
+        #region Updating linking table
+
+        // Post users to a specific movie in linking table
+        [Authorize]
+        [HttpPut("{id}/Join")]
+        public async Task<IActionResult> UpdateGroupUser(int id, List<int> usersId)
+        {
+            var keycloakId = this.User.GetId();
+            if (!_groupService.Exists(id))
+            {
+                return NotFound();
+            }
 
             try
             {
-                await _context.SaveChangesAsync();
+                await _groupService.UpdateGroupUserAsync(id, usersId, keycloakId);
             }
-            catch (DbUpdateConcurrencyException)
+            catch (KeyNotFoundException)
             {
-                if (!GroupExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                return BadRequest("Invalid user.");
+            }
+            catch (Exception)
+            {
+                return Forbid();
             }
 
             return NoContent();
         }
 
-        // POST: api/Groups
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<Group>> PostGroup(Group @group)
-        {
-            _context.Group.Add(@group);
-            await _context.SaveChangesAsync();
+        #endregion
 
-            return CreatedAtAction("GetGroup", new { id = @group.Id }, @group);
-        }
-
-        // DELETE: api/Groups/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteGroup(int id)
-        {
-            var @group = await _context.Group.FindAsync(id);
-            if (@group == null)
-            {
-                return NotFound();
-            }
-
-            _context.Group.Remove(@group);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
-        }
-
-        private bool GroupExists(int id)
-        {
-            return _context.Group.Any(e => e.Id == id);
-        }
     }
 }

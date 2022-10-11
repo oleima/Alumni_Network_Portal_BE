@@ -24,12 +24,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Profiles\" />
-    <Folder Include="Services\EventServices\" />
     <Folder Include="Services\GroupServices\" />
-    <Folder Include="Services\UserServices\" />
     <Folder Include="Services\TopicServices\" />
-    <Folder Include="Services\PostServices\" />
   </ItemGroup>
 
 </Project>

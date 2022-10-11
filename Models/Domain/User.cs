@@ -6,6 +6,7 @@ namespace Alumni_Network_Portal_BE.Models.Domain
     {
         // PK
         public int Id { get; set; }
+        public string KeycloakId { get; set; }
         // Fields
         [MaxLength(255)]
         [Required]
@@ -26,5 +27,6 @@ namespace Alumni_Network_Portal_BE.Models.Domain
         public ICollection<Topic>? Topics { get; set; } //Many-Many
         public ICollection<Group>? Groups { get; set; } //Many-Many
         public ICollection<Event>? RespondedEvents { get; set; } //Many-Many
+        public ICollection<Event>? InvitedEvents { get; set; } //Many-Many
     }
 }

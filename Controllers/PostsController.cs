@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Alumni_Network_Portal_BE.Models;
+﻿using Microsoft.AspNetCore.Mvc;
+using AutoMapper;
+using Alumni_Network_Portal_BE.Models.DTOs.PostDTO;
+using Alumni_Network_Portal_BE.Services.PostServices;
+using Alumni_Network_Portal_BE.Helpers;
 using Alumni_Network_Portal_BE.Models.Domain;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Alumni_Network_Portal_BE.Controllers
 {
@@ -14,95 +12,101 @@ namespace Alumni_Network_Portal_BE.Controllers
     [ApiController]
     public class PostsController : ControllerBase
     {
-        private readonly AlumniNetworkDbContext _context;
-
-        public PostsController(AlumniNetworkDbContext context)
+        private readonly IPostService _postService;
+        private readonly IMapper _mapper;
+        public PostsController(IMapper mapper, IPostService postService)
         {
-            _context = context;
+            _postService = postService;
+            _mapper = mapper;
         }
 
-        // GET: api/Posts
+        #region Generic CRUD with DTOs
+        [Authorize]
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Post>>> GetPost()
+        public async Task<ActionResult<IEnumerable<PostReadDTO>>> GetPosts()
         {
-            return await _context.Post.ToListAsync();
+            var keycloakId = this.User.GetId();
+
+            return _mapper.Map<List<PostReadDTO>>(await _postService.GetAllAsync(keycloakId));
         }
-
-        // GET: api/Posts/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Post>> GetPost(int id)
+        [Authorize]
+        [HttpGet("user")]
+        public async Task<ActionResult<IEnumerable<PostReadDTO>>> GetRecievedPosts()
         {
-            var post = await _context.Post.FindAsync(id);
+            var keycloakId = this.User.GetId();
 
-            if (post == null)
-            {
-                return NotFound();
-            }
-
-            return post;
+            return _mapper.Map<List<PostReadDTO>>(await _postService.GetMessagesAsync(keycloakId));
         }
-
-        // PUT: api/Posts/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutPost(int id, Post post)
+        [Authorize]
+        [HttpGet("user/{{id}}")]
+        public async Task<ActionResult<IEnumerable<PostReadDTO>>> GetRecievedFromAuthorPosts(int id)
         {
-            if (id != post.Id)
-            {
-                return BadRequest();
-            }
+            var keycloakId = this.User.GetId();
 
-            _context.Entry(post).State = EntityState.Modified;
+            return _mapper.Map<List<PostReadDTO>>(await _postService.GetMessagesFromAuthorAsync(id,keycloakId));
+        }
+        [Authorize]
+        [HttpGet("group/{{id}}")]
+        public async Task<ActionResult<IEnumerable<PostReadDTO>>> GetGroupPosts(int id)
+        {
+            var keycloakId = this.User.GetId();
+
+            return _mapper.Map<List<PostReadDTO>>(await _postService.GetGroupPostsAsync(id, keycloakId));
+        }
+        [Authorize]
+        [HttpGet("topic/{{id}}")]
+        public async Task<ActionResult<IEnumerable<PostReadDTO>>> GetTopicPosts(int id)
+        {
+            var keycloakId = this.User.GetId();
+
+            return _mapper.Map<List<PostReadDTO>>(await _postService.GetTopicPostsAsync(id, keycloakId));
+        }
+        [Authorize]
+        [HttpGet("event/{{id}}")]
+        public async Task<ActionResult<IEnumerable<PostReadDTO>>> GetEventPosts(int id)
+        {
+            var keycloakId = this.User.GetId();
+
+            return _mapper.Map<List<PostReadDTO>>(await _postService.GetEventPostsAsync(id, keycloakId));
+        }
+        [Authorize]
+        [HttpPost]
+        public async Task<ActionResult<Post>> CreatePost(PostCreateDTO dtoPost)
+        {
+            string keycloakId = this.User.GetId();
+
+            Post domainPost = _mapper.Map<Post>(dtoPost);
 
             try
             {
-                await _context.SaveChangesAsync();
+                domainPost = await _postService.AddPostAsync(domainPost, keycloakId);
+                return CreatedAtAction("addPost",
+                    new { id = domainPost.Id },
+                    _mapper.Map<PostReadDTO>(domainPost));
             }
-            catch (DbUpdateConcurrencyException)
+            catch (KeyNotFoundException)
             {
-                if (!PostExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                return BadRequest("Invalid audience");
             }
+            catch (Exception)
+            {
+                return Forbid();
+            }
+
+        }
+
+        [Authorize]
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdatePost(PostCreateDTO dtoPost)
+        {
+            Post domainPost = _mapper.Map<Post>(dtoPost);
+
+            await _postService.UpdateAsync(domainPost);
 
             return NoContent();
         }
 
-        // POST: api/Posts
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<Post>> PostPost(Post post)
-        {
-            _context.Post.Add(post);
-            await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetPost", new { id = post.Id }, post);
-        }
-
-        // DELETE: api/Posts/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeletePost(int id)
-        {
-            var post = await _context.Post.FindAsync(id);
-            if (post == null)
-            {
-                return NotFound();
-            }
-
-            _context.Post.Remove(post);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
-        }
-
-        private bool PostExists(int id)
-        {
-            return _context.Post.Any(e => e.Id == id);
-        }
+        #endregion
     }
 }

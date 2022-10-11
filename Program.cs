@@ -5,6 +5,13 @@ using static System.Net.WebRequestMethods;
 
 using Alumni_Network_Portal_BE.Models;
 using Microsoft.EntityFrameworkCore;
+using Alumni_Network_Portal_BE.Services.UserServices;
+using Microsoft.Extensions.Options;
+using Microsoft.OpenApi.Models;
+using Alumni_Network_Portal_BE.Services.TopicServices;
+using Alumni_Network_Portal_BE.Services.GroupServices;
+using Alumni_Network_Portal_BE.Services.PostServices;
+using Alumni_Network_Portal_BE.Services.EventServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -38,10 +45,75 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 builder.Services.AddControllers();
 builder.Services.AddDbContext<AlumniNetworkDbContext>(
     opt => opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddAutoMapper(typeof(Program).Assembly);
+builder.Services.AddScoped(typeof(ITopicService), typeof(TopicService));
+builder.Services.AddScoped(typeof(IUserService), typeof(UserService));
+builder.Services.AddScoped(typeof(IGroupService), typeof(GroupService));
+builder.Services.AddScoped(typeof(IPostService), typeof(PostService));
+builder.Services.AddScoped(typeof(IEventService), typeof(EventService));
+
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(options =>
+{
+    options.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Version = "v1",
+        Title = "Alumni Network API",
+        Description = "Get information about users, posts, groups and events",
+        TermsOfService = new Uri("https://example.com/terms"), //TODO
+        Contact = new OpenApiContact
+        {
+            Name = "Example Contact",
+            Url = new Uri("https://example.com/contact")
+        },
+        License = new OpenApiLicense
+        {
+            Name = "Example License",
+            Url = new Uri("https://example.com/license")
+        }
+    });
+    options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Description = "JWT Token",
+        Name = "Authorization",
+        In = ParameterLocation.Header,
+        Type = SecuritySchemeType.Http,
+        Scheme = "Bearer"
+    });
+    options.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Name = "Bearer",
+                In = ParameterLocation.Header,
+                Reference = new OpenApiReference
+                {
+                    Id = "Bearer",
+                    Type = ReferenceType.SecurityScheme
+                }
+            },
+            new List<string>()
+        }
+    });
+});
+
+//TODO Add cors specific to frontend
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: "AllowAll", builder =>
+    {
+        builder
+        .AllowAnyOrigin()
+        .AllowAnyMethod()
+        .AllowAnyHeader();
+    });
+});
+
+
+
 
 var app = builder.Build();
 
@@ -54,6 +126,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseCors("AllowAll"); //TOO Cors specific to frontend
 app.UseAuthentication();
 app.UseAuthorization();
 

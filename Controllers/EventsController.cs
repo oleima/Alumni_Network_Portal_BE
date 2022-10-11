@@ -1,4 +1,5 @@
 ﻿using System;
+
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,6 +8,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Alumni_Network_Portal_BE.Models;
 using Alumni_Network_Portal_BE.Models.Domain;
+using Alumni_Network_Portal_BE.Models.DTOs.EventDTO;
+using Alumni_Network_Portal_BE.Services.EventServices;
+using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
+using Alumni_Network_Portal_BE.Helpers;
+using System.Text.RegularExpressions;
 
 namespace Alumni_Network_Portal_BE.Controllers
 {
@@ -14,95 +21,182 @@ namespace Alumni_Network_Portal_BE.Controllers
     [ApiController]
     public class EventsController : ControllerBase
     {
-        private readonly AlumniNetworkDbContext _context;
-
-        public EventsController(AlumniNetworkDbContext context)
+        private readonly IEventService _eventService;
+        private readonly IMapper _mapper;
+        public EventsController(IMapper mapper, IEventService eventService)
         {
-            _context = context;
+            _eventService = eventService;
+            _mapper = mapper;
         }
 
-        // GET: api/Events
+        //FIXME Different DTOs? Return object on delete?
+
+        [Authorize]
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Event>>> GetEvent()
+        public async Task<ActionResult<IEnumerable<EventReadDTO>>> GetEvents()
         {
-            return await _context.Event.ToListAsync();
+            string keycloakId = this.User.GetId();
+            return _mapper.Map<List<EventReadDTO>>(await _eventService.GetEvents(keycloakId));
         }
 
-        // GET: api/Events/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Event>> GetEvent(int id)
+        [Authorize]
+        [HttpPost]
+        public async Task<ActionResult<EventCreateDTO>> CreateEvent(EventCreateDTO ev)
         {
-            var @event = await _context.Event.FindAsync(id);
+            Event domainEvent = _mapper.Map<Event>(ev);
 
-            if (@event == null)
-            {
-                return NotFound();
-            }
+            domainEvent = await _eventService.CreateEvent(domainEvent);
 
-            return @event;
+            return CreatedAtAction("GetEvent",
+                new { id = domainEvent.Id },
+                _mapper.Map<EventReadDTO>(domainEvent));
         }
 
-        // PUT: api/Events/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [Authorize]
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutEvent(int id, Event @event)
+        public async Task<IActionResult> UpdateEvent(int id, EventUpdateDTO ev)
         {
-            if (id != @event.Id)
+            if(id != ev.Id)
             {
                 return BadRequest();
             }
-
-            _context.Entry(@event).State = EntityState.Modified;
-
-            try
+            
+            if (!_eventService.Exists(id))
             {
-                await _context.SaveChangesAsync();
+                return NotFound();
             }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!EventExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            Event domainEvent = _mapper.Map<Event>(ev);
+            await _eventService.UpdateEvent(domainEvent);
 
             return NoContent();
         }
 
-        // POST: api/Events
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<Event>> PostEvent(Event @event)
+        [Authorize]
+        [HttpPost("{eventId}/invite/group/{groupId}")]
+        public async Task<IActionResult> CreateGroupEventInvitation(int eventId, int groupId)
         {
-            _context.Event.Add(@event);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetEvent", new { id = @event.Id }, @event);
-        }
-
-        // DELETE: api/Events/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteEvent(int id)
-        {
-            var @event = await _context.Event.FindAsync(id);
-            if (@event == null)
+            if(!_eventService.Exists(eventId))
             {
                 return NotFound();
             }
 
-            _context.Event.Remove(@event);
-            await _context.SaveChangesAsync();
+            try
+            {
+                await _eventService.CreateGroupEventInvitation(eventId, groupId);
+            }
+            catch (Exception)
+            {
+
+                // Error hanalding
+            }
 
             return NoContent();
         }
 
-        private bool EventExists(int id)
+        [Authorize]
+        [HttpDelete("{eventId}/invite/group/{groupId}")]
+        public async Task<IActionResult> DeleteGroupEventInvitation(int eventId, int groupId)
         {
-            return _context.Event.Any(e => e.Id == id);
+            if(!_eventService.Exists(eventId))
+            {
+                return NotFound();
+            }
+            await _eventService.DeleteGroupEventInvitation(eventId, groupId);
+
+            return NoContent();
+        }
+
+        [Authorize]
+        [HttpPost("{eventId}/invite/topic/{topicId}")]
+        public async Task<IActionResult> CreateTopicEventInvitation(int eventId, int topicId)
+        {
+            if (!_eventService.Exists(eventId))
+            {
+                return NotFound();
+            }
+
+            try
+            {
+                await _eventService.CreateTopicEventInvitation(eventId, topicId);
+            }
+            catch (Exception)
+            {
+
+                // Error hanalding
+            }
+
+            return NoContent();
+        }
+
+        [Authorize]
+        [HttpDelete("{eventId}/invite/topic/{topicId}")]
+        public async Task<IActionResult> DeleteTopicEventInvitation(int eventId, int topicId)
+        {
+            if (!_eventService.Exists(eventId))
+            {
+                return NotFound();
+            }
+            await _eventService.DeleteTopicEventInvitation(eventId, topicId);
+
+            return NoContent();
+        }
+
+        [Authorize]
+        [HttpPost("{eventId}/invite/user/{userId}")]
+        public async Task<IActionResult> CreateUserEventInvitation(int eventId, int userId)
+        {
+            if (!_eventService.Exists(eventId))
+            {
+                return NotFound();
+            }
+
+            try
+            {
+                await _eventService.CreateUserEventInvitation(eventId, userId);
+            }
+            catch (Exception)
+            {
+
+                // Error hanalding
+            }
+
+            return NoContent();
+        }
+
+        [Authorize]
+        [HttpDelete("{eventId}/invite/user/{userId}")]
+        public async Task<IActionResult> DeleteUserEventInvitation(int eventId, int userId)
+        {
+            if (!_eventService.Exists(eventId))
+            {
+                return NotFound();
+            }
+            await _eventService.DeleteUserEventInvitation(eventId, userId);
+
+            return NoContent();
+        }
+
+        [Authorize]
+        [HttpPost("{eventId}/rsvp")]
+        public async Task<IActionResult> CreateEventRSVP(int eventId)
+        {
+            if (!_eventService.Exists(eventId))
+            {
+                return NotFound();
+            }
+
+            try
+            {
+                string keycloakId = this.User.GetId();
+                await _eventService.CreateEventRSVP(eventId, keycloakId);
+            }
+            catch (Exception)
+            {
+
+                // Error hanalding
+            }
+
+            return NoContent();
         }
     }
 }

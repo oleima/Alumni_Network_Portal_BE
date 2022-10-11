@@ -7,6 +7,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Alumni_Network_Portal_BE.Models;
 using Alumni_Network_Portal_BE.Models.Domain;
+using Alumni_Network_Portal_BE.Services.TopicServices;
+using AutoMapper;
+using Alumni_Network_Portal_BE.Models.DTOs.TopicDTO;
+using Alumni_Network_Portal_BE.Helpers;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Alumni_Network_Portal_BE.Controllers
 {
@@ -14,95 +19,65 @@ namespace Alumni_Network_Portal_BE.Controllers
     [ApiController]
     public class TopicsController : ControllerBase
     {
-        private readonly AlumniNetworkDbContext _context;
-
-        public TopicsController(AlumniNetworkDbContext context)
+        private readonly ITopicService _topicService;
+        private readonly IMapper _mapper;
+        public TopicsController(IMapper mapper, ITopicService topicService)
         {
-            _context = context;
+            _topicService = topicService;
+            _mapper = mapper;
         }
 
-        // GET: api/Topics
+        //TODO Authorization and exception handling
+        [Authorize]
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Topic>>> GetTopic()
+        public async Task<ActionResult<IEnumerable<TopicReadDTO>>> GetTopics() //TODO Add search, limit and pagination
         {
-            return await _context.Topic.ToListAsync();
+            return _mapper.Map<List<TopicReadDTO>>(await _topicService.GetTopics());
         }
 
-        // GET: api/Topics/5
+        [Authorize]
         [HttpGet("{id}")]
-        public async Task<ActionResult<Topic>> GetTopic(int id)
+        public async Task<ActionResult<TopicReadDTO>> GetTopic(int id)
         {
-            var topic = await _context.Topic.FindAsync(id);
+            return _mapper.Map<TopicReadDTO>(await _topicService.GetTopicById(id));
+        }
 
-            if (topic == null)
+        [Authorize]
+        [HttpPost]
+        public async Task<ActionResult> PostTopic(TopicCreateDTO topicDTO)
+        {
+            Topic domainTopic = _mapper.Map<Topic>(topicDTO);
+            string keycloakID = this.User.GetId();
+            domainTopic = await _topicService.AddTopic(domainTopic, keycloakID);
+            return CreatedAtAction("GetTopic",
+              new { id = domainTopic.Id },
+              _mapper.Map<TopicReadDTO>(domainTopic));
+
+        }
+
+        [Authorize]
+        [HttpPost("{id}/join")]
+        public async Task<ActionResult> JoinTopic(int id)
+        {
+            if(!_topicService.Exists(id))
             {
                 return NotFound();
             }
-
-            return topic;
-        }
-
-        // PUT: api/Topics/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutTopic(int id, Topic topic)
-        {
-            if (id != topic.Id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(topic).State = EntityState.Modified;
 
             try
             {
-                await _context.SaveChangesAsync();
+                string keycloakID = this.User.GetId();
+                await _topicService.JoinTopic(id, keycloakID);
             }
-            catch (DbUpdateConcurrencyException)
+            catch (KeyNotFoundException)
             {
-                if (!TopicExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                return BadRequest("Error");
             }
 
             return NoContent();
+
+
         }
 
-        // POST: api/Topics
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<Topic>> PostTopic(Topic topic)
-        {
-            _context.Topic.Add(topic);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetTopic", new { id = topic.Id }, topic);
-        }
-
-        // DELETE: api/Topics/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteTopic(int id)
-        {
-            var topic = await _context.Topic.FindAsync(id);
-            if (topic == null)
-            {
-                return NotFound();
-            }
-
-            _context.Topic.Remove(topic);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
-        }
-
-        private bool TopicExists(int id)
-        {
-            return _context.Topic.Any(e => e.Id == id);
-        }
     }
 }
