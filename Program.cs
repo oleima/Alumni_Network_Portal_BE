@@ -41,10 +41,11 @@ else
 
     var user = userPassSide.Split(":")[0];
     var password = userPassSide.Split(":")[1];
-    var host = hostSide.Split("/")[0];
+    var host = hostSide.Split("/")[0].Split(':')[0];
     var database = hostSide.Split("/")[1].Split("?")[0];
 
-    defaultConnectionString = $"Server={host};Port=5432;Database={database};User Id={user};Password={password};sslmode=Require;TrustServerCertificate=True;";
+    defaultConnectionString = $"Host={host};Port=5432;Database={database};User ID={user};Password={password};sslmode=Require;TrustServerCertificate=True;";
+
 }
 
 builder.Services.AddDbContext<AlumniNetworkDbContext>(
