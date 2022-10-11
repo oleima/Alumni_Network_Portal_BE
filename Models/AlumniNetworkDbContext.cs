@@ -11,9 +11,8 @@ namespace Alumni_Network_Portal_BE.Models
     {
         public AlumniNetworkDbContext(DbContextOptions options) : base(options)
         {
-
+            
         }
-
 
 
 
