@@ -48,7 +48,7 @@ else
     defaultConnectionString = $"Server={host};Port=5432;Database={database};User ID={user};Password={password};sslmode=Require;TrustServerCertificate=True;";
 
 }
-
+builder.Services.AddNpgsql<AlumniNetworkDbContext>(defaultConnectionString);
 builder.Services.AddDbContext<AlumniNetworkDbContext>(
     opt => {
         if(builder.Environment.EnvironmentName == "Development")
@@ -58,6 +58,7 @@ builder.Services.AddDbContext<AlumniNetworkDbContext>(
         else
         {
             opt.UseNpgsql(defaultConnectionString);
+            
         }
     });
 
