@@ -66,30 +66,30 @@ namespace Alumni_Network_Portal_BE.Migrations
                             Id = 1,
                             AllowGuests = 1,
                             Description = "Get your cowboy boots on and bourbon ready",
-                            EndTime = new DateTime(2023, 7, 5, 3, 0, 0, 0, DateTimeKind.Unspecified),
-                            LastUpdated = new DateTime(2022, 10, 11, 15, 25, 5, 206, DateTimeKind.Local).AddTicks(6234),
+                            EndTime = new DateTime(2023, 7, 5, 1, 0, 0, 0, DateTimeKind.Utc),
+                            LastUpdated = new DateTime(2022, 10, 11, 13, 34, 49, 648, DateTimeKind.Utc).AddTicks(9393),
                             Name = "Party in the USA",
-                            StartTime = new DateTime(2023, 7, 4, 16, 0, 0, 0, DateTimeKind.Unspecified)
+                            StartTime = new DateTime(2023, 7, 4, 14, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
                             Id = 2,
                             AllowGuests = 1,
                             Description = "The Noroff course presentation of the case project",
-                            EndTime = new DateTime(2023, 10, 28, 16, 0, 0, 0, DateTimeKind.Unspecified),
-                            LastUpdated = new DateTime(2022, 10, 11, 15, 25, 5, 206, DateTimeKind.Local).AddTicks(6276),
+                            EndTime = new DateTime(2023, 10, 28, 14, 0, 0, 0, DateTimeKind.Utc),
+                            LastUpdated = new DateTime(2022, 10, 11, 13, 34, 49, 648, DateTimeKind.Utc).AddTicks(9441),
                             Name = "Project Presentation",
-                            StartTime = new DateTime(2023, 10, 28, 12, 0, 0, 0, DateTimeKind.Unspecified)
+                            StartTime = new DateTime(2023, 10, 28, 10, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
                             Id = 3,
                             AllowGuests = 1,
                             Description = "Get your socks on and rock on! The case period is over and we need to forget everything we have learned",
-                            EndTime = new DateTime(2023, 10, 28, 22, 0, 0, 0, DateTimeKind.Unspecified),
-                            LastUpdated = new DateTime(2022, 10, 11, 15, 25, 5, 206, DateTimeKind.Local).AddTicks(6279),
+                            EndTime = new DateTime(2023, 10, 28, 20, 0, 0, 0, DateTimeKind.Utc),
+                            LastUpdated = new DateTime(2022, 10, 11, 13, 34, 49, 648, DateTimeKind.Utc).AddTicks(9444),
                             Name = "After Work Beer",
-                            StartTime = new DateTime(2023, 10, 28, 16, 0, 0, 0, DateTimeKind.Unspecified)
+                            StartTime = new DateTime(2023, 10, 28, 14, 0, 0, 0, DateTimeKind.Utc)
                         });
                 });
 

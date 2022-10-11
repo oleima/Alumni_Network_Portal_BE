@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Alumni_Network_Portal_BE.Migrations
 {
-    public partial class initialdb : Migration
+    public partial class InitialDb : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -281,9 +281,9 @@ namespace Alumni_Network_Portal_BE.Migrations
                 columns: new[] { "Id", "AllowGuests", "AuthorId", "Description", "EndTime", "LastUpdated", "Name", "StartTime" },
                 values: new object[,]
                 {
-                    { 1, 1, null, "Get your cowboy boots on and bourbon ready", new DateTime(2023, 7, 5, 3, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2022, 10, 11, 15, 25, 5, 206, DateTimeKind.Local).AddTicks(6234), "Party in the USA", new DateTime(2023, 7, 4, 16, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 2, 1, null, "The Noroff course presentation of the case project", new DateTime(2023, 10, 28, 16, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2022, 10, 11, 15, 25, 5, 206, DateTimeKind.Local).AddTicks(6276), "Project Presentation", new DateTime(2023, 10, 28, 12, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 3, 1, null, "Get your socks on and rock on! The case period is over and we need to forget everything we have learned", new DateTime(2023, 10, 28, 22, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2022, 10, 11, 15, 25, 5, 206, DateTimeKind.Local).AddTicks(6279), "After Work Beer", new DateTime(2023, 10, 28, 16, 0, 0, 0, DateTimeKind.Unspecified) }
+                    { 1, 1, null, "Get your cowboy boots on and bourbon ready", new DateTime(2023, 7, 5, 1, 0, 0, 0, DateTimeKind.Utc), new DateTime(2022, 10, 11, 13, 34, 49, 648, DateTimeKind.Utc).AddTicks(9393), "Party in the USA", new DateTime(2023, 7, 4, 14, 0, 0, 0, DateTimeKind.Utc) },
+                    { 2, 1, null, "The Noroff course presentation of the case project", new DateTime(2023, 10, 28, 14, 0, 0, 0, DateTimeKind.Utc), new DateTime(2022, 10, 11, 13, 34, 49, 648, DateTimeKind.Utc).AddTicks(9441), "Project Presentation", new DateTime(2023, 10, 28, 10, 0, 0, 0, DateTimeKind.Utc) },
+                    { 3, 1, null, "Get your socks on and rock on! The case period is over and we need to forget everything we have learned", new DateTime(2023, 10, 28, 20, 0, 0, 0, DateTimeKind.Utc), new DateTime(2022, 10, 11, 13, 34, 49, 648, DateTimeKind.Utc).AddTicks(9444), "After Work Beer", new DateTime(2023, 10, 28, 14, 0, 0, 0, DateTimeKind.Utc) }
                 });
 
             migrationBuilder.InsertData(
