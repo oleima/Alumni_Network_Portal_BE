@@ -44,7 +44,7 @@ else
     var host = hostSide.Split("/")[0];
     var database = hostSide.Split("/")[1].Split("?")[0];
 
-    defaultConnectionString = $"Host={host};Database={database};Username={user};Password={password};SSL Mode=Require;Trust Server Certificate=true";
+    defaultConnectionString = $"Server={host};Port=5432;Database={database};User Id={user};Password={password};sslmode=Require;TrustServerCertificate=True;";
 }
 
 builder.Services.AddDbContext<AlumniNetworkDbContext>(
@@ -68,10 +68,6 @@ try
 catch
 {
 }
-
-
-
-
 
 // Add services to the container.
 builder.Services.AddControllers();
