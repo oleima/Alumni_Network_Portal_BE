@@ -15,6 +15,7 @@ using Alumni_Network_Portal_BE.Services.EventServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
+//FIXME: Testing of deployment
 var configurationBuilder = new ConfigurationBuilder()
                             .SetBasePath(builder.Environment.ContentRootPath)
                             .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
@@ -22,25 +23,6 @@ var configurationBuilder = new ConfigurationBuilder()
                             .AddEnvironmentVariables();
 
 builder.Configuration.AddConfiguration(configurationBuilder.Build());
-
-//FIXME: Testing of deployment
-builder.Services.AddDbContext<AlumniNetworkDbContext>(
-    opt => {
-        if(builder.Environment.EnvironmentName == "Development")
-        {
-            opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
-        }
-        else
-        {
-            opt.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
-        }
-    });
-
-using (var serviceProvider = builder.Services.BuildServiceProvider())
-{
-    var dbContext = serviceProvider.GetRequiredService<AlumniNetworkDbContext>();
-    dbContext.Database.Migrate();
-}
 
 var defaultConnectionString = string.Empty;
 
@@ -64,6 +46,32 @@ else
 
     defaultConnectionString = $"Host={host};Database={database};Username={user};Password={password};SSL Mode=Require;Trust Server Certificate=true";
 }
+
+builder.Services.AddDbContext<AlumniNetworkDbContext>(
+    opt => {
+        if(builder.Environment.EnvironmentName == "Development")
+        {
+            opt.UseSqlServer(defaultConnectionString);
+        }
+        else
+        {
+            opt.UseNpgsql(defaultConnectionString);
+        }
+    });
+
+var serviceProvider = builder.Services.BuildServiceProvider();
+try
+{
+    var dbContext = serviceProvider.GetRequiredService<AlumniNetworkDbContext>();
+    dbContext.Database.Migrate();
+}
+catch
+{
+}
+
+
+
+
 
 // Add services to the container.
 builder.Services.AddControllers();
