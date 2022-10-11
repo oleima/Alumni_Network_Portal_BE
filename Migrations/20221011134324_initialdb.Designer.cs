@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Alumni_Network_Portal_BE.Migrations
 {
     [DbContext(typeof(AlumniNetworkDbContext))]
-    [Migration("20221011133450_InitialDb")]
-    partial class InitialDb
+    [Migration("20221011134324_initialdb")]
+    partial class initialdb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -39,8 +39,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("EndTime")
                         .HasColumnType("datetime2");
@@ -50,8 +49,7 @@ namespace Alumni_Network_Portal_BE.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("StartTime")
                         .HasColumnType("datetime2");
@@ -69,7 +67,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             AllowGuests = 1,
                             Description = "Get your cowboy boots on and bourbon ready",
                             EndTime = new DateTime(2023, 7, 5, 1, 0, 0, 0, DateTimeKind.Utc),
-                            LastUpdated = new DateTime(2022, 10, 11, 13, 34, 49, 648, DateTimeKind.Utc).AddTicks(9393),
+                            LastUpdated = new DateTime(2022, 10, 11, 13, 43, 23, 551, DateTimeKind.Utc).AddTicks(69),
                             Name = "Party in the USA",
                             StartTime = new DateTime(2023, 7, 4, 14, 0, 0, 0, DateTimeKind.Utc)
                         },
@@ -79,7 +77,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             AllowGuests = 1,
                             Description = "The Noroff course presentation of the case project",
                             EndTime = new DateTime(2023, 10, 28, 14, 0, 0, 0, DateTimeKind.Utc),
-                            LastUpdated = new DateTime(2022, 10, 11, 13, 34, 49, 648, DateTimeKind.Utc).AddTicks(9441),
+                            LastUpdated = new DateTime(2022, 10, 11, 13, 43, 23, 551, DateTimeKind.Utc).AddTicks(119),
                             Name = "Project Presentation",
                             StartTime = new DateTime(2023, 10, 28, 10, 0, 0, 0, DateTimeKind.Utc)
                         },
@@ -89,7 +87,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             AllowGuests = 1,
                             Description = "Get your socks on and rock on! The case period is over and we need to forget everything we have learned",
                             EndTime = new DateTime(2023, 10, 28, 20, 0, 0, 0, DateTimeKind.Utc),
-                            LastUpdated = new DateTime(2022, 10, 11, 13, 34, 49, 648, DateTimeKind.Utc).AddTicks(9444),
+                            LastUpdated = new DateTime(2022, 10, 11, 13, 43, 23, 551, DateTimeKind.Utc).AddTicks(123),
                             Name = "After Work Beer",
                             StartTime = new DateTime(2023, 10, 28, 14, 0, 0, 0, DateTimeKind.Utc)
                         });
@@ -104,16 +102,14 @@ namespace Alumni_Network_Portal_BE.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Body")
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("IsPrivate")
                         .HasColumnType("int");
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -162,8 +158,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Body")
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("EventId")
                         .HasColumnType("int");
@@ -179,8 +174,7 @@ namespace Alumni_Network_Portal_BE.Migrations
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("TopicId")
                         .HasColumnType("int");
@@ -309,13 +303,11 @@ namespace Alumni_Network_Portal_BE.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Description")
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -357,12 +349,10 @@ namespace Alumni_Network_Portal_BE.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Bio")
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FunFact")
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("KeycloakId")
                         .IsRequired()
@@ -373,13 +363,11 @@ namespace Alumni_Network_Portal_BE.Migrations
 
                     b.Property<string>("Status")
                         .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Username")
                         .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 

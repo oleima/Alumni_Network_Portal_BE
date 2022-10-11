@@ -8,15 +8,11 @@ namespace Alumni_Network_Portal_BE.Models.Domain
         public int Id { get; set; }
         public string KeycloakId { get; set; }
         // Fields
-        [MaxLength(255)]
         [Required]
         public string Username { get; set; }
-        [MaxLength(255)]
         [Required]
         public string Status { get; set; }
-        [MaxLength(255)]
         public string? Bio { get; set; }
-        [MaxLength(255)]
         public string? FunFact { get; set; }
         public byte[]? Picture { get; set; }
 

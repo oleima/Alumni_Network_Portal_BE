@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Alumni_Network_Portal_BE.Migrations
 {
-    public partial class InitialDb : Migration
+    public partial class initialdb : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -15,8 +15,8 @@ namespace Alumni_Network_Portal_BE.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
-                    Body = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Body = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IsPrivate = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -30,8 +30,8 @@ namespace Alumni_Network_Portal_BE.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true)
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -45,10 +45,10 @@ namespace Alumni_Network_Portal_BE.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     KeycloakId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Username = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
-                    Status = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
-                    Bio = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
-                    FunFact = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
+                    Username = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Bio = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FunFact = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Picture = table.Column<byte[]>(type: "varbinary(max)", nullable: true)
                 },
                 constraints: table =>
@@ -62,8 +62,8 @@ namespace Alumni_Network_Portal_BE.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastUpdated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     StartTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EndTime = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -207,8 +207,8 @@ namespace Alumni_Network_Portal_BE.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
-                    Body = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Body = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     AuthorId = table.Column<int>(type: "int", nullable: true),
                     RecieverId = table.Column<int>(type: "int", nullable: true),
                     TopicId = table.Column<int>(type: "int", nullable: true),
@@ -281,9 +281,9 @@ namespace Alumni_Network_Portal_BE.Migrations
                 columns: new[] { "Id", "AllowGuests", "AuthorId", "Description", "EndTime", "LastUpdated", "Name", "StartTime" },
                 values: new object[,]
                 {
-                    { 1, 1, null, "Get your cowboy boots on and bourbon ready", new DateTime(2023, 7, 5, 1, 0, 0, 0, DateTimeKind.Utc), new DateTime(2022, 10, 11, 13, 34, 49, 648, DateTimeKind.Utc).AddTicks(9393), "Party in the USA", new DateTime(2023, 7, 4, 14, 0, 0, 0, DateTimeKind.Utc) },
-                    { 2, 1, null, "The Noroff course presentation of the case project", new DateTime(2023, 10, 28, 14, 0, 0, 0, DateTimeKind.Utc), new DateTime(2022, 10, 11, 13, 34, 49, 648, DateTimeKind.Utc).AddTicks(9441), "Project Presentation", new DateTime(2023, 10, 28, 10, 0, 0, 0, DateTimeKind.Utc) },
-                    { 3, 1, null, "Get your socks on and rock on! The case period is over and we need to forget everything we have learned", new DateTime(2023, 10, 28, 20, 0, 0, 0, DateTimeKind.Utc), new DateTime(2022, 10, 11, 13, 34, 49, 648, DateTimeKind.Utc).AddTicks(9444), "After Work Beer", new DateTime(2023, 10, 28, 14, 0, 0, 0, DateTimeKind.Utc) }
+                    { 1, 1, null, "Get your cowboy boots on and bourbon ready", new DateTime(2023, 7, 5, 1, 0, 0, 0, DateTimeKind.Utc), new DateTime(2022, 10, 11, 13, 43, 23, 551, DateTimeKind.Utc).AddTicks(69), "Party in the USA", new DateTime(2023, 7, 4, 14, 0, 0, 0, DateTimeKind.Utc) },
+                    { 2, 1, null, "The Noroff course presentation of the case project", new DateTime(2023, 10, 28, 14, 0, 0, 0, DateTimeKind.Utc), new DateTime(2022, 10, 11, 13, 43, 23, 551, DateTimeKind.Utc).AddTicks(119), "Project Presentation", new DateTime(2023, 10, 28, 10, 0, 0, 0, DateTimeKind.Utc) },
+                    { 3, 1, null, "Get your socks on and rock on! The case period is over and we need to forget everything we have learned", new DateTime(2023, 10, 28, 20, 0, 0, 0, DateTimeKind.Utc), new DateTime(2022, 10, 11, 13, 43, 23, 551, DateTimeKind.Utc).AddTicks(123), "After Work Beer", new DateTime(2023, 10, 28, 14, 0, 0, 0, DateTimeKind.Utc) }
                 });
 
             migrationBuilder.InsertData(
