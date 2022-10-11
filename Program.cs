@@ -21,6 +21,7 @@ var configurationBuilder = new ConfigurationBuilder()
                             .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true)
                             .AddEnvironmentVariables();
 
+builder.Configuration.AddConfiguration(configurationBuilder.Build());
 
 //FIXME: Testing of deployment
 builder.Services.AddDbContext<AlumniNetworkDbContext>(
