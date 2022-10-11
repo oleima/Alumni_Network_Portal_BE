@@ -5,6 +5,7 @@ using Alumni_Network_Portal_BE.Services.UserServices;
 using Alumni_Network_Portal_BE.Models.DTOs.UserDTO;
 using Alumni_Network_Portal_BE.Helpers;
 using Microsoft.AspNetCore.Authorization;
+using System.Xml.Linq;
 
 namespace Alumni_Network_Portal_BE.Controllers
 {
@@ -14,6 +15,7 @@ namespace Alumni_Network_Portal_BE.Controllers
     {
         private readonly IUserService _userService;
         private readonly IMapper _mapper;
+
         public UsersController(IMapper mapper, IUserService userService)
         {
             _userService = userService;
@@ -23,9 +25,10 @@ namespace Alumni_Network_Portal_BE.Controllers
         // GET: api/Users
         [Authorize]
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<UserReadDTO>>> GetUser()
+        public async Task<ActionResult<UserReadDTO>> GetUser()
         {
-            return _mapper.Map<List<UserReadDTO>>(await _userService.GetAllAsync());
+            string keycloakId = this.User.GetId();
+            return _mapper.Map<UserReadDTO>(await _userService.GetAsync(keycloakId));
         }
 
         // GET: api/Users/5
@@ -47,9 +50,12 @@ namespace Alumni_Network_Portal_BE.Controllers
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [Authorize]
         [HttpPatch("{id}")]
-        public async Task<ActionResult> PatchUser(int id, UserUpdateDTO userDTO)
+        public async Task<ActionResult> PatchUser(int id, UserUpdateDTO userInput)
         {
-            if (id != userDTO.Id)
+            string keycloakId = this.User.GetId();
+            User userToPatch = _userService.getUserFromKeyCloak(keycloakId);
+
+            if (userToPatch.Id != id)
             {
                 return BadRequest();
             }
@@ -59,8 +65,11 @@ namespace Alumni_Network_Portal_BE.Controllers
                 return NotFound();
             }
 
-            User domainUser = _mapper.Map<User>(userDTO);
-            await _userService.UpdateAsync(domainUser);
+           
+
+
+            User patchUser = _mapper.Map<User>(userInput);
+            await _userService.UpdateAsync(patchUser,userToPatch);
 
             return NoContent();
         }
