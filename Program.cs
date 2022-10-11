@@ -61,6 +61,8 @@ builder.Services.AddDbContext<AlumniNetworkDbContext>(
         }
     });
 
+
+
 var serviceProvider = builder.Services.BuildServiceProvider();
 try
 {
@@ -70,6 +72,8 @@ try
 catch
 {
 }
+
+
 
 // Add services to the container.
 builder.Services.AddControllers();
@@ -184,6 +188,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
 
 
 app.UseCors("AllowAll"); //TOO Cors specific to frontend
