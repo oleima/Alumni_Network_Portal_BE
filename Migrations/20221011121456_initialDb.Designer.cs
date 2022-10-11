@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Alumni_Network_Portal_BE.Migrations
 {
     [DbContext(typeof(AlumniNetworkDbContext))]
-    [Migration("20221011112118_postgres")]
-    partial class postgres
+    [Migration("20221011121456_initialDb")]
+    partial class initialDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -69,7 +69,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             AllowGuests = true,
                             Description = "Get your cowboy boots on and bourbon ready",
                             EndTime = new DateTime(2023, 7, 5, 3, 0, 0, 0, DateTimeKind.Unspecified),
-                            LastUpdated = new DateTime(2022, 10, 11, 13, 21, 17, 760, DateTimeKind.Local).AddTicks(8341),
+                            LastUpdated = new DateTime(2022, 10, 11, 14, 14, 56, 49, DateTimeKind.Local).AddTicks(6828),
                             Name = "Party in the USA",
                             StartTime = new DateTime(2023, 7, 4, 16, 0, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -79,7 +79,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             AllowGuests = true,
                             Description = "The Noroff course presentation of the case project",
                             EndTime = new DateTime(2023, 10, 28, 16, 0, 0, 0, DateTimeKind.Unspecified),
-                            LastUpdated = new DateTime(2022, 10, 11, 13, 21, 17, 760, DateTimeKind.Local).AddTicks(8399),
+                            LastUpdated = new DateTime(2022, 10, 11, 14, 14, 56, 49, DateTimeKind.Local).AddTicks(6882),
                             Name = "Project Presentation",
                             StartTime = new DateTime(2023, 10, 28, 12, 0, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -89,7 +89,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             AllowGuests = true,
                             Description = "Get your socks on and rock on! The case period is over and we need to forget everything we have learned",
                             EndTime = new DateTime(2023, 10, 28, 22, 0, 0, 0, DateTimeKind.Unspecified),
-                            LastUpdated = new DateTime(2022, 10, 11, 13, 21, 17, 760, DateTimeKind.Local).AddTicks(8405),
+                            LastUpdated = new DateTime(2022, 10, 11, 14, 14, 56, 49, DateTimeKind.Local).AddTicks(6887),
                             Name = "After Work Beer",
                             StartTime = new DateTime(2023, 10, 28, 16, 0, 0, 0, DateTimeKind.Unspecified)
                         });
@@ -365,6 +365,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                         .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("KeycloakId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<byte[]>("Picture")
