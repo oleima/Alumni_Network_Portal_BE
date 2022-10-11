@@ -12,6 +12,7 @@ using Alumni_Network_Portal_BE.Services.TopicServices;
 using Alumni_Network_Portal_BE.Services.GroupServices;
 using Alumni_Network_Portal_BE.Services.PostServices;
 using Alumni_Network_Portal_BE.Services.EventServices;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -88,7 +89,15 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             IssuerSigningKeyResolver = (token, securityToken, kid, parameters) =>
             {
                 var client = new HttpClient();
-                var keyuri = builder.Configuration["Token:KeyURI"];
+                var keyuri = "";
+                if (builder.Environment.EnvironmentName == "Development")
+                {
+                    keyuri = builder.Configuration["Token:KeyURI"];
+                }
+                else
+                {
+                    keyuri = Environment.GetEnvironmentVariable("TokenKeyURI");
+                }
                 //Retrieves the keys from keycloak instance to verify token
                 var response = client.GetAsync(keyuri).Result;
                 var responseString = response.Content.ReadAsStringAsync().Result;
@@ -98,7 +107,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
             ValidIssuers = new List<string>
       {
-        builder.Configuration["Token:IssuerURI"]
+        builder.Environment.EnvironmentName == "Development" ? builder.Configuration["Token:IssuerURI"] : Environment.GetEnvironmentVariable("TokenIssuerURI")
       },
             ValidAudience = "account",
         };
