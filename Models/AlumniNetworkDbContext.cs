@@ -1,6 +1,7 @@
 ﻿using Alumni_Network_Portal_BE.Helpers;
 using Alumni_Network_Portal_BE.Models.Domain;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using System.Text.RegularExpressions;
 using Group = Alumni_Network_Portal_BE.Models.Domain.Group;
 
@@ -23,9 +24,20 @@ namespace Alumni_Network_Portal_BE.Models
         //overriding OnModelCreating to create seeddata for all object models 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Event>()
-                .Property(e => e.AllowGuests)
-                .HasConversion<int>();
+            if(Database.IsNpgsql())
+            {
+                var boolConverter = new ValueConverter<bool, int>(v => v ? 1 : 0,v => (v == 1) ? true : false);
+
+                foreach (var entityType in modelBuilder.Model.GetEntityTypes())
+                {
+                    foreach (var property in entityType.GetProperties())
+                    {
+                        if (property.ClrType == typeof(bool))
+                            property.SetValueConverter(boolConverter);
+                    }
+                }
+            }
+
             // Seeddata
 
             // Seed User
