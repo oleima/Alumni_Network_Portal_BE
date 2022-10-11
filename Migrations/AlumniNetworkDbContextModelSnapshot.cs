@@ -30,8 +30,8 @@ namespace Alumni_Network_Portal_BE.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<bool>("AllowGuests")
-                        .HasColumnType("bit");
+                    b.Property<int>("AllowGuests")
+                        .HasColumnType("int");
 
                     b.Property<int?>("AuthorId")
                         .HasColumnType("int");
@@ -64,30 +64,30 @@ namespace Alumni_Network_Portal_BE.Migrations
                         new
                         {
                             Id = 1,
-                            AllowGuests = true,
+                            AllowGuests = 1,
                             Description = "Get your cowboy boots on and bourbon ready",
                             EndTime = new DateTime(2023, 7, 5, 3, 0, 0, 0, DateTimeKind.Unspecified),
-                            LastUpdated = new DateTime(2022, 10, 11, 15, 22, 29, 742, DateTimeKind.Local).AddTicks(9825),
+                            LastUpdated = new DateTime(2022, 10, 11, 15, 25, 5, 206, DateTimeKind.Local).AddTicks(6234),
                             Name = "Party in the USA",
                             StartTime = new DateTime(2023, 7, 4, 16, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 2,
-                            AllowGuests = true,
+                            AllowGuests = 1,
                             Description = "The Noroff course presentation of the case project",
                             EndTime = new DateTime(2023, 10, 28, 16, 0, 0, 0, DateTimeKind.Unspecified),
-                            LastUpdated = new DateTime(2022, 10, 11, 15, 22, 29, 742, DateTimeKind.Local).AddTicks(9868),
+                            LastUpdated = new DateTime(2022, 10, 11, 15, 25, 5, 206, DateTimeKind.Local).AddTicks(6276),
                             Name = "Project Presentation",
                             StartTime = new DateTime(2023, 10, 28, 12, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 3,
-                            AllowGuests = true,
+                            AllowGuests = 1,
                             Description = "Get your socks on and rock on! The case period is over and we need to forget everything we have learned",
                             EndTime = new DateTime(2023, 10, 28, 22, 0, 0, 0, DateTimeKind.Unspecified),
-                            LastUpdated = new DateTime(2022, 10, 11, 15, 22, 29, 742, DateTimeKind.Local).AddTicks(9872),
+                            LastUpdated = new DateTime(2022, 10, 11, 15, 25, 5, 206, DateTimeKind.Local).AddTicks(6279),
                             Name = "After Work Beer",
                             StartTime = new DateTime(2023, 10, 28, 16, 0, 0, 0, DateTimeKind.Unspecified)
                         });
@@ -105,8 +105,8 @@ namespace Alumni_Network_Portal_BE.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<bool>("IsPrivate")
-                        .HasColumnType("bit");
+                    b.Property<int>("IsPrivate")
+                        .HasColumnType("int");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -122,28 +122,28 @@ namespace Alumni_Network_Portal_BE.Migrations
                         {
                             Id = 1,
                             Body = "The noroff group",
-                            IsPrivate = false,
+                            IsPrivate = 0,
                             Title = "Noroff"
                         },
                         new
                         {
                             Id = 2,
                             Body = "We learn about C#",
-                            IsPrivate = false,
+                            IsPrivate = 0,
                             Title = "C# learning group"
                         },
                         new
                         {
                             Id = 3,
                             Body = "For members of Experis",
-                            IsPrivate = true,
+                            IsPrivate = 1,
                             Title = "Experis Academy"
                         },
                         new
                         {
                             Id = 4,
                             Body = "Anyone can be part of this group",
-                            IsPrivate = false,
+                            IsPrivate = 0,
                             Title = "Group for everyone"
                         });
                 });

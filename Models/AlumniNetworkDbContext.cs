@@ -24,8 +24,7 @@ namespace Alumni_Network_Portal_BE.Models
         //overriding OnModelCreating to create seeddata for all object models 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            if(Database.IsNpgsql())
-            {
+            
                 var boolConverter = new ValueConverter<bool, int>(v => v ? 1 : 0,v => (v == 1) ? true : false);
 
                 foreach (var entityType in modelBuilder.Model.GetEntityTypes())
@@ -36,7 +35,7 @@ namespace Alumni_Network_Portal_BE.Models
                             property.SetValueConverter(boolConverter);
                     }
                 }
-            }
+            
 
             // Seeddata
 

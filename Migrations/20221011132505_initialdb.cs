@@ -17,7 +17,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     Body = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
-                    IsPrivate = table.Column<bool>(type: "bit", nullable: false)
+                    IsPrivate = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -67,7 +67,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                     LastUpdated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     StartTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EndTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    AllowGuests = table.Column<bool>(type: "bit", nullable: false),
+                    AllowGuests = table.Column<int>(type: "int", nullable: false),
                     AuthorId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -281,9 +281,9 @@ namespace Alumni_Network_Portal_BE.Migrations
                 columns: new[] { "Id", "AllowGuests", "AuthorId", "Description", "EndTime", "LastUpdated", "Name", "StartTime" },
                 values: new object[,]
                 {
-                    { 1, true, null, "Get your cowboy boots on and bourbon ready", new DateTime(2023, 7, 5, 3, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2022, 10, 11, 15, 22, 29, 742, DateTimeKind.Local).AddTicks(9825), "Party in the USA", new DateTime(2023, 7, 4, 16, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 2, true, null, "The Noroff course presentation of the case project", new DateTime(2023, 10, 28, 16, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2022, 10, 11, 15, 22, 29, 742, DateTimeKind.Local).AddTicks(9868), "Project Presentation", new DateTime(2023, 10, 28, 12, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 3, true, null, "Get your socks on and rock on! The case period is over and we need to forget everything we have learned", new DateTime(2023, 10, 28, 22, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2022, 10, 11, 15, 22, 29, 742, DateTimeKind.Local).AddTicks(9872), "After Work Beer", new DateTime(2023, 10, 28, 16, 0, 0, 0, DateTimeKind.Unspecified) }
+                    { 1, 1, null, "Get your cowboy boots on and bourbon ready", new DateTime(2023, 7, 5, 3, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2022, 10, 11, 15, 25, 5, 206, DateTimeKind.Local).AddTicks(6234), "Party in the USA", new DateTime(2023, 7, 4, 16, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 2, 1, null, "The Noroff course presentation of the case project", new DateTime(2023, 10, 28, 16, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2022, 10, 11, 15, 25, 5, 206, DateTimeKind.Local).AddTicks(6276), "Project Presentation", new DateTime(2023, 10, 28, 12, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 3, 1, null, "Get your socks on and rock on! The case period is over and we need to forget everything we have learned", new DateTime(2023, 10, 28, 22, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2022, 10, 11, 15, 25, 5, 206, DateTimeKind.Local).AddTicks(6279), "After Work Beer", new DateTime(2023, 10, 28, 16, 0, 0, 0, DateTimeKind.Unspecified) }
                 });
 
             migrationBuilder.InsertData(
@@ -291,10 +291,10 @@ namespace Alumni_Network_Portal_BE.Migrations
                 columns: new[] { "Id", "Body", "IsPrivate", "Title" },
                 values: new object[,]
                 {
-                    { 1, "The noroff group", false, "Noroff" },
-                    { 2, "We learn about C#", false, "C# learning group" },
-                    { 3, "For members of Experis", true, "Experis Academy" },
-                    { 4, "Anyone can be part of this group", false, "Group for everyone" }
+                    { 1, "The noroff group", 0, "Noroff" },
+                    { 2, "We learn about C#", 0, "C# learning group" },
+                    { 3, "For members of Experis", 1, "Experis Academy" },
+                    { 4, "Anyone can be part of this group", 0, "Group for everyone" }
                 });
 
             migrationBuilder.InsertData(
