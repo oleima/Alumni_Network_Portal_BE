@@ -14,6 +14,9 @@ namespace Alumni_Network_Portal_BE.Models
 
         }
 
+
+
+
         public DbSet<Event> Events { get; set; }
         public DbSet<Group> Groups { get; set; }
         public DbSet<Post> Posts { get; set; }
