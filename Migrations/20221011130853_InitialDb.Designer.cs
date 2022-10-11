@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Alumni_Network_Portal_BE.Migrations
 {
     [DbContext(typeof(AlumniNetworkDbContext))]
-    [Migration("20221011121456_initialDb")]
-    partial class initialDb
+    [Migration("20221011130853_InitialDb")]
+    partial class InitialDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -32,8 +32,8 @@ namespace Alumni_Network_Portal_BE.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<bool>("AllowGuests")
-                        .HasColumnType("bit");
+                    b.Property<int>("AllowGuests")
+                        .HasColumnType("int");
 
                     b.Property<int?>("AuthorId")
                         .HasColumnType("int");
@@ -66,30 +66,30 @@ namespace Alumni_Network_Portal_BE.Migrations
                         new
                         {
                             Id = 1,
-                            AllowGuests = true,
+                            AllowGuests = 1,
                             Description = "Get your cowboy boots on and bourbon ready",
                             EndTime = new DateTime(2023, 7, 5, 3, 0, 0, 0, DateTimeKind.Unspecified),
-                            LastUpdated = new DateTime(2022, 10, 11, 14, 14, 56, 49, DateTimeKind.Local).AddTicks(6828),
+                            LastUpdated = new DateTime(2022, 10, 11, 15, 8, 52, 919, DateTimeKind.Local).AddTicks(6381),
                             Name = "Party in the USA",
                             StartTime = new DateTime(2023, 7, 4, 16, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 2,
-                            AllowGuests = true,
+                            AllowGuests = 1,
                             Description = "The Noroff course presentation of the case project",
                             EndTime = new DateTime(2023, 10, 28, 16, 0, 0, 0, DateTimeKind.Unspecified),
-                            LastUpdated = new DateTime(2022, 10, 11, 14, 14, 56, 49, DateTimeKind.Local).AddTicks(6882),
+                            LastUpdated = new DateTime(2022, 10, 11, 15, 8, 52, 919, DateTimeKind.Local).AddTicks(6427),
                             Name = "Project Presentation",
                             StartTime = new DateTime(2023, 10, 28, 12, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 3,
-                            AllowGuests = true,
+                            AllowGuests = 1,
                             Description = "Get your socks on and rock on! The case period is over and we need to forget everything we have learned",
                             EndTime = new DateTime(2023, 10, 28, 22, 0, 0, 0, DateTimeKind.Unspecified),
-                            LastUpdated = new DateTime(2022, 10, 11, 14, 14, 56, 49, DateTimeKind.Local).AddTicks(6887),
+                            LastUpdated = new DateTime(2022, 10, 11, 15, 8, 52, 919, DateTimeKind.Local).AddTicks(6431),
                             Name = "After Work Beer",
                             StartTime = new DateTime(2023, 10, 28, 16, 0, 0, 0, DateTimeKind.Unspecified)
                         });

@@ -10,6 +10,7 @@ namespace Alumni_Network_Portal_BE.Models
     {
         public AlumniNetworkDbContext(DbContextOptions options) : base(options)
         {
+
         }
 
         public DbSet<Event> Events { get; set; }
@@ -22,6 +23,9 @@ namespace Alumni_Network_Portal_BE.Models
         //overriding OnModelCreating to create seeddata for all object models 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Event>()
+                .Property(e => e.AllowGuests)
+                .HasConversion<int>();
             // Seeddata
 
             // Seed User
