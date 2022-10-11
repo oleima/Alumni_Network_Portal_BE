@@ -11,6 +11,7 @@ using Microsoft.OpenApi.Models;
 using Alumni_Network_Portal_BE.Services.TopicServices;
 using Alumni_Network_Portal_BE.Services.GroupServices;
 using Alumni_Network_Portal_BE.Services.PostServices;
+using Alumni_Network_Portal_BE.Services.EventServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -49,7 +50,7 @@ builder.Services.AddScoped(typeof(ITopicService), typeof(TopicService));
 builder.Services.AddScoped(typeof(IUserService), typeof(UserService));
 builder.Services.AddScoped(typeof(IGroupService), typeof(GroupService));
 builder.Services.AddScoped(typeof(IPostService), typeof(PostService));
-
+builder.Services.AddScoped(typeof(IEventService), typeof(EventService));
 
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

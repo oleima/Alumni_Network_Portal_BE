@@ -55,6 +55,11 @@ namespace Alumni_Network_Portal_BE.Services.EventServices
                 .Where(g => g.Id == groupId)
                 .FirstOrDefaultAsync().Result;
 
+            if (ev.Groups == null)
+            {
+                ev.Groups = new List<Group>();
+            }
+
             ev.Groups.Add(group);
             await _context.SaveChangesAsync();
         }
@@ -105,6 +110,12 @@ namespace Alumni_Network_Portal_BE.Services.EventServices
                 .Where(u => u.Id == userId)
                 .FirstOrDefaultAsync().Result;
 
+
+            if (ev.UserInvited == null)
+            {
+                ev.UserInvited = new List<User>();
+            }
+
             ev.UserInvited.Add(user);
             await _context.SaveChangesAsync();
         }
@@ -119,7 +130,8 @@ namespace Alumni_Network_Portal_BE.Services.EventServices
                 .Where(u => u.Id == userId)
                 .FirstOrDefaultAsync().Result;
 
-            ev.UserInvited.Add(user);
+
+            ev.UserInvited.Remove(user);
             await _context.SaveChangesAsync();
         }
         public async Task CreateEventRSVP(int eventId, string keycloakId)
@@ -131,6 +143,11 @@ namespace Alumni_Network_Portal_BE.Services.EventServices
             User user = _context.Users
                 .Where(u => u.KeycloakId == keycloakId)
                 .FirstOrDefaultAsync().Result;
+
+            if(ev.UsersResponded == null)
+            {
+                ev.UsersResponded = new List<User>();
+            }
 
             ev.UsersResponded.Add(user);
             await _context.SaveChangesAsync();
