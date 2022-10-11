@@ -1,8 +1,6 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
-using static System.Net.WebRequestMethods;
-
 using Alumni_Network_Portal_BE.Models;
 using Microsoft.EntityFrameworkCore;
 using Alumni_Network_Portal_BE.Services.UserServices;

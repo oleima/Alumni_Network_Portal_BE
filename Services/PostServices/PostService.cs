@@ -77,7 +77,7 @@ namespace Alumni_Network_Portal_BE.Services.PostServices
         {
             User user = _context.Users.First(u => u.KeycloakId == keycloakId);
 
-            if (domainPost.TopicId != null)
+            if (domainPost.TopicId != 0)
             {
                 Topic audienceToPostTo = _context.Topics.First(t => t.Id == domainPost.TopicId);
                 ICollection<Topic>? audienceRelation = user.Topics;
@@ -86,7 +86,7 @@ namespace Alumni_Network_Portal_BE.Services.PostServices
                     throw new Exception();
                 }
             }
-            else if (domainPost.GroupId != null)
+            else if (domainPost.GroupId != 0)
             {
                 Group audienceToPostTo = _context.Groups.First(g => g.Id == domainPost.GroupId);
                 ICollection<Group>? audienceRelation = user.Groups;
@@ -95,7 +95,7 @@ namespace Alumni_Network_Portal_BE.Services.PostServices
                     throw new Exception();
                 }
             }
-            else if (domainPost.EventId != null)
+            else if (domainPost.EventId != 0)
             {
                 Event audienceToPostTo = _context.Events.First(e => e.Id == domainPost.EventId);
                 ICollection<Event>? audienceRelation = user.RespondedEvents;
