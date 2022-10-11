@@ -179,7 +179,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
 
 app.UseCors("AllowAll"); //TOO Cors specific to frontend
 app.UseAuthentication();
