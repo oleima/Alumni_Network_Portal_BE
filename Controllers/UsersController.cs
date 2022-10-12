@@ -76,24 +76,27 @@ namespace Alumni_Network_Portal_BE.Controllers
 
         [Authorize]
         [HttpPost]
-        public async Task<ActionResult> PostUser()
+        public async Task<ActionResult<User>> PostUser()
         {
             //FIXME 
             var keycloakID = this.User.GetId();
+            var username = this.User.GetUsername();
             if (keycloakID == null)
             {
                 return NotFound();
             }
-            
-            User user = new User {
-                Username = "",
-                Status = "",
-                KeycloakId = keycloakID
-            };
 
-            await _userService.PostAsync(user);
+            if(_userService.getUserFromKeyCloak(keycloakID) == null)
+            {
+                return BadRequest();
+            }
 
-            return NoContent();
+            User domainUser = await _userService.PostAsync(keycloakID, username);
+
+            return CreatedAtAction("GetÙser",
+                new { id = domainUser.Id },
+                _mapper.Map<UserReadDTO>(domainUser));
+
         }
     }
 }

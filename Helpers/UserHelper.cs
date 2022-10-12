@@ -15,5 +15,15 @@ namespace Alumni_Network_Portal_BE.Helpers
             }
             return null;
         }
+
+        public static string GetUsername(this ClaimsPrincipal principal)
+        {
+            var p = principal;
+            if (p != null)
+            {
+                return p.FindFirstValue("preferred_username");
+            }
+            return null;
+        }
     }
 }
