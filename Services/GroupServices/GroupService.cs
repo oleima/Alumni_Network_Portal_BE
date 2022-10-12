@@ -25,6 +25,8 @@ namespace Alumni_Network_Portal_BE.Services.GroupServices
 
             return await _context.Groups
                 .Include(c => c.Users)
+                .Include(t => t.Posts)
+                .Include(t => t.Events)
                 .Where(c => c.IsPrivate == false || c.Users.Contains(user))
                 .ToListAsync();
         }
@@ -34,6 +36,8 @@ namespace Alumni_Network_Portal_BE.Services.GroupServices
             User user = _context.Users.First(u => u.KeycloakId == keycloakId);
 
             Group group = await _context.Groups
+                .Include(t => t.Posts)
+                .Include(t => t.Events)
                 .Include(c => c.Users)
                 .Where(c => c.Id == id)
                 .FirstOrDefaultAsync();
@@ -77,18 +81,18 @@ namespace Alumni_Network_Portal_BE.Services.GroupServices
                 throw new Exception();
             }
 
-
-            List<User> usersList = new();
-
-            foreach(int userId in users)
+            foreach (int userId in users)
             {
                 User user = await _context.Users.FindAsync(userId);
                 if (user == null)
                     throw new KeyNotFoundException();
-                usersList.Add(user);
+                if (!groupToUpdate.Users.Contains(user))
+                {
+                    groupToUpdate.Users.Add(user);
+                }
+                
             }
 
-            groupToUpdate.Users = usersList;
             await _context.SaveChangesAsync();
         }
 

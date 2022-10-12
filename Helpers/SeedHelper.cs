@@ -20,7 +20,7 @@ namespace Alumni_Network_Portal_BE.Helpers
             users.Add(new User()
             {
                 Id = 2,
-                KeycloakId = "14b7a32e-27a4-488b-89d4-e411bec2ba2f",
+                KeycloakId = "7ccf5453-c488-43f3-b7eb-587d8e44054b",
                 Username = "olem",
                 Status = "Online",
                 Bio = "Likes backend and peaches",
@@ -87,6 +87,7 @@ namespace Alumni_Network_Portal_BE.Helpers
                 Id = 1,
                 Title = "Fun fact",
                 Body = "I love peaches",
+                LastUpdated = DateTime.Now,
                 AuthorId = 1,
                 GroupId = 1,
             }) ;
@@ -95,6 +96,7 @@ namespace Alumni_Network_Portal_BE.Helpers
                 Id = 2,
                 Title = "Fun fact",
                 Body = "I love beaches",
+                LastUpdated = DateTime.Now,
                 AuthorId = 2,
                 GroupId = 2,
             });
@@ -103,6 +105,7 @@ namespace Alumni_Network_Portal_BE.Helpers
                 Id = 3,
                 Title = "Fun fact",
                 Body = "I love leaches",
+                LastUpdated = DateTime.Now,
                 AuthorId = 3,
                 GroupId = 3,
             });
@@ -111,6 +114,7 @@ namespace Alumni_Network_Portal_BE.Helpers
                 Id = 4,
                 Title = "Fun fact",
                 Body = "I love breaches",
+                LastUpdated = DateTime.Now,
                 AuthorId = 4,
                 GroupId = 4,
             });
@@ -119,6 +123,7 @@ namespace Alumni_Network_Portal_BE.Helpers
                 Id = 5,
                 Title = "Fun fact",
                 Body = "I love peaches",
+                LastUpdated = DateTime.Now,
                 AuthorId = 1,
                 TopicId = 1,
             });
@@ -127,6 +132,7 @@ namespace Alumni_Network_Portal_BE.Helpers
                 Id = 6,
                 Title = "Fun fact",
                 Body = "I love beaches",
+                LastUpdated = DateTime.Now,
                 AuthorId = 2,
                 TopicId = 2,
             });
@@ -135,6 +141,7 @@ namespace Alumni_Network_Portal_BE.Helpers
                 Id = 7,
                 Title = "Fun fact",
                 Body = "I love leaches",
+                LastUpdated = DateTime.Now,
                 AuthorId = 3,
                 TopicId = 3,
             });
@@ -143,6 +150,7 @@ namespace Alumni_Network_Portal_BE.Helpers
                 Id = 8,
                 Title = "Fun fact",
                 Body = "I love breaches",
+                LastUpdated = DateTime.Now,
                 AuthorId = 4,
                 TopicId = 4,
             });
@@ -151,6 +159,7 @@ namespace Alumni_Network_Portal_BE.Helpers
                 Id = 9,
                 Title = "Message",
                 Body = "From fred to olem",
+                LastUpdated = DateTime.Now,
                 AuthorId = 1,
                 RecieverId = 2,
             });
@@ -159,6 +168,7 @@ namespace Alumni_Network_Portal_BE.Helpers
                 Id = 10,
                 Title = "Message",
                 Body = "From olem to fred",
+                LastUpdated = DateTime.Now,
                 AuthorId = 2,
                 RecieverId = 1,
             });
@@ -167,6 +177,7 @@ namespace Alumni_Network_Portal_BE.Helpers
                 Id = 11,
                 Title = "Message",
                 Body = "From solo to johnny",
+                LastUpdated = DateTime.Now,
                 AuthorId = 3,
                 RecieverId = 4,
             });
@@ -175,6 +186,7 @@ namespace Alumni_Network_Portal_BE.Helpers
                 Id = 12,
                 Title = "Message",
                 Body = "From johnny to solo",
+                LastUpdated = DateTime.Now,
                 AuthorId = 4,
                 RecieverId = 3,
             });

@@ -208,6 +208,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    LastUpdated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Body = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
                     AuthorId = table.Column<int>(type: "int", nullable: true),
                     RecieverId = table.Column<int>(type: "int", nullable: true),
@@ -281,9 +282,9 @@ namespace Alumni_Network_Portal_BE.Migrations
                 columns: new[] { "Id", "AllowGuests", "AuthorId", "Description", "EndTime", "LastUpdated", "Name", "StartTime" },
                 values: new object[,]
                 {
-                    { 1, true, null, "Get your cowboy boots on and bourbon ready", new DateTime(2023, 7, 5, 3, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2022, 10, 10, 14, 52, 38, 894, DateTimeKind.Local).AddTicks(5508), "Party in the USA", new DateTime(2023, 7, 4, 16, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 2, true, null, "The Noroff course presentation of the case project", new DateTime(2023, 10, 28, 16, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2022, 10, 10, 14, 52, 38, 894, DateTimeKind.Local).AddTicks(5556), "Project Presentation", new DateTime(2023, 10, 28, 12, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 3, true, null, "Get your socks on and rock on! The case period is over and we need to forget everything we have learned", new DateTime(2023, 10, 28, 22, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2022, 10, 10, 14, 52, 38, 894, DateTimeKind.Local).AddTicks(5559), "After Work Beer", new DateTime(2023, 10, 28, 16, 0, 0, 0, DateTimeKind.Unspecified) }
+                    { 1, true, null, "Get your cowboy boots on and bourbon ready", new DateTime(2023, 7, 5, 3, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2022, 10, 12, 8, 48, 59, 821, DateTimeKind.Local).AddTicks(8940), "Party in the USA", new DateTime(2023, 7, 4, 16, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 2, true, null, "The Noroff course presentation of the case project", new DateTime(2023, 10, 28, 16, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2022, 10, 12, 8, 48, 59, 821, DateTimeKind.Local).AddTicks(8946), "Project Presentation", new DateTime(2023, 10, 28, 12, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 3, true, null, "Get your socks on and rock on! The case period is over and we need to forget everything we have learned", new DateTime(2023, 10, 28, 22, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2022, 10, 12, 8, 48, 59, 821, DateTimeKind.Local).AddTicks(8948), "After Work Beer", new DateTime(2023, 10, 28, 16, 0, 0, 0, DateTimeKind.Unspecified) }
                 });
 
             migrationBuilder.InsertData(
@@ -314,7 +315,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                 values: new object[,]
                 {
                     { 1, "Likes football", "None", "4f1bd04c-7e5a-406f-952d-756ed92933bc", null, "Online", "fred" },
-                    { 2, "Likes backend and peaches", "None", "14b7a32e-27a4-488b-89d4-e411bec2ba2f", null, "Online", "olem" },
+                    { 2, "Likes backend and peaches", "None", "7ccf5453-c488-43f3-b7eb-587d8e44054b", null, "Online", "olem" },
                     { 3, "Fan of sodas", "None", "a23f6e10-697d-4f53-bd1d-f38157e3ef54", null, "Online", "solo" },
                     { 4, "Mr.Bean lover", "None", "14b7a32e-27a4-488b-89d4-e411bec2ba2f", null, "Online", "johnny" }
                 });
@@ -380,26 +381,26 @@ namespace Alumni_Network_Portal_BE.Migrations
 
             migrationBuilder.InsertData(
                 table: "Posts",
-                columns: new[] { "Id", "AuthorId", "Body", "EventId", "GroupId", "ParentId", "RecieverId", "Title", "TopicId" },
+                columns: new[] { "Id", "AuthorId", "Body", "EventId", "GroupId", "LastUpdated", "ParentId", "RecieverId", "Title", "TopicId" },
                 values: new object[,]
                 {
-                    { 1, 1, "I love peaches", null, 1, null, null, "Fun fact", null },
-                    { 2, 2, "I love beaches", null, 2, null, null, "Fun fact", null },
-                    { 3, 3, "I love leaches", null, 3, null, null, "Fun fact", null },
-                    { 4, 4, "I love breaches", null, 4, null, null, "Fun fact", null },
-                    { 5, 1, "I love peaches", null, null, null, null, "Fun fact", 1 },
-                    { 6, 2, "I love beaches", null, null, null, null, "Fun fact", 2 },
-                    { 7, 3, "I love leaches", null, null, null, null, "Fun fact", 3 },
-                    { 8, 4, "I love breaches", null, null, null, null, "Fun fact", 4 },
-                    { 9, 1, "From fred to olem", null, null, null, 2, "Message", null },
-                    { 10, 2, "From olem to fred", null, null, null, 1, "Message", null },
-                    { 11, 3, "From solo to johnny", null, null, null, 4, "Message", null }
+                    { 1, 1, "I love peaches", null, 1, new DateTime(2022, 10, 12, 8, 48, 59, 821, DateTimeKind.Local).AddTicks(8788), null, null, "Fun fact", null },
+                    { 2, 2, "I love beaches", null, 2, new DateTime(2022, 10, 12, 8, 48, 59, 821, DateTimeKind.Local).AddTicks(8823), null, null, "Fun fact", null },
+                    { 3, 3, "I love leaches", null, 3, new DateTime(2022, 10, 12, 8, 48, 59, 821, DateTimeKind.Local).AddTicks(8825), null, null, "Fun fact", null },
+                    { 4, 4, "I love breaches", null, 4, new DateTime(2022, 10, 12, 8, 48, 59, 821, DateTimeKind.Local).AddTicks(8827), null, null, "Fun fact", null },
+                    { 5, 1, "I love peaches", null, null, new DateTime(2022, 10, 12, 8, 48, 59, 821, DateTimeKind.Local).AddTicks(8829), null, null, "Fun fact", 1 },
+                    { 6, 2, "I love beaches", null, null, new DateTime(2022, 10, 12, 8, 48, 59, 821, DateTimeKind.Local).AddTicks(8833), null, null, "Fun fact", 2 },
+                    { 7, 3, "I love leaches", null, null, new DateTime(2022, 10, 12, 8, 48, 59, 821, DateTimeKind.Local).AddTicks(8835), null, null, "Fun fact", 3 },
+                    { 8, 4, "I love breaches", null, null, new DateTime(2022, 10, 12, 8, 48, 59, 821, DateTimeKind.Local).AddTicks(8837), null, null, "Fun fact", 4 },
+                    { 9, 1, "From fred to olem", null, null, new DateTime(2022, 10, 12, 8, 48, 59, 821, DateTimeKind.Local).AddTicks(8839), null, 2, "Message", null },
+                    { 10, 2, "From olem to fred", null, null, new DateTime(2022, 10, 12, 8, 48, 59, 821, DateTimeKind.Local).AddTicks(8842), null, 1, "Message", null },
+                    { 11, 3, "From solo to johnny", null, null, new DateTime(2022, 10, 12, 8, 48, 59, 821, DateTimeKind.Local).AddTicks(8844), null, 4, "Message", null }
                 });
 
             migrationBuilder.InsertData(
                 table: "Posts",
-                columns: new[] { "Id", "AuthorId", "Body", "EventId", "GroupId", "ParentId", "RecieverId", "Title", "TopicId" },
-                values: new object[] { 12, 4, "From johnny to solo", null, null, null, 3, "Message", null });
+                columns: new[] { "Id", "AuthorId", "Body", "EventId", "GroupId", "LastUpdated", "ParentId", "RecieverId", "Title", "TopicId" },
+                values: new object[] { 12, 4, "From johnny to solo", null, null, new DateTime(2022, 10, 12, 8, 48, 59, 821, DateTimeKind.Local).AddTicks(8846), null, 3, "Message", null });
 
             migrationBuilder.InsertData(
                 table: "RSVP",

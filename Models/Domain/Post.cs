@@ -10,6 +10,8 @@ namespace Alumni_Network_Portal_BE.Models.Domain
         [MaxLength(255)]
         [Required]
         public string Title { get; set; }
+        [Required]
+        public DateTime LastUpdated { get; set; }
 
         [MaxLength(255)]
         public string? Body { get; set; } //Nullable
