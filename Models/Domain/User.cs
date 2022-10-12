@@ -18,7 +18,7 @@ namespace Alumni_Network_Portal_BE.Models.Domain
         public string? Bio { get; set; }
         [MaxLength(255)]
         public string? FunFact { get; set; }
-        public byte[]? Picture { get; set; }
+        public string? Picture { get; set; }
 
         // Relationships
         public ICollection<Post>? AuthoredPosts { get; set; } //One-Many
