@@ -198,26 +198,26 @@ namespace Alumni_Network_Portal_BE.Helpers
             topics.Add(new Topic()
             {
                 Id = 1,
-                Name = "News",
-                Description = "Discussion of news",
+                Title = "News",
+                Body = "Discussion of news",
             });
             topics.Add(new Topic()
             {
                 Id = 2,
-                Name = "Fun",
-                Description = "Discuss anything that is related to fun things!",
+                Title = "Fun",
+                Body = "Discuss anything that is related to fun things!",
             });
             topics.Add(new Topic()
             {
                 Id = 3,
-                Name = "Animals",
-                Description = "We talk about anything related to animals",
+                Title = "Animals",
+                Body = "We talk about anything related to animals",
             });
             topics.Add(new Topic()
             {
                 Id = 4,
-                Name = "Food",
-                Description = "Food talk, recipes and anything that involves food",
+                Title = "Food",
+                Body = "Food talk, recipes and anything that involves food",
             });
             return topics;
         }

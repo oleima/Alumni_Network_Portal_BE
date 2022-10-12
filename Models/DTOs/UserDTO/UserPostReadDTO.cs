@@ -8,6 +8,6 @@
         public string Status { get; set; }
         public string? Bio { get; set; } //Nullable
         public string? FunFact { get; set; } //Nullable
-        public byte[]? Picture { get; set; }
+        public string? Picture { get; set; }
     }
 }

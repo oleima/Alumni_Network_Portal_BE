@@ -11,7 +11,7 @@ namespace Alumni_Network_Portal_BE.Profiles
             //Mapping from user to the respective DTOs
             CreateMap<User, UserReadDTO>()
                 .ForMember(cdto => cdto.Topics, opt => opt
-                .MapFrom(u => u.Topics.Select(t => t.Name).ToArray()))
+                .MapFrom(u => u.Topics.Select(t => t.Title).ToArray()))
                 .ForMember(cdto => cdto.Groups, opt => opt
                 .MapFrom(u => u.Groups.Select(g => g.Title).ToArray()))
                 .ForMember(cdto => cdto.AuthoredPosts, opt => opt
