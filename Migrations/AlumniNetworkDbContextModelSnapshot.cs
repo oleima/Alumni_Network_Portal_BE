@@ -67,7 +67,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             AllowGuests = true,
                             Description = "Get your cowboy boots on and bourbon ready",
                             EndTime = new DateTime(2023, 7, 5, 3, 0, 0, 0, DateTimeKind.Unspecified),
-                            LastUpdated = new DateTime(2022, 10, 10, 14, 52, 38, 894, DateTimeKind.Local).AddTicks(5508),
+                            LastUpdated = new DateTime(2022, 10, 12, 8, 48, 59, 821, DateTimeKind.Local).AddTicks(8940),
                             Name = "Party in the USA",
                             StartTime = new DateTime(2023, 7, 4, 16, 0, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -77,7 +77,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             AllowGuests = true,
                             Description = "The Noroff course presentation of the case project",
                             EndTime = new DateTime(2023, 10, 28, 16, 0, 0, 0, DateTimeKind.Unspecified),
-                            LastUpdated = new DateTime(2022, 10, 10, 14, 52, 38, 894, DateTimeKind.Local).AddTicks(5556),
+                            LastUpdated = new DateTime(2022, 10, 12, 8, 48, 59, 821, DateTimeKind.Local).AddTicks(8946),
                             Name = "Project Presentation",
                             StartTime = new DateTime(2023, 10, 28, 12, 0, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -87,7 +87,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             AllowGuests = true,
                             Description = "Get your socks on and rock on! The case period is over and we need to forget everything we have learned",
                             EndTime = new DateTime(2023, 10, 28, 22, 0, 0, 0, DateTimeKind.Unspecified),
-                            LastUpdated = new DateTime(2022, 10, 10, 14, 52, 38, 894, DateTimeKind.Local).AddTicks(5559),
+                            LastUpdated = new DateTime(2022, 10, 12, 8, 48, 59, 821, DateTimeKind.Local).AddTicks(8948),
                             Name = "After Work Beer",
                             StartTime = new DateTime(2023, 10, 28, 16, 0, 0, 0, DateTimeKind.Unspecified)
                         });
@@ -169,6 +169,9 @@ namespace Alumni_Network_Portal_BE.Migrations
                     b.Property<int?>("GroupId")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("LastUpdated")
+                        .HasColumnType("datetime2");
+
                     b.Property<int?>("ParentId")
                         .HasColumnType("int");
 
@@ -206,6 +209,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             AuthorId = 1,
                             Body = "I love peaches",
                             GroupId = 1,
+                            LastUpdated = new DateTime(2022, 10, 12, 8, 48, 59, 821, DateTimeKind.Local).AddTicks(8788),
                             Title = "Fun fact"
                         },
                         new
@@ -214,6 +218,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             AuthorId = 2,
                             Body = "I love beaches",
                             GroupId = 2,
+                            LastUpdated = new DateTime(2022, 10, 12, 8, 48, 59, 821, DateTimeKind.Local).AddTicks(8823),
                             Title = "Fun fact"
                         },
                         new
@@ -222,6 +227,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             AuthorId = 3,
                             Body = "I love leaches",
                             GroupId = 3,
+                            LastUpdated = new DateTime(2022, 10, 12, 8, 48, 59, 821, DateTimeKind.Local).AddTicks(8825),
                             Title = "Fun fact"
                         },
                         new
@@ -230,6 +236,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             AuthorId = 4,
                             Body = "I love breaches",
                             GroupId = 4,
+                            LastUpdated = new DateTime(2022, 10, 12, 8, 48, 59, 821, DateTimeKind.Local).AddTicks(8827),
                             Title = "Fun fact"
                         },
                         new
@@ -237,6 +244,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             Id = 5,
                             AuthorId = 1,
                             Body = "I love peaches",
+                            LastUpdated = new DateTime(2022, 10, 12, 8, 48, 59, 821, DateTimeKind.Local).AddTicks(8829),
                             Title = "Fun fact",
                             TopicId = 1
                         },
@@ -245,6 +253,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             Id = 6,
                             AuthorId = 2,
                             Body = "I love beaches",
+                            LastUpdated = new DateTime(2022, 10, 12, 8, 48, 59, 821, DateTimeKind.Local).AddTicks(8833),
                             Title = "Fun fact",
                             TopicId = 2
                         },
@@ -253,6 +262,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             Id = 7,
                             AuthorId = 3,
                             Body = "I love leaches",
+                            LastUpdated = new DateTime(2022, 10, 12, 8, 48, 59, 821, DateTimeKind.Local).AddTicks(8835),
                             Title = "Fun fact",
                             TopicId = 3
                         },
@@ -261,6 +271,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             Id = 8,
                             AuthorId = 4,
                             Body = "I love breaches",
+                            LastUpdated = new DateTime(2022, 10, 12, 8, 48, 59, 821, DateTimeKind.Local).AddTicks(8837),
                             Title = "Fun fact",
                             TopicId = 4
                         },
@@ -269,6 +280,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             Id = 9,
                             AuthorId = 1,
                             Body = "From fred to olem",
+                            LastUpdated = new DateTime(2022, 10, 12, 8, 48, 59, 821, DateTimeKind.Local).AddTicks(8839),
                             RecieverId = 2,
                             Title = "Message"
                         },
@@ -277,6 +289,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             Id = 10,
                             AuthorId = 2,
                             Body = "From olem to fred",
+                            LastUpdated = new DateTime(2022, 10, 12, 8, 48, 59, 821, DateTimeKind.Local).AddTicks(8842),
                             RecieverId = 1,
                             Title = "Message"
                         },
@@ -285,6 +298,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             Id = 11,
                             AuthorId = 3,
                             Body = "From solo to johnny",
+                            LastUpdated = new DateTime(2022, 10, 12, 8, 48, 59, 821, DateTimeKind.Local).AddTicks(8844),
                             RecieverId = 4,
                             Title = "Message"
                         },
@@ -293,6 +307,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             Id = 12,
                             AuthorId = 4,
                             Body = "From johnny to solo",
+                            LastUpdated = new DateTime(2022, 10, 12, 8, 48, 59, 821, DateTimeKind.Local).AddTicks(8846),
                             RecieverId = 3,
                             Title = "Message"
                         });
@@ -398,7 +413,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             Id = 2,
                             Bio = "Likes backend and peaches",
                             FunFact = "None",
-                            KeycloakId = "14b7a32e-27a4-488b-89d4-e411bec2ba2f",
+                            KeycloakId = "7ccf5453-c488-43f3-b7eb-587d8e44054b",
                             Status = "Online",
                             Username = "olem"
                         },

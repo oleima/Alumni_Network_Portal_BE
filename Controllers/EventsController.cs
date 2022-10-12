@@ -43,9 +43,10 @@ namespace Alumni_Network_Portal_BE.Controllers
         [HttpPost]
         public async Task<ActionResult<EventCreateDTO>> CreateEvent(EventCreateDTO ev)
         {
+            string keycloakId = this.User.GetId();
             Event domainEvent = _mapper.Map<Event>(ev);
 
-            domainEvent = await _eventService.CreateEvent(domainEvent);
+            domainEvent = await _eventService.CreateEvent(domainEvent, keycloakId);
 
             return CreatedAtAction("GetEvent",
                 new { id = domainEvent.Id },

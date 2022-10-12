@@ -118,8 +118,13 @@ namespace Alumni_Network_Portal_BE.Services.PostServices
         }
         public async Task UpdateAsync(Post post)
         {
+            post.LastUpdated = DateTime.Now;
             _context.Entry(post).State = EntityState.Modified;
             await _context.SaveChangesAsync();
+        }
+        public bool Exists(int id)
+        {
+            return _context.Posts.Any(e => e.Id == id);
         }
     }
 }

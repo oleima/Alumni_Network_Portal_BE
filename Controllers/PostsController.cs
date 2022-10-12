@@ -76,7 +76,7 @@ namespace Alumni_Network_Portal_BE.Controllers
             string keycloakId = this.User.GetId();
 
             Post domainPost = _mapper.Map<Post>(dtoPost);
-
+            domainPost.LastUpdated = DateTime.Now;
             try
             {
                 domainPost = await _postService.AddPostAsync(domainPost, keycloakId);
@@ -97,10 +97,18 @@ namespace Alumni_Network_Portal_BE.Controllers
 
         [Authorize]
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdatePost(PostCreateDTO dtoPost)
+        public async Task<IActionResult> UpdatePost(int id, PostUpdateDTO dtoPost)
         {
-            Post domainPost = _mapper.Map<Post>(dtoPost);
+            if (id != dtoPost.Id)
+            {
+                return BadRequest();
+            }
 
+            if (!_postService.Exists(id))
+            {
+                return NotFound();
+            }
+            Post domainPost = _mapper.Map<Post>(dtoPost);
             await _postService.UpdateAsync(domainPost);
 
             return NoContent();

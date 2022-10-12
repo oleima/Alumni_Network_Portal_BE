@@ -13,6 +13,7 @@ namespace Alumni_Network_Portal_BE.Services.PostServices
         public Task<IEnumerable<Post>> GetEventPostsAsync(int eventId, string keycloakId);
         public Task<Post> AddPostAsync(Post domainPost, string keycloakId);
         public Task UpdateAsync(Post post);
+        public bool Exists(int id);
 
 
     }
