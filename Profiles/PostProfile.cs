@@ -14,6 +14,8 @@ namespace Alumni_Network_Portal_BE.Profiles
 
             CreateMap<PostCreateDTO, Post>();
 
+            CreateMap<PostUpdateDTO, Post>();
+
         }
     }
 }

@@ -32,9 +32,11 @@ namespace Alumni_Network_Portal_BE.Services.EventServices
                 .Distinct()
                 .ToListAsync();
         }
-        public async Task<Event> CreateEvent(Event ev)
+        public async Task<Event> CreateEvent(Event ev, string keycloakId)
         {
+            User user = getUserFromKeyCloak(keycloakId);
             ev.LastUpdated = DateTime.Now;
+            ev.AuthorId = user.Id;
             _context.Events.Add(ev);
             await _context.SaveChangesAsync();
             return ev;
