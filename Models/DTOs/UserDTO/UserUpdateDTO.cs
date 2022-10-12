@@ -7,6 +7,6 @@
         public string? Status { get; set; }
         public string? Bio { get; set; } 
         public string? FunFact { get; set; }
-        public byte[]? Picture { get; set; }
+        public string? Picture { get; set; }
     }
 }

@@ -11,7 +11,7 @@ namespace Alumni_Network_Portal_BE.Models.DTOs.UserDTO
         public string Status { get; set; }
         public string? Bio { get; set; } //Nullable
         public string? FunFact { get; set; } //Nullable
-        public byte[]? Picture { get; set; }
+        public string? Picture { get; set; }
         public List<string>? AuthoredPosts { get; set; } //One-Many
         public List<string>? RecievedPosts { get; set; } //One-Many
         public List<string>? AuthoredEvents { get; set; } //One-Many
