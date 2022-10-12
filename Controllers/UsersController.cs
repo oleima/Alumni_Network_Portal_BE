@@ -28,6 +28,12 @@ namespace Alumni_Network_Portal_BE.Controllers
         public async Task<ActionResult<UserReadDTO>> GetUser()
         {
             string keycloakId = this.User.GetId();
+
+            if(_userService.getUserFromKeyCloak(keycloakId) == null)
+            {
+                return BadRequest();
+            }
+
             return _mapper.Map<UserReadDTO>(await _userService.GetAsync(keycloakId));
         }
 
@@ -86,7 +92,7 @@ namespace Alumni_Network_Portal_BE.Controllers
                 return NotFound();
             }
 
-            if(_userService.getUserFromKeyCloak(keycloakID) == null)
+            if(_userService.getUserFromKeyCloak(keycloakID) != null)
             {
                 return BadRequest();
             }
