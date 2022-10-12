@@ -73,11 +73,14 @@ namespace Alumni_Network_Portal_BE.Services.UserServices
 
         }
 
-        public async Task PostAsync(User user)
+        public async Task<User> PostAsync(string keycloakId, string username)
         {
+            User user = new User { KeycloakId = keycloakId, Username = username, Status = "" };
 
             _context.Add(user);
             await _context.SaveChangesAsync();
+            return user;
+            
         }
 
         public User getUserFromKeyCloak(string keycloakId)
