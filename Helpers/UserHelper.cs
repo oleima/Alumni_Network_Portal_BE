@@ -1,4 +1,5 @@
 ﻿using Alumni_Network_Portal_BE.Models.Domain;
+using System.Linq;
 using System.Security.Claims;
 
 namespace Alumni_Network_Portal_BE.Helpers
@@ -7,10 +8,10 @@ namespace Alumni_Network_Portal_BE.Helpers
     {
         public static string GetId(this ClaimsPrincipal principal)
         {
-            var claims = principal.Claims;
-            if(claims.Any())
+            var p = principal;
+            if(p != null)
             {
-                return claims.ToList()[5].Value;
+                return p.FindFirstValue(ClaimTypes.NameIdentifier);
             }
             return null;
         }
