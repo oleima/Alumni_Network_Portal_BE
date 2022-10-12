@@ -22,6 +22,7 @@ namespace Alumni_Network_Portal_BE.Services.PostServices
             return await _context.Posts
                 .Include(c => c.Group)
                 .Include(c => c.Topic)
+                .Include(c => c.Author)
                 .Where(c=>c.Group.Users.Contains(user)|| c.Topic.Users.Contains(user))
                 .ToListAsync();
         }
