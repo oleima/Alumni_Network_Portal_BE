@@ -17,7 +17,8 @@ namespace Alumni_Network_Portal_BE.Profiles
             .ForMember(cdto => cdto.Topics, opt => opt
             .MapFrom(c => c.Topics.Select(c => c.Name).ToArray()))
             .ForMember(cdto => cdto.Posts, opt => opt
-            .MapFrom(c => c.Posts.Select(c => c.Title).ToArray()));
+            .MapFrom(c => c.Posts.Select(c => c.Title).ToArray()))
+            .MaxDepth(2);
 
             CreateMap<EventCreateDTO, Event>();
 

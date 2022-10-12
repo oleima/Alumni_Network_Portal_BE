@@ -15,7 +15,10 @@ namespace Alumni_Network_Portal_BE.Services.EventServices
         }
         public User getUserFromKeyCloak(string keycloakId)
         {
-            User user = _context.Users.FirstOrDefaultAsync(u => u.KeycloakId == keycloakId).Result;
+            User user = _context.Users
+                .Include(u => u.Groups)
+                .Include(u => u.Topics)
+                .FirstOrDefaultAsync(u => u.KeycloakId == keycloakId).Result;
             return user;
         }
         public async Task<IEnumerable<Event>> GetEvents(string keycloakId)
@@ -27,9 +30,7 @@ namespace Alumni_Network_Portal_BE.Services.EventServices
                 .Include(e => e.Topics)
                 .Include(e => e.Posts)
                 .Include(e => e.UsersResponded)
-                .Where(e => e.Groups.Any(g => g.Users.Contains(user)))
-                .Where(e => e.Topics.Any(t => t.Users.Contains(user)))
-                .Distinct()
+                .Where(e => e.Groups.Any(g => user.Groups.Contains(g)) || e.Topics.Any(t => user.Topics.Contains(t)))
                 .ToListAsync();
         }
         public async Task<Event> CreateEvent(Event ev, string keycloakId)
