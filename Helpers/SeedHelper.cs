@@ -188,7 +188,7 @@ namespace Alumni_Network_Portal_BE.Helpers
                 Body = "From johnny to solo",
                 LastUpdated = DateTime.Now,
                 AuthorId = 4,
-                RecieverId = 3,
+                RecieverId = 3
             });
             posts.Add(new Post()
             {
@@ -197,7 +197,8 @@ namespace Alumni_Network_Portal_BE.Helpers
                 Body = "Child",
                 LastUpdated = DateTime.Now,
                 AuthorId = 2,
-                ParentId = 6
+                ParentId = 6,
+                GroupId = 1
             });
             posts.Add(new Post()
             {
@@ -206,7 +207,8 @@ namespace Alumni_Network_Portal_BE.Helpers
                 Body = "Child of child",
                 LastUpdated = DateTime.Now,
                 AuthorId = 2,
-                ParentId = 13
+                ParentId = 13,
+                GroupId = 1
             });
             return posts;
         }
