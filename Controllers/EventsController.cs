@@ -54,10 +54,12 @@ namespace Alumni_Network_Portal_BE.Controllers
         }
 
         [Authorize]
-        [HttpPut("{id}")]
+        [HttpPatch("{id}")]
         public async Task<IActionResult> UpdateEvent(int id, EventUpdateDTO ev)
         {
-            if(id != ev.Id)
+            string keycloakId = this.User.GetId();
+
+            if (id != ev.Id)
             {
                 return BadRequest();
             }
@@ -67,7 +69,7 @@ namespace Alumni_Network_Portal_BE.Controllers
                 return NotFound();
             }
             Event domainEvent = _mapper.Map<Event>(ev);
-            await _eventService.UpdateEvent(domainEvent);
+            await _eventService.UpdateEvent(domainEvent, keycloakId, id);
 
             return NoContent();
         }

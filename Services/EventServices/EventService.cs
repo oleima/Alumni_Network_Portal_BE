@@ -45,10 +45,36 @@ namespace Alumni_Network_Portal_BE.Services.EventServices
             await _context.SaveChangesAsync();
             return ev;
         }
-        public async Task UpdateEvent(Event ev)
+        public async Task UpdateEvent(Event ev, string keycloakId, int id)
         {
-            ev.LastUpdated = DateTime.Now;
-            _context.Entry(ev).State = EntityState.Modified;
+            Event eventToUpdate = GetById(id).Result;
+
+            if (ev.AllowGuests != null)
+            {
+                eventToUpdate.AllowGuests = ev.AllowGuests;
+            }
+            if (ev.Description != null)
+            {
+                eventToUpdate.Description = ev.Description;
+            }
+            if (ev.Name != null)
+            {
+                eventToUpdate.Name = ev.Name;
+            }
+            if (ev.StartTime > DateTime.Now)
+            {
+                eventToUpdate.StartTime = ev.StartTime;
+            }
+            if (ev.EndTime > DateTime.Now)
+            {
+                eventToUpdate.EndTime = ev.EndTime;
+            }
+
+
+            User user = getUserFromKeyCloak(keycloakId);
+            eventToUpdate.LastUpdated = DateTime.Now;
+            eventToUpdate.AuthorId = user.Id;
+            _context.Entry(eventToUpdate).State = EntityState.Modified;
             await _context.SaveChangesAsync();
         }
         public async Task CreateGroupEventInvitation(int eventId, int groupId)
@@ -161,6 +187,13 @@ namespace Alumni_Network_Portal_BE.Services.EventServices
         public bool Exists(int id)
         {
             return _context.Events.Any(e => e.Id == id);
+        }
+
+        public async Task<Event> GetById(int id)
+        {
+         return await _context.Events
+         .Where(c => c.Id == id)
+         .FirstOrDefaultAsync();
         }
     }
 }
