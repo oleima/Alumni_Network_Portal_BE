@@ -24,6 +24,8 @@ namespace Alumni_Network_Portal_BE.Services.PostServices
                 .Include(c => c.Group)
                 .Include(c => c.Topic)
                 .Include(c => c.Author)
+                .Include(c => c.Replies)
+                .Where(c => c.ParentId==null)
                 .Where(c=>c.Group.Users.Contains(user)|| c.Topic.Users.Contains(user))
                 .ToListAsync();
         }

@@ -48,6 +48,11 @@ namespace Alumni_Network_Portal_BE.Models
             // Seed GroupMember, EventUserInvite, EventGroupInvite, EventTopicInvite, RSVP, TopicMember
 
             //Relationships
+            modelBuilder.Entity<Post>()
+            .HasMany(e => e.Replies)
+            .WithOne(e => e.Parent)
+            .OnDelete(DeleteBehavior.Restrict);
+
             modelBuilder.Entity<User>()
             .HasMany(e => e.AuthoredEvents)
             .WithOne(e => e.Author)

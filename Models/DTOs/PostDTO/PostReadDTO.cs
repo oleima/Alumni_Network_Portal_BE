@@ -17,5 +17,7 @@ namespace Alumni_Network_Portal_BE.Models.DTOs.PostDTO
         public int? GroupId { get; set; }
         public int? EventId { get; set; }
         public int? ParentId { get; set; }
+
+        public ICollection<PostGroupReadDTO>? Replies { get; set; } //One-Many
     }
 }

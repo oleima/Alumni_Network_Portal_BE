@@ -30,6 +30,8 @@ namespace Alumni_Network_Portal_BE.Models.Domain
         public int? ParentId { get; set; }
         public Post? Parent { get; set; }
 
+        public ICollection<Post>? Replies { get; set; }
+
 
     }
 
