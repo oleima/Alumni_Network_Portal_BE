@@ -11,6 +11,8 @@ namespace Alumni_Network_Portal_BE.Profiles
             //Mapping from group to the respective DTOs
             CreateMap<Group, GroupReadDTO>();
 
+            CreateMap<Group, GroupUserReadDTO>();
+
             CreateMap<GroupCreateDTO, Group>();
 
             CreateMap<GroupUpdateDTO, Group>();

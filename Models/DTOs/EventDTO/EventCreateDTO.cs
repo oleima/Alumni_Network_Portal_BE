@@ -10,7 +10,5 @@ namespace Alumni_Network_Portal_BE.Models.DTOs.EventDTO
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
         public bool AllowGuests { get; set; }
-        public List<string>? Topics { get; set; } //Many-Many
-        public List<string>? Groups { get; set; } //Many-Many
     }
 }

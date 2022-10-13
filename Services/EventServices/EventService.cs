@@ -33,11 +33,12 @@ namespace Alumni_Network_Portal_BE.Services.EventServices
                 .Where(e => e.Groups.Any(g => user.Groups.Contains(g)) || e.Topics.Any(t => user.Topics.Contains(t)))
                 .ToListAsync();
         }
-        public async Task<Event> CreateEvent(Event ev, string keycloakId)
+        public async Task<Event> AddEvent(Event ev, string keycloakId)
         {
             User user = getUserFromKeyCloak(keycloakId);
             ev.LastUpdated = DateTime.Now;
             ev.AuthorId = user.Id;
+
             _context.Events.Add(ev);
             await _context.SaveChangesAsync();
             return ev;

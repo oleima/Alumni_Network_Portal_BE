@@ -10,6 +10,8 @@ namespace Alumni_Network_Portal_BE.Profiles
         {
             CreateMap<Topic, TopicReadDTO>();
 
+            CreateMap<Topic, TopicUserReadDTO>();
+
 
             CreateMap<TopicCreateDTO, Topic>();
         }
