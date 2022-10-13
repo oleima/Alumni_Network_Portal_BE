@@ -28,8 +28,10 @@ namespace Alumni_Network_Portal_BE.Services.EventServices
             return await _context.Events
                 .Include(e => e.Groups)
                 .Include(e => e.Topics)
-                .Include(e => e.Posts)
+                .Include(e => e.Posts).ThenInclude(p => p.Author)
                 .Include(e => e.UsersResponded)
+                .Include(e => e.UserInvited)
+                .Include(e => e.Author)
                 .Where(e => e.Groups.Any(g => user.Groups.Contains(g)) || e.Topics.Any(t => user.Topics.Contains(t)))
                 .ToListAsync();
         }
