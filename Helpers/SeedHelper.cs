@@ -190,6 +190,24 @@ namespace Alumni_Network_Portal_BE.Helpers
                 AuthorId = 4,
                 RecieverId = 3,
             });
+            posts.Add(new Post()
+            {
+                Id = 13,
+                Title = "Message",
+                Body = "Child",
+                LastUpdated = DateTime.Now,
+                AuthorId = 2,
+                ParentId = 6
+            });
+            posts.Add(new Post()
+            {
+                Id = 14,
+                Title = "Message",
+                Body = "Child of child",
+                LastUpdated = DateTime.Now,
+                AuthorId = 2,
+                ParentId = 13
+            });
             return posts;
         }
         public static List<Topic> GetTopicSeed()
