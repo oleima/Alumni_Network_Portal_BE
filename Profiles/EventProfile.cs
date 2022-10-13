@@ -15,10 +15,14 @@ namespace Alumni_Network_Portal_BE.Profiles
             .ForMember(cdto => cdto.Groups, opt => opt
             .MapFrom(c => c.Groups.Select(c => c.Title).ToArray()))
             .ForMember(cdto => cdto.Topics, opt => opt
-            .MapFrom(c => c.Topics.Select(c => c.Name).ToArray()))
+            .MapFrom(c => c.Topics.Select(c => c.Title).ToArray()))
             .ForMember(cdto => cdto.Posts, opt => opt
             .MapFrom(c => c.Posts.Select(c => c.Title).ToArray()))
             .MaxDepth(2);
+
+            CreateMap<Event, EventGroupReadDTO>()
+            .ForMember(cdto => cdto.UsersResponded, opt => opt
+            .MapFrom(c => c.UsersResponded.Select(c => c.Id).ToArray()));
 
             CreateMap<EventCreateDTO, Event>();
 
