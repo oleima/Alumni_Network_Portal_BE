@@ -24,6 +24,8 @@ namespace Alumni_Network_Portal_BE.Profiles
             .ForMember(cdto => cdto.UsersResponded, opt => opt
             .MapFrom(c => c.UsersResponded.Select(c => c.Id).ToArray()));
 
+            CreateMap<Event, EventUserReadDTO>();
+
             CreateMap<EventCreateDTO, Event>();
 
             CreateMap<EventUpdateDTO, Event>();

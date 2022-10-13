@@ -59,6 +59,12 @@ namespace Alumni_Network_Portal_BE.Models
             .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<User>()
+            .HasMany(e => e.RecievedPosts)
+            .WithOne(e => e.Reciever)
+            .OnDelete(DeleteBehavior.Restrict);
+
+
+            modelBuilder.Entity<User>()
             .HasMany(e => e.InvitedEvents)
             .WithMany(e => e.UserInvited)
             .UsingEntity<Dictionary<string, object>>(

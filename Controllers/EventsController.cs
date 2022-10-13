@@ -14,6 +14,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Alumni_Network_Portal_BE.Helpers;
 using System.Text.RegularExpressions;
+using Alumni_Network_Portal_BE.Models.DTOs.PostDTO;
 
 namespace Alumni_Network_Portal_BE.Controllers
 {
@@ -41,16 +42,15 @@ namespace Alumni_Network_Portal_BE.Controllers
 
         [Authorize]
         [HttpPost]
-        public async Task<ActionResult> CreateEvent(EventCreateDTO ev)
+        public async Task<ActionResult<Event>> CreateEvent(EventCreateDTO ev)
         {
             string keycloakId = this.User.GetId();
             Event domainEvent = _mapper.Map<Event>(ev);
 
             domainEvent = await _eventService.AddEvent(domainEvent, keycloakId);
-
-            return CreatedAtAction("addEvent",
-                new { id = domainEvent.Id },
-                _mapper.Map<EventReadDTO>(domainEvent));
+            return CreatedAtAction("GetEvents",
+                new { Id = domainEvent.Id },
+                _mapper.Map<EventUserReadDTO>(domainEvent));
         }
 
         [Authorize]

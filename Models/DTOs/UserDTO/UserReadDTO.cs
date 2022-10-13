@@ -16,9 +16,9 @@ namespace Alumni_Network_Portal_BE.Models.DTOs.UserDTO
         public string? Bio { get; set; } //Nullable
         public string? FunFact { get; set; } //Nullable
         public string? Picture { get; set; }
-        public ICollection<PostGroupReadDTO>? AuthoredPosts { get; set; } //One-Many
+        public ICollection<PostUserReadDTO>? AuthoredPosts { get; set; } //One-Many
         public ICollection<PostGroupReadDTO>? RecievedPosts { get; set; } //One-Many
-        public ICollection<EventGroupReadDTO>? AuthoredEvents { get; set; } //One-Many
+        public ICollection<EventUserReadDTO>? AuthoredEvents { get; set; } //One-Many
         public ICollection<TopicUserReadDTO>? Topics { get; set; } //Many-Many
         public ICollection<GroupUserReadDTO>? Groups { get; set; } //Many-Many
         public ICollection<EventGroupReadDTO>? RespondedEvents { get; set; } //Many-Many

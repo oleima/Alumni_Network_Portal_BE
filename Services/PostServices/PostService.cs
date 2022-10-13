@@ -1,6 +1,7 @@
 ﻿using Alumni_Network_Portal_BE.Models;
 using Alumni_Network_Portal_BE.Models.Domain;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration.UserSecrets;
 using System.Text.RegularExpressions;
 using Group = Alumni_Network_Portal_BE.Models.Domain.Group;
 
@@ -78,7 +79,7 @@ namespace Alumni_Network_Portal_BE.Services.PostServices
         {
             User user = _context.Users.First(u => u.KeycloakId == keycloakId);
 
-            if (domainPost.TopicId != 0)
+            if (domainPost.TopicId != null)
             {
                 Topic audienceToPostTo = _context.Topics.First(t => t.Id == domainPost.TopicId);
                 ICollection<Topic>? audienceRelation = user.Topics;
@@ -87,7 +88,7 @@ namespace Alumni_Network_Portal_BE.Services.PostServices
                     throw new Exception();
                 }
             }
-            else if (domainPost.GroupId != 0)
+            else if (domainPost.GroupId != null)
             {
                 Group audienceToPostTo = _context.Groups.First(g => g.Id == domainPost.GroupId);
                 ICollection<Group>? audienceRelation = user.Groups;
@@ -96,11 +97,18 @@ namespace Alumni_Network_Portal_BE.Services.PostServices
                     throw new Exception();
                 }
             }
-            else if (domainPost.EventId != 0)
+            else if (domainPost.EventId != null)
             {
                 Event audienceToPostTo = _context.Events.First(e => e.Id == domainPost.EventId);
                 ICollection<Event>? audienceRelation = user.RespondedEvents;
                 if (!audienceRelation.Contains(audienceToPostTo))
+                {
+                    throw new Exception();
+                }
+            }
+            else if (domainPost.RecieverId != null)
+            {
+                if (domainPost.RecieverId == user.Id)
                 {
                     throw new Exception();
                 }
@@ -110,7 +118,7 @@ namespace Alumni_Network_Portal_BE.Services.PostServices
                 throw new KeyNotFoundException();
             }
 
-
+            domainPost.AuthorId = user.Id;
             _context.Posts.Add(domainPost);
             await _context.SaveChangesAsync();
             return domainPost;

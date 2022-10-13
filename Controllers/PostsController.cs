@@ -80,7 +80,7 @@ namespace Alumni_Network_Portal_BE.Controllers
             try
             {
                 domainPost = await _postService.AddPostAsync(domainPost, keycloakId);
-                return CreatedAtAction("addPost",
+                return CreatedAtAction("GetPosts",
                     new { id = domainPost.Id },
                     _mapper.Map<PostReadDTO>(domainPost));
             }

@@ -1,4 +1,5 @@
 ﻿using Alumni_Network_Portal_BE.Models.Domain;
+using Alumni_Network_Portal_BE.Models.DTOs.PostDTO;
 using Alumni_Network_Portal_BE.Models.DTOs.UserDTO;
 using AutoMapper;
 

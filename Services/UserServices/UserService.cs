@@ -29,7 +29,7 @@ namespace Alumni_Network_Portal_BE.Services.UserServices
             .Include(c => c.Groups)
             .Include(c => c.Topics)
             .Include(c => c.AuthoredPosts)
-            .Include(c => c.RecievedPosts)
+            .Include(c => c.RecievedPosts).ThenInclude(c => c.Author)
             .Include(c => c.InvitedEvents)
             .Include(c => c.AuthoredEvents)
             .Where(c => c.Id == user.Id)
