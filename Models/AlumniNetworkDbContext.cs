@@ -129,18 +129,31 @@ namespace Alumni_Network_Portal_BE.Models
                     {
                         je.HasKey("TopicId", "UserId");
                         je.HasData(
-                            new { TopicId = 1, UserId = 1 },
                             new { TopicId = 1, UserId = 2 },
-                            new { TopicId = 1, UserId = 3 },
                             new { TopicId = 2, UserId = 1 },
                             new { TopicId = 2, UserId = 2 },
-                            new { TopicId = 2, UserId = 4 },
                             new { TopicId = 3, UserId = 1 },
-                            new { TopicId = 3, UserId = 3 },
-                            new { TopicId = 3, UserId = 4 },
+                            new { TopicId = 3, UserId = 2 },
                             new { TopicId = 4, UserId = 2 },
                             new { TopicId = 4, UserId = 3 },
-                            new { TopicId = 4, UserId = 4 }
+                            new { TopicId = 4, UserId = 4 },
+                            new { TopicId = 5, UserId = 2 },
+                            new { TopicId = 5, UserId = 3 },
+                            new { TopicId = 5, UserId = 4 },
+                            new { TopicId = 6, UserId = 1 },
+                            new { TopicId = 6, UserId = 2 },
+                            new { TopicId = 7, UserId = 1 },
+                            new { TopicId = 7, UserId = 2 },
+                            new { TopicId = 7, UserId = 4 },
+                            new { TopicId = 8, UserId = 2 },
+                            new { TopicId = 8, UserId = 3 },
+                            new { TopicId = 8, UserId = 4 },
+                            new { TopicId = 9, UserId = 1 },
+                            new { TopicId = 9, UserId = 3 },
+                            new { TopicId = 9, UserId = 4 },
+                            new { TopicId = 10, UserId = 1 },
+                            new { TopicId = 10, UserId = 2 },
+                            new { TopicId = 10, UserId = 3 }
                             );
                     });
 
@@ -157,16 +170,27 @@ namespace Alumni_Network_Portal_BE.Models
                         je.HasData(
                             new { GroupId = 1, UserId = 1 },
                             new { GroupId = 1, UserId = 2 },
-                            new { GroupId = 1, UserId = 3 },
                             new { GroupId = 2, UserId = 1 },
                             new { GroupId = 2, UserId = 2 },
-                            new { GroupId = 2, UserId = 4 },
                             new { GroupId = 3, UserId = 1 },
+                            new { GroupId = 3, UserId = 2 },
                             new { GroupId = 3, UserId = 3 },
-                            new { GroupId = 3, UserId = 4 },
+                            new { GroupId = 4, UserId = 1 },
                             new { GroupId = 4, UserId = 2 },
-                            new { GroupId = 4, UserId = 3 },
-                            new { GroupId = 4, UserId = 4 }
+                            new { GroupId = 5, UserId = 2 },
+                            new { GroupId = 5, UserId = 3 },
+                            new { GroupId = 5, UserId = 4 },
+                            new { GroupId = 6, UserId = 3 },
+                            new { GroupId = 6, UserId = 4 },
+                            new { GroupId = 7, UserId = 1 },
+                            new { GroupId = 7, UserId = 3 },
+                            new { GroupId = 8, UserId = 2 },
+                            new { GroupId = 8, UserId = 3 },
+                            new { GroupId = 9, UserId = 1 },
+                            new { GroupId = 9, UserId = 3 },
+                            new { GroupId = 9, UserId = 4 },
+                            new { GroupId = 10, UserId = 3 },
+                            new { GroupId = 10, UserId = 4 }
                             );
                     });
 

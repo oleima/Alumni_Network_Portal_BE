@@ -8,12 +8,11 @@ namespace Alumni_Network_Portal_BE.Models.Domain
         public int Id { get; set; }
         // Fields
         [MaxLength(255)]
-        [Required]
         public string? Title { get; set; }
         [Required]
         public DateTime LastUpdated { get; set; }
 
-        [MaxLength(255)]
+        [MaxLength(525)]
         public string? Body { get; set; } //Nullable
 
         // Relationships

@@ -129,7 +129,7 @@ namespace Alumni_Network_Portal_BE.Helpers
             {
                 Id = i,
                 Title = "Know your variables",
-                Body = "C# variables needs to be delcared do to it being a strongly typed language. boolean: true or false, char: single character, int: whole number, float: floating point number, double, like float but more accurate, long: like int but bigger, decimal: monetary values.",
+                Body = "CSharp variables needs to be delcared do to it being a strongly typed language. boolean: true or false, char: single character, int: whole number, float: floating point number, double, like float but more accurate, long: like int but bigger, decimal: monetary values.",
                 LastUpdated = DateTime.Now,
                 AuthorId = 1,
                 GroupId = 1,
@@ -1017,7 +1017,7 @@ namespace Alumni_Network_Portal_BE.Helpers
                 AuthorId = 2,
                 ParentId = i - 1,
             });
-            i++;
+
             return posts;
         }
         public static List<Topic> GetTopicSeed()
