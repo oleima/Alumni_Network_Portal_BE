@@ -5,6 +5,8 @@ using Alumni_Network_Portal_BE.Services.PostServices;
 using Alumni_Network_Portal_BE.Helpers;
 using Alumni_Network_Portal_BE.Models.Domain;
 using Microsoft.AspNetCore.Authorization;
+using Alumni_Network_Portal_BE.Models.DTOs.Pages;
+using Newtonsoft.Json;
 
 namespace Alumni_Network_Portal_BE.Controllers
 {
@@ -23,49 +25,102 @@ namespace Alumni_Network_Portal_BE.Controllers
         #region Generic CRUD with DTOs
         [Authorize]
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<PostReadDTO>>> GetPosts()
+        public async Task<ActionResult<IEnumerable<PostReadDTO>>> GetPosts([FromQuery]Pagination ?pagination)
         {
             var keycloakId = this.User.GetId();
-
+            if(pagination.Page > 0)
+            {
+                var posts = await _postService.GetAllAsync(keycloakId);
+                var paginationMetadata = new PaginationMetadata(posts.Count(), pagination.Page, pagination.ItemsPerPage);
+                Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(paginationMetadata));
+                posts = _postService.Paginate(posts,pagination);
+                return _mapper.Map<List<PostReadDTO>>(posts);
+            }
+                
             return _mapper.Map<List<PostReadDTO>>(await _postService.GetAllAsync(keycloakId));
         }
         [Authorize]
         [HttpGet("user")]
-        public async Task<ActionResult<IEnumerable<PostReadDTO>>> GetRecievedPosts()
+        public async Task<ActionResult<IEnumerable<PostReadDTO>>> GetRecievedPosts([FromQuery] Pagination? pagination)
         {
             var keycloakId = this.User.GetId();
+
+            if (pagination.Page > 0)
+            {
+                var posts = await _postService.GetMessagesAsync(keycloakId);
+                var paginationMetadata = new PaginationMetadata(posts.Count(), pagination.Page, pagination.ItemsPerPage);
+                Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(paginationMetadata));
+                posts = _postService.Paginate(posts, pagination);
+                return _mapper.Map<List<PostReadDTO>>(posts);
+            }
 
             return _mapper.Map<List<PostReadDTO>>(await _postService.GetMessagesAsync(keycloakId));
         }
         [Authorize]
         [HttpGet("user/{{id}}")]
-        public async Task<ActionResult<IEnumerable<PostReadDTO>>> GetRecievedFromAuthorPosts(int id)
+        public async Task<ActionResult<IEnumerable<PostReadDTO>>> GetRecievedFromAuthorPosts(int id, [FromQuery] Pagination? pagination)
         {
             var keycloakId = this.User.GetId();
+
+            if (pagination.Page > 0)
+            {
+                var posts = await _postService.GetMessagesFromAuthorAsync(id,keycloakId);
+                var paginationMetadata = new PaginationMetadata(posts.Count(), pagination.Page, pagination.ItemsPerPage);
+                Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(paginationMetadata));
+                posts = _postService.Paginate(posts, pagination);
+                return _mapper.Map<List<PostReadDTO>>(posts);
+            }
 
             return _mapper.Map<List<PostReadDTO>>(await _postService.GetMessagesFromAuthorAsync(id,keycloakId));
         }
         [Authorize]
         [HttpGet("group/{{id}}")]
-        public async Task<ActionResult<IEnumerable<PostReadDTO>>> GetGroupPosts(int id)
+        public async Task<ActionResult<IEnumerable<PostReadDTO>>> GetGroupPosts(int id, [FromQuery] Pagination? pagination)
         {
             var keycloakId = this.User.GetId();
+
+            if (pagination.Page > 0)
+            {
+                var posts = await _postService.GetGroupPostsAsync(id, keycloakId);
+                var paginationMetadata = new PaginationMetadata(posts.Count(), pagination.Page, pagination.ItemsPerPage);
+                Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(paginationMetadata));
+                posts = _postService.Paginate(posts, pagination);
+                return _mapper.Map<List<PostReadDTO>>(posts);
+            }
 
             return _mapper.Map<List<PostReadDTO>>(await _postService.GetGroupPostsAsync(id, keycloakId));
         }
         [Authorize]
         [HttpGet("topic/{{id}}")]
-        public async Task<ActionResult<IEnumerable<PostReadDTO>>> GetTopicPosts(int id)
+        public async Task<ActionResult<IEnumerable<PostReadDTO>>> GetTopicPosts(int id, [FromQuery] Pagination? pagination)
         {
             var keycloakId = this.User.GetId();
+
+            if (pagination.Page > 0)
+            {
+                var posts = await _postService.GetTopicPostsAsync(id, keycloakId);
+                var paginationMetadata = new PaginationMetadata(posts.Count(), pagination.Page, pagination.ItemsPerPage);
+                Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(paginationMetadata));
+                posts = _postService.Paginate(posts, pagination);
+                return _mapper.Map<List<PostReadDTO>>(posts);
+            }
 
             return _mapper.Map<List<PostReadDTO>>(await _postService.GetTopicPostsAsync(id, keycloakId));
         }
         [Authorize]
         [HttpGet("event/{{id}}")]
-        public async Task<ActionResult<IEnumerable<PostReadDTO>>> GetEventPosts(int id)
+        public async Task<ActionResult<IEnumerable<PostReadDTO>>> GetEventPosts(int id, [FromQuery] Pagination? pagination)
         {
             var keycloakId = this.User.GetId();
+
+            if (pagination.Page > 0)
+            {
+                var posts = await _postService.GetEventPostsAsync(id, keycloakId);
+                var paginationMetadata = new PaginationMetadata(posts.Count(), pagination.Page, pagination.ItemsPerPage);
+                Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(paginationMetadata));
+                posts = _postService.Paginate(posts, pagination);
+                return _mapper.Map<List<PostReadDTO>>(posts);
+            }
 
             return _mapper.Map<List<PostReadDTO>>(await _postService.GetEventPostsAsync(id, keycloakId));
         }

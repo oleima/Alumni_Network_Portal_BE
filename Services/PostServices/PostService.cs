@@ -1,5 +1,6 @@
 ﻿using Alumni_Network_Portal_BE.Models;
 using Alumni_Network_Portal_BE.Models.Domain;
+using Alumni_Network_Portal_BE.Models.DTOs.Pages;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration.UserSecrets;
 using System.Text.RegularExpressions;
@@ -16,6 +17,15 @@ namespace Alumni_Network_Portal_BE.Services.PostServices
             _context = context;
         }
         //Fixme: Reverse orer to chronologically reversed
+
+        public  IEnumerable<Post> Paginate(IEnumerable<Post> posts, Pagination pagination)
+        {
+            return posts
+                .Skip((pagination.Page - 1) * pagination.ItemsPerPage)
+                .Take(pagination.ItemsPerPage)
+                .ToList();
+        }
+
         public async Task<IEnumerable<Post>> GetAllAsync(string keycloakId)
         {
             User user = _context.Users.First(u => u.KeycloakId == keycloakId);
@@ -25,8 +35,10 @@ namespace Alumni_Network_Portal_BE.Services.PostServices
                 .Include(c => c.Topic)
                 .Include(c => c.Author)
                 .Include(c => c.Replies)
-                .Where(c => c.ParentId==null)
-                .Where(c=>c.Group.Users.Contains(user)|| c.Topic.Users.Contains(user))
+                .Where(c => c.ParentId == null)
+                .Where(c => c.Group.Users.Contains(user) || c.Topic.Users.Contains(user))
+                .OrderByDescending(c => c.LastUpdated.Date)
+                .ThenBy(c => c.LastUpdated.TimeOfDay)
                 .ToListAsync();
         }
 
@@ -36,6 +48,8 @@ namespace Alumni_Network_Portal_BE.Services.PostServices
 
             return await _context.Posts
                 .Where(c => c.RecieverId==user.Id)
+                .OrderByDescending(c => c.LastUpdated.Date)
+                .ThenBy(c => c.LastUpdated.TimeOfDay)
                 .ToListAsync();
         }
 
@@ -45,6 +59,8 @@ namespace Alumni_Network_Portal_BE.Services.PostServices
 
             return await _context.Posts
                 .Where(c => c.RecieverId == user.Id && c.AuthorId == authorId)
+                .OrderByDescending(c => c.LastUpdated.Date)
+                .ThenBy(c => c.LastUpdated.TimeOfDay)
                 .ToListAsync();
         }
 
@@ -56,6 +72,8 @@ namespace Alumni_Network_Portal_BE.Services.PostServices
                 .Include(c => c.Group)
                 .Where(c => c.GroupId==groupId)
                 .Where(c => c.Group.Users.Contains(user) || !c.Group.IsPrivate)
+                .OrderByDescending(c => c.LastUpdated.Date)
+                .ThenBy(c => c.LastUpdated.TimeOfDay)
                 .ToListAsync();
         }
         public async Task<IEnumerable<Post>> GetTopicPostsAsync(int topicId, string keycloakId)
@@ -65,6 +83,8 @@ namespace Alumni_Network_Portal_BE.Services.PostServices
             return await _context.Posts
                 .Include(c => c.Topic)
                 .Where(c => c.TopicId == topicId)
+                .OrderByDescending(c => c.LastUpdated.Date)
+                .ThenBy(c => c.LastUpdated.TimeOfDay)
                 .ToListAsync();
         }
         public async Task<IEnumerable<Post>> GetEventPostsAsync(int eventId, string keycloakId)
@@ -75,6 +95,8 @@ namespace Alumni_Network_Portal_BE.Services.PostServices
                 .Include(c => c.Event)
                 .Where(c => c.EventId == eventId)
                 .Where(c => c.Event.UsersResponded.Contains(user))
+                .OrderByDescending(c => c.LastUpdated.Date)
+                .ThenBy(c => c.LastUpdated.TimeOfDay)
                 .ToListAsync();
         }
         public async Task<Post> AddPostAsync(Post domainPost, string keycloakId)

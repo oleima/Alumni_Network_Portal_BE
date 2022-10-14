@@ -1,4 +1,5 @@
 ﻿using Alumni_Network_Portal_BE.Models.Domain;
+using Alumni_Network_Portal_BE.Models.DTOs.Pages;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Alumni_Network_Portal_BE.Services.PostServices
@@ -14,6 +15,7 @@ namespace Alumni_Network_Portal_BE.Services.PostServices
         public Task<Post> AddPostAsync(Post domainPost, string keycloakId);
         public Task UpdateAsync(Post post);
         public bool Exists(int id);
+        public IEnumerable<Post> Paginate(IEnumerable<Post> posts, Pagination pagination);
 
 
     }
