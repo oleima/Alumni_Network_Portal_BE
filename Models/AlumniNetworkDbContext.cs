@@ -181,11 +181,16 @@ namespace Alumni_Network_Portal_BE.Models
                     {
                         je.HasKey("GroupId", "EventId");
                         je.HasData(
-                            new { GroupId = 2, EventId = 1 },
-                            new { GroupId = 3, EventId = 1 },
-                            new { GroupId = 1, EventId = 2 },
+                            new { GroupId = 1, EventId = 1 },
+                            new { GroupId = 2, EventId = 2 },
                             new { GroupId = 3, EventId = 3 },
-                            new { GroupId = 4, EventId = 3 }
+                            new { GroupId = 4, EventId = 4 },
+                            new { GroupId = 5, EventId = 5 },
+                            new { GroupId = 6, EventId = 6 },
+                            new { GroupId = 7, EventId = 7 },
+                            new { GroupId = 8, EventId = 8 },
+                            new { GroupId = 9, EventId = 9 },
+                            new { GroupId = 10, EventId = 10 }
                             );
                     });
 

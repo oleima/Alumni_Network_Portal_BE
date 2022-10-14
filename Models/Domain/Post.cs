@@ -9,7 +9,7 @@ namespace Alumni_Network_Portal_BE.Models.Domain
         // Fields
         [MaxLength(255)]
         [Required]
-        public string Title { get; set; }
+        public string? Title { get; set; }
         [Required]
         public DateTime LastUpdated { get; set; }
 
