@@ -79,7 +79,11 @@ namespace Alumni_Network_Portal_BE.Services.PostServices
         }
         public async Task<Post> AddPostAsync(Post domainPost, string keycloakId)
         {
-            User user = _context.Users.First(u => u.KeycloakId == keycloakId);
+            User user = _context.Users
+                .Include(u => u.Groups)
+                .Include(u => u.Topics)
+                .Include(u => u.RespondedEvents)
+                .First(u => u.KeycloakId == keycloakId);
 
             if (domainPost.TopicId != null)
             {
