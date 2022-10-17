@@ -54,13 +54,10 @@ namespace Alumni_Network_Portal_BE.Services.GroupServices
         {
             User user = _context.Users.First(u => u.KeycloakId == keycloakId);
 
-            List<int> list = new List<int>();
-            list.Add(user.Id);
+            group.Users = new List <User>() {user} ;
 
             _context.Groups.Add(group);
             await _context.SaveChangesAsync();
-
-            UpdateGroupUserAsync(group.Id, list, keycloakId);
 
             return group;
         }
