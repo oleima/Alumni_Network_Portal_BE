@@ -64,7 +64,7 @@ namespace Alumni_Network_Portal_BE.Controllers
 
             return CreatedAtAction("GetGroup",
                 new { id = domainGroup.Id },
-                _mapper.Map<GroupCreateDTO>(domainGroup));
+                _mapper.Map<GroupReadDTO>(domainGroup));
         }
 
         #region Updating linking table
