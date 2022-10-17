@@ -103,11 +103,11 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy(name: "AllowAll", builder =>
     {
-        builder.AllowAnyHeader()
-               .AllowAnyMethod()
-               .AllowAnyOrigin()
-               .AllowCredentials()
-               .WithExposedHeaders("*");
+        builder
+        .AllowAnyOrigin()
+        .AllowAnyMethod()
+        .AllowAnyHeader()
+        .WithExposedHeaders("X-Pagination");
     });
 });
 
