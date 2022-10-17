@@ -93,5 +93,26 @@ namespace Alumni_Network_Portal_BE.Services.GroupServices
             await _context.SaveChangesAsync();
         }
 
+        public async Task LeaveGroupAsync(int groupId, string keycloakId)
+        {
+            User userUpdate = _context.Users.First(u => u.KeycloakId == keycloakId);
+
+            Group groupToUpdate = await _context.Groups
+               .Include(c => c.Users)
+               .Where(c => c.Id == groupId)
+               .FirstAsync();
+
+            if (groupToUpdate.Users.Contains(userUpdate))
+            {
+                groupToUpdate.Users.Remove(userUpdate);
+            }
+            else
+            {
+                throw new Exception();
+
+            }
+
+            await _context.SaveChangesAsync();
+        }
     }
 }

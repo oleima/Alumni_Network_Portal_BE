@@ -96,6 +96,27 @@ namespace Alumni_Network_Portal_BE.Controllers
             return NoContent();
         }
 
+        [Authorize]
+        [HttpDelete("{id}/Leave")]
+        public async Task<IActionResult> LeaveGroupUser(int id)
+        {
+            var keycloakId = this.User.GetId();
+            if ( !_groupService.Exists(id))
+            {
+                return NotFound();
+            }
+
+            try
+            {
+                await _groupService.LeaveGroupAsync(id, keycloakId);
+            } catch (Exception)
+            {
+                return BadRequest();
+            }
+
+            return NoContent();
+        }
+
         #endregion
 
     }
