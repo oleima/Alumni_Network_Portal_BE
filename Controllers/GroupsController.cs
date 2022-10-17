@@ -72,7 +72,7 @@ namespace Alumni_Network_Portal_BE.Controllers
         // Post users to a specific movie in linking table
         [Authorize]
         [HttpPut("{id}/Join")]
-        public async Task<IActionResult> UpdateGroupUser(int id, List<int> usersId)
+        public async Task<IActionResult> UpdateGroupUser(int id)
         {
             var keycloakId = this.User.GetId();
             if (!_groupService.Exists(id))
@@ -82,7 +82,7 @@ namespace Alumni_Network_Portal_BE.Controllers
 
             try
             {
-                await _groupService.UpdateGroupUserAsync(id, usersId, keycloakId);
+                await _groupService.UpdateGroupUserAsync(id, keycloakId);
             }
             catch (KeyNotFoundException)
             {

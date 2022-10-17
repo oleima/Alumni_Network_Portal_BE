@@ -62,7 +62,7 @@ namespace Alumni_Network_Portal_BE.Services.GroupServices
             return group;
         }
 
-        public async Task UpdateGroupUserAsync(int groupId, List<int> users, string keycloakId)
+        public async Task UpdateGroupUserAsync(int groupId, string keycloakId)
         {
             User userUpdating = _context.Users.First(u => u.KeycloakId == keycloakId);
 
@@ -71,25 +71,20 @@ namespace Alumni_Network_Portal_BE.Services.GroupServices
                .Where(c => c.Id == groupId)
                .FirstAsync();
 
-            if (!groupToUpdate.Users.Contains(userUpdating) 
-                && groupToUpdate.IsPrivate 
-                && groupToUpdate.Users.Count>0)
+            if (groupToUpdate.IsPrivate )
             {
                 throw new Exception();
             }
 
-            foreach (int userId in users)
-            {
-                User user = await _context.Users.FindAsync(userId);
-                if (user == null)
-                    throw new KeyNotFoundException();
-                if (!groupToUpdate.Users.Contains(user))
-                {
-                    groupToUpdate.Users.Add(user);
-                }
-                
-            }
 
+            if (!groupToUpdate.Users.Contains(userUpdating))
+            {
+                groupToUpdate.Users.Add(userUpdating);
+            }
+            else
+            {
+                throw new Exception();
+            }
             await _context.SaveChangesAsync();
         }
 
