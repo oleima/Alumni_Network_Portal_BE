@@ -33,7 +33,7 @@ namespace Alumni_Network_Portal_BE.Controllers
         // GET: api/Groups/5
         [Authorize]
         [HttpGet("{id}")]
-        public async Task<ActionResult<GroupReadDTO>> GetGroup(int id)
+        public async Task<ActionResult<GroupReadDTO>> GetGroupById(int id)
         {
             var keycloakId = this.User.GetId();
             Group group = await _groupService.GetByIdAsync(id,keycloakId);
