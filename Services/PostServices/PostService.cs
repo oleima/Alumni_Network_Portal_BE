@@ -70,8 +70,12 @@ namespace Alumni_Network_Portal_BE.Services.PostServices
 
             return await _context.Posts
                 .Include(c => c.Group)
-                .Where(c => c.GroupId==groupId)
-                .Where(c => c.Group.Users.Contains(user) || !c.Group.IsPrivate)
+                .Include(c => c.Topic)
+                .Include(c => c.Author)
+                .Include(c => c.Replies)
+                .Where(c => c.GroupId == groupId)
+                .Where(c => c.ParentId == null)
+                .Where(c => c.Group.Users.Contains(user) || c.Topic.Users.Contains(user))
                 .OrderByDescending(c => c.LastUpdated.Date)
                 .ThenBy(c => c.LastUpdated.TimeOfDay)
                 .ToListAsync();
@@ -81,8 +85,13 @@ namespace Alumni_Network_Portal_BE.Services.PostServices
             User user = _context.Users.First(u => u.KeycloakId == keycloakId);
 
             return await _context.Posts
+                .Include(c => c.Group)
                 .Include(c => c.Topic)
+                .Include(c => c.Author)
+                .Include(c => c.Replies)
                 .Where(c => c.TopicId == topicId)
+                .Where(c => c.ParentId == null)
+                .Where(c => c.Group.Users.Contains(user) || c.Topic.Users.Contains(user))
                 .OrderByDescending(c => c.LastUpdated.Date)
                 .ThenBy(c => c.LastUpdated.TimeOfDay)
                 .ToListAsync();
@@ -92,9 +101,13 @@ namespace Alumni_Network_Portal_BE.Services.PostServices
             User user = _context.Users.First(u => u.KeycloakId == keycloakId);
 
             return await _context.Posts
-                .Include(c => c.Event)
+                .Include(c => c.Group)
+                .Include(c => c.Topic)
+                .Include(c => c.Author)
+                .Include(c => c.Replies)
                 .Where(c => c.EventId == eventId)
-                .Where(c => c.Event.UsersResponded.Contains(user))
+                .Where(c => c.ParentId == null)
+                .Where(c => c.Event.UserInvited.Contains(user))
                 .OrderByDescending(c => c.LastUpdated.Date)
                 .ThenBy(c => c.LastUpdated.TimeOfDay)
                 .ToListAsync();
@@ -134,7 +147,7 @@ namespace Alumni_Network_Portal_BE.Services.PostServices
                     throw new Exception();
                 }
             }
-            else if (domainPost.RecieverId != null)
+            else if (domainPost.RecieverId != null || domainPost.ParentId != null)
             {
                 if (domainPost.RecieverId == user.Id)
                 {
