@@ -57,7 +57,7 @@ namespace Alumni_Network_Portal_BE.Controllers
             return _mapper.Map<List<PostReadDTO>>(await _postService.GetMessagesAsync(keycloakId));
         }
         [Authorize]
-        [HttpGet("user/{{id}}")]
+        [HttpGet("user/{id}")]
         public async Task<ActionResult<IEnumerable<PostReadDTO>>> GetRecievedFromAuthorPosts(int id, [FromQuery] Pagination? pagination)
         {
             var keycloakId = this.User.GetId();
@@ -74,7 +74,7 @@ namespace Alumni_Network_Portal_BE.Controllers
             return _mapper.Map<List<PostReadDTO>>(await _postService.GetMessagesFromAuthorAsync(id,keycloakId));
         }
         [Authorize]
-        [HttpGet("group/{{id}}")]
+        [HttpGet("group/{id}")]
         public async Task<ActionResult<IEnumerable<PostReadDTO>>> GetGroupPosts(int id, [FromQuery] Pagination? pagination)
         {
             var keycloakId = this.User.GetId();
@@ -91,7 +91,7 @@ namespace Alumni_Network_Portal_BE.Controllers
             return _mapper.Map<List<PostReadDTO>>(await _postService.GetGroupPostsAsync(id, keycloakId));
         }
         [Authorize]
-        [HttpGet("topic/{{id}}")]
+        [HttpGet("topic/{id}")]
         public async Task<ActionResult<IEnumerable<PostReadDTO>>> GetTopicPosts(int id, [FromQuery] Pagination? pagination)
         {
             var keycloakId = this.User.GetId();
@@ -108,7 +108,7 @@ namespace Alumni_Network_Portal_BE.Controllers
             return _mapper.Map<List<PostReadDTO>>(await _postService.GetTopicPostsAsync(id, keycloakId));
         }
         [Authorize]
-        [HttpGet("event/{{id}}")]
+        [HttpGet("event/{id}")]
         public async Task<ActionResult<IEnumerable<PostReadDTO>>> GetEventPosts(int id, [FromQuery] Pagination? pagination)
         {
             var keycloakId = this.User.GetId();
