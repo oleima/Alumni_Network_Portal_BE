@@ -539,7 +539,7 @@ namespace Alumni_Network_Portal_BE.Helpers
                 Body = "3x4 =12 and increase by one each round for 8 rounds to get 20. I think..",
                 LastUpdated = DateTime.Now,
                 AuthorId = 3,
-                GroupId = 10,
+                ParentId = i-1,
             }); //group husflid
             i++;
             posts.Add(new Post()
@@ -557,8 +557,8 @@ namespace Alumni_Network_Portal_BE.Helpers
                 Id = i,
                 Body = "The darker themes of SelfMade are astonishing!",
                 LastUpdated = DateTime.Now,
-                AuthorId = 4,
-                GroupId = 10,
+                AuthorId = 3,
+                ParentId = i-1,
             });
             i++;
             posts.Add(new Post()
