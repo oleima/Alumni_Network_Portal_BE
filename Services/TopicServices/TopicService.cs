@@ -51,6 +51,26 @@ namespace Alumni_Network_Portal_BE.Services.TopicServices
             await _context.SaveChangesAsync();
             return topic;
         }
+
+        public async Task LeaveTopic(int topicId, string keycloakId)
+        {
+            Topic topic = _context.Topics
+                .Include(t => t.Users)
+                .FirstOrDefaultAsync(t => t.Id == topicId).Result;
+
+            User user = getUserFromKeyCloak(keycloakId);
+
+            if (topic.Users.Contains(user))
+            {
+                topic.Users.Remove(user);
+            }
+            else
+            {
+                throw new Exception();
+
+            }
+            await _context.SaveChangesAsync();
+        }
         public bool Exists(int id)
         {
             return _context.Topics.Any(e => e.Id == id);

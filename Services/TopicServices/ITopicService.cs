@@ -8,6 +8,8 @@ namespace Alumni_Network_Portal_BE.Services.TopicServices
         public Task<Topic> JoinTopic(int topicId, string keycloakId);
         public Task<IEnumerable<Topic>> GetTopics();
         public Task<Topic> GetTopicById(int id);
+        public Task LeaveTopic(int topicId, string keycloakId);
+
 
         public bool Exists(int id);
         public User getUserFromKeyCloak(string keycloakId);
