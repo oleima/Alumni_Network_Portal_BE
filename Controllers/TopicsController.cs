@@ -79,5 +79,28 @@ namespace Alumni_Network_Portal_BE.Controllers
 
         }
 
+        [Authorize]
+        [HttpDelete("{id}/Leave")]
+        public async Task<ActionResult> LeaveTopic(int id)
+        {
+            if (!_topicService.Exists(id))
+            {
+                return NotFound();
+            }
+
+            try
+            {
+                string keycloakID = this.User.GetId();
+                await _topicService.LeaveTopic(id, keycloakID);
+            }
+            catch (Exception)
+            {
+                return BadRequest("Error");
+            }
+
+            return NoContent();
+
+
+        }
     }
 }
