@@ -71,7 +71,7 @@ namespace Alumni_Network_Portal_BE.Controllers
 
         // Post users to a specific movie in linking table
         [Authorize]
-        [HttpPut("{id}/Join")]
+        [HttpPost("{id}/Join")]
         public async Task<IActionResult> UpdateGroupUser(int id)
         {
             var keycloakId = this.User.GetId();
