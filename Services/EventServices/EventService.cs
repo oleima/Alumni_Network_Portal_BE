@@ -35,6 +35,21 @@ namespace Alumni_Network_Portal_BE.Services.EventServices
                 .Where(e => e.Groups.Any(g => user.Groups.Contains(g)) || e.Topics.Any(t => user.Topics.Contains(t)))
                 .ToListAsync();
         }
+
+        public async Task<Event> GetEventById(string keycloakId, int eventId)
+        {
+            User user = getUserFromKeyCloak(keycloakId);
+
+            return await _context.Events
+                .Include(e => e.Groups)
+                .Include(e => e.Topics)
+                .Include(e => e.Posts).ThenInclude(p => p.Author)
+                .Include(e => e.UsersResponded)
+                .Include(e => e.UserInvited)
+                .Include(e => e.Author)
+                .Where(e => e.Id == eventId)
+                .FirstOrDefaultAsync();
+        }
         public async Task<Event> AddEvent(Event ev, string keycloakId)
         {
             User user = getUserFromKeyCloak(keycloakId);

@@ -65,9 +65,10 @@ namespace Alumni_Network_Portal_BE.Migrations
                         {
                             Id = 1,
                             AllowGuests = true,
+                            AuthorId = 2,
                             Description = "Halloween? Hello Wine! Get ready for a spooky and fun night!",
                             EndTime = new DateTime(2022, 10, 29, 23, 0, 0, 0, DateTimeKind.Unspecified),
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(4004),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8841),
                             Name = "Halloween Party",
                             StartTime = new DateTime(2022, 10, 29, 19, 0, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -75,9 +76,10 @@ namespace Alumni_Network_Portal_BE.Migrations
                         {
                             Id = 2,
                             AllowGuests = true,
+                            AuthorId = 2,
                             Description = "The Noroff course presentation of the case project",
                             EndTime = new DateTime(2022, 10, 28, 16, 0, 0, 0, DateTimeKind.Unspecified),
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(4020),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8846),
                             Name = "Project Presentation",
                             StartTime = new DateTime(2022, 10, 28, 12, 0, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -85,9 +87,10 @@ namespace Alumni_Network_Portal_BE.Migrations
                         {
                             Id = 3,
                             AllowGuests = true,
+                            AuthorId = 2,
                             Description = "Get your socks on and rock on! The case period is over and we need to forget everything we have learned",
                             EndTime = new DateTime(2022, 10, 28, 22, 0, 0, 0, DateTimeKind.Unspecified),
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(4027),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8849),
                             Name = "After Work Beer",
                             StartTime = new DateTime(2022, 10, 28, 16, 0, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -95,9 +98,10 @@ namespace Alumni_Network_Portal_BE.Migrations
                         {
                             Id = 4,
                             AllowGuests = true,
+                            AuthorId = 2,
                             Description = "Come to Festplassen, Bergen to celebrate the best norwegian music!",
                             EndTime = new DateTime(2023, 7, 5, 22, 0, 0, 0, DateTimeKind.Unspecified),
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(4033),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8851),
                             Name = "Vg Lista topp 20",
                             StartTime = new DateTime(2023, 7, 5, 19, 0, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -105,9 +109,10 @@ namespace Alumni_Network_Portal_BE.Migrations
                         {
                             Id = 5,
                             AllowGuests = true,
+                            AuthorId = 2,
                             Description = "Haaland won't stop scoring goals. Complain about at Fredrik's apartment",
                             EndTime = new DateTime(2022, 11, 1, 19, 0, 0, 0, DateTimeKind.Unspecified),
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(4039),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8853),
                             Name = "Fantasy Permier League Weekly Recap",
                             StartTime = new DateTime(2022, 11, 1, 17, 0, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -115,9 +120,10 @@ namespace Alumni_Network_Portal_BE.Migrations
                         {
                             Id = 6,
                             AllowGuests = true,
+                            AuthorId = 2,
                             Description = "Laksevåg has set new routes so we are going exploring!",
                             EndTime = new DateTime(2022, 11, 2, 21, 0, 0, 0, DateTimeKind.Unspecified),
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(4047),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8861),
                             Name = "Bouldering in Laksevåg",
                             StartTime = new DateTime(2022, 11, 2, 17, 0, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -125,9 +131,10 @@ namespace Alumni_Network_Portal_BE.Migrations
                         {
                             Id = 7,
                             AllowGuests = false,
+                            AuthorId = 2,
                             Description = "Today we are ranking up!",
                             EndTime = new DateTime(2022, 10, 28, 21, 0, 0, 0, DateTimeKind.Unspecified),
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(4053),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8863),
                             Name = "5 man queue",
                             StartTime = new DateTime(2022, 10, 28, 17, 0, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -135,9 +142,10 @@ namespace Alumni_Network_Portal_BE.Migrations
                         {
                             Id = 8,
                             AllowGuests = false,
+                            AuthorId = 2,
                             Description = "Trivia, beer and atmosphere!",
                             EndTime = new DateTime(2022, 11, 3, 21, 0, 0, 0, DateTimeKind.Unspecified),
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(4059),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8865),
                             Name = "Thursday Quiz at Finnegans",
                             StartTime = new DateTime(2022, 11, 3, 17, 0, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -145,9 +153,10 @@ namespace Alumni_Network_Portal_BE.Migrations
                         {
                             Id = 9,
                             AllowGuests = true,
+                            AuthorId = 2,
                             Description = "VestBrygg is hosting a beginners course in brewing your own beer. ",
                             EndTime = new DateTime(2022, 10, 31, 20, 0, 0, 0, DateTimeKind.Unspecified),
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(4065),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8868),
                             Name = "Learn To brew your own beer!",
                             StartTime = new DateTime(2022, 10, 31, 18, 0, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -155,9 +164,10 @@ namespace Alumni_Network_Portal_BE.Migrations
                         {
                             Id = 10,
                             AllowGuests = true,
+                            AuthorId = 2,
                             Description = "Get together to share knitting recepies and inspire eachother. There will be tea and cookies ;)",
                             EndTime = new DateTime(2022, 10, 30, 14, 0, 0, 0, DateTimeKind.Unspecified),
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(4073),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8871),
                             Name = "Knitting and chatting",
                             StartTime = new DateTime(2022, 10, 30, 10, 0, 0, 0, DateTimeKind.Unspecified)
                         });
@@ -320,7 +330,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             AuthorId = 1,
                             Body = "CSharp variables needs to be delcared do to it being a strongly typed language. boolean: true or false, char: single character, int: whole number, float: floating point number, double, like float but more accurate, long: like int but bigger, decimal: monetary values.",
                             GroupId = 1,
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(2988),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8414),
                             Title = "Know your variables"
                         },
                         new
@@ -329,7 +339,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             AuthorId = 1,
                             Body = "int [] ages = new int[8] is the declaration for integer array of set length 8. Remember they are zero indexed! Access the second element like this: ages[1].",
                             GroupId = 1,
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(3045),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8445),
                             Title = "Know your arrays"
                         },
                         new
@@ -338,7 +348,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             AuthorId = 1,
                             Body = "Dictionary<int,string> dictionaryOfWords = new Dictionary<int,string>(); is the declaration of key type integer and value type string. It is of dynamic length. add like this: dictionaryOfWords.Add(423, \"First word\"); and access like this dictionaryOfWords(423).",
                             GroupId = 1,
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(3051),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8447),
                             Title = "Know your dictionaries"
                         },
                         new
@@ -347,7 +357,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             AuthorId = 1,
                             Body = "A class is made of four components. Constructors, fields, bahaviours and properties",
                             GroupId = 1,
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(3057),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8449),
                             Title = "Know your Class"
                         },
                         new
@@ -356,7 +366,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             AuthorId = 2,
                             Body = "The Firealarm might go off today due to technical issues",
                             GroupId = 2,
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(3063),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8451),
                             Title = "Firealarm might go off today!"
                         },
                         new
@@ -365,7 +375,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             AuthorId = 2,
                             Body = "Monday: Bean Shepards Pie, Tuesday: Baked Cod, Wednesday: Chickpea Masala, Thursday: Lentils Lansagna, Friday: Loaded Veggie Taco",
                             GroupId = 2,
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(3071),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8454),
                             Title = "Weekly menu in the cafeteria"
                         },
                         new
@@ -374,7 +384,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             AuthorId = 2,
                             Body = "I have been trying to get enpoints to work, but they just wont work!",
                             GroupId = 3,
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(3077),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8456),
                             Title = "Anyone know how endpoints work?"
                         },
                         new
@@ -382,7 +392,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             Id = 8,
                             AuthorId = 1,
                             Body = "Have you tried adding scoped of the services?",
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(3082),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8458),
                             ParentId = 7
                         },
                         new
@@ -390,7 +400,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             Id = 9,
                             AuthorId = 3,
                             Body = "Checkout the noroff page to see how to correctly set up controller and services",
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(3088),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8460),
                             ParentId = 7
                         },
                         new
@@ -399,7 +409,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             AuthorId = 1,
                             Body = "If anyone is interested, just ask me",
                             GroupId = 3,
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(3190),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8464),
                             Title = "I figured out how to get figma to work"
                         },
                         new
@@ -407,7 +417,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             Id = 11,
                             AuthorId = 1,
                             Body = "Figma balls",
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(3197),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8469),
                             ParentId = 10
                         },
                         new
@@ -416,7 +426,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             AuthorId = 1,
                             Body = "Save electricity in these dark times",
                             GroupId = 3,
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(3202),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8471),
                             Title = "Remember to turn off the lights when leaving the offices"
                         },
                         new
@@ -424,7 +434,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             Id = 13,
                             AuthorId = 2,
                             Body = "They have automatic movement sensors, so theres no stress",
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(3208),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8473),
                             ParentId = 12
                         },
                         new
@@ -433,7 +443,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             AuthorId = 1,
                             Body = "Use it for all your social media needs!",
                             GroupId = 4,
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(3214),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8475),
                             Title = "Alumni Network is the best app out there!"
                         },
                         new
@@ -442,7 +452,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             AuthorId = 2,
                             Body = "The change we need in social media",
                             GroupId = 4,
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(3220),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8482),
                             Title = "Thank you for using Almuni Network!"
                         },
                         new
@@ -451,7 +461,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             AuthorId = 3,
                             Body = "The man keeps assisting and scoring points, hes def worth the high price",
                             GroupId = 5,
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(3225),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8484),
                             Title = "I decided to add Kevin De Bruyne"
                         },
                         new
@@ -460,7 +470,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             AuthorId = 4,
                             Body = "Arsenal definitely seems to have turned things around this season",
                             GroupId = 5,
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(3232),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8486),
                             Title = "Is Arteta the must-have-coach"
                         },
                         new
@@ -468,7 +478,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             Id = 18,
                             AuthorId = 3,
                             Body = "Cheaper than Pep and gets as many points, but doubt he can keep it up through this season",
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(3240),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8489),
                             ParentId = 17
                         },
                         new
@@ -476,7 +486,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             Id = 19,
                             AuthorId = 2,
                             Body = "I have him on my team, but after the world cup i might change it to Klopp. He'll have a hell of a second half of the season.",
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(3245),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8491),
                             ParentId = 17
                         },
                         new
@@ -484,7 +494,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             Id = 20,
                             AuthorId = 3,
                             Body = "I have Mancini, fml",
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(3250),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8493),
                             ParentId = 17
                         },
                         new
@@ -493,7 +503,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             AuthorId = 4,
                             Body = "Holy guacamoly, I ahave never had so many points in a round before!",
                             GroupId = 5,
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(3256),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8495),
                             Title = "This round scored me so many points!"
                         },
                         new
@@ -502,7 +512,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             AuthorId = 4,
                             Body = "I was so stressed, when I heard the rumors",
                             GroupId = 5,
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(3261),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8497),
                             Title = "Praise the Lord, Allahu Ackbar, and Barukh Hashem! Haaland is not injured!"
                         },
                         new
@@ -511,7 +521,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             AuthorId = 4,
                             Body = "So crazy that guy",
                             GroupId = 6,
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(3267),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8499),
                             Title = "Did you guys see Magnus midtbø's newest video?"
                         },
                         new
@@ -520,7 +530,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             AuthorId = 3,
                             Body = "I heard they will have 700 meters of climbing!",
                             GroupId = 6,
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(3273),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8501),
                             Title = "I am so looking forward to the new bouldering hall in Åsane!"
                         },
                         new
@@ -529,7 +539,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             AuthorId = 1,
                             Body = "I have no idea how it is the most popular character!",
                             GroupId = 7,
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(3278),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8503),
                             Title = "Kai'sa is so overrated"
                         },
                         new
@@ -538,7 +548,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             AuthorId = 1,
                             Body = "It always delivers in creating a balanced game!",
                             GroupId = 7,
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(3284),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8505),
                             Title = "ARAM is the best gamemode"
                         },
                         new
@@ -547,7 +557,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             AuthorId = 1,
                             Body = "I want to watch this years worlds",
                             GroupId = 7,
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(3290),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8507),
                             Title = "When is Worlds?"
                         },
                         new
@@ -555,7 +565,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             Id = 28,
                             AuthorId = 3,
                             Body = "It has already been, i am sorry",
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(3296),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8509),
                             ParentId = 27
                         },
                         new
@@ -563,7 +573,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             Id = 29,
                             AuthorId = 3,
                             Body = "Maybe you can watch the replays on youtube",
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(3301),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8511),
                             ParentId = 27
                         },
                         new
@@ -572,7 +582,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             AuthorId = 1,
                             Body = "Mine is Lee Sin",
                             GroupId = 7,
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(3307),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8513),
                             Title = "What is your favourite character?"
                         },
                         new
@@ -580,7 +590,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             Id = 31,
                             AuthorId = 3,
                             Body = "Mine is Teemo!",
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(3313),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8515),
                             ParentId = 29
                         },
                         new
@@ -589,7 +599,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             AuthorId = 3,
                             Body = "I just get rekt :( ",
                             GroupId = 7,
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(3318),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8517),
                             Title = "I don't want to play toplane anymore!"
                         },
                         new
@@ -598,7 +608,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             AuthorId = 2,
                             Body = "I know all the capitals of European and American countries",
                             GroupId = 8,
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(3324),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8520),
                             Title = "I have read up on geography"
                         },
                         new
@@ -607,7 +617,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             AuthorId = 2,
                             Body = "I feel this is the subject we get the least points on",
                             GroupId = 8,
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(3333),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8574),
                             Title = "We need to get some knowledge on litterature"
                         },
                         new
@@ -615,7 +625,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             Id = 35,
                             AuthorId = 3,
                             Body = "I mean, it is the most boring subject of all",
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(3338),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8577),
                             ParentId = 34
                         },
                         new
@@ -624,7 +634,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             AuthorId = 2,
                             Body = "Next time we will get them!",
                             GroupId = 8,
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(3344),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8580),
                             Title = "We are tied with Conquiztadores for second place overall"
                         },
                         new
@@ -632,7 +642,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             Id = 37,
                             AuthorId = 3,
                             Body = "Heck yeah we will!",
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(3349),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8582),
                             ParentId = 36
                         },
                         new
@@ -641,7 +651,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             AuthorId = 3,
                             Body = "Get your hops on now, all hops from the 2021 season is 20% off all week!",
                             GroupId = 9,
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(3355),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8583),
                             Title = "Cheap HOPS! 20% off all week!"
                         },
                         new
@@ -650,7 +660,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             AuthorId = 3,
                             Body = "Tasty and aromatic, hints of chocolate and coffee. Beautiful mouthfeel!",
                             GroupId = 9,
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(3360),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8585),
                             Title = "Congratulations to Tom for brewing the best stout in our fall-brew-off!"
                         },
                         new
@@ -659,7 +669,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             AuthorId = 3,
                             Body = "We have made a ten step guide to how to create the best NEIPA!",
                             GroupId = 9,
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(3366),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8588),
                             Title = "Keen on a proper New England IPA? Come by our store to get the best tips and tricks!"
                         },
                         new
@@ -668,7 +678,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             AuthorId = 3,
                             Body = "Get them at our store, for favourable prices and good insight in yeast culture.",
                             GroupId = 9,
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(3372),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8590),
                             Title = "Use Norwegian yeast Kveik to brew your pale ales!"
                         },
                         new
@@ -677,7 +687,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             AuthorId = 4,
                             Body = "Page 3 in the Husflid catalogue. How does that make sense?",
                             GroupId = 10,
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(3377),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8592),
                             Title = "Anyone understand this knitting recipe, and can help me out?"
                         },
                         new
@@ -685,8 +695,8 @@ namespace Alumni_Network_Portal_BE.Migrations
                             Id = 43,
                             AuthorId = 3,
                             Body = "3x4 =12 and increase by one each round for 8 rounds to get 20. I think..",
-                            GroupId = 10,
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(3383)
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8594),
+                            ParentId = 42
                         },
                         new
                         {
@@ -694,23 +704,23 @@ namespace Alumni_Network_Portal_BE.Migrations
                             AuthorId = 4,
                             Body = "Thinking something green",
                             GroupId = 10,
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(3389),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8596),
                             Title = "What are your favorite colors for winter gowns. I want to sow my own!"
                         },
                         new
                         {
                             Id = 45,
-                            AuthorId = 4,
+                            AuthorId = 3,
                             Body = "The darker themes of SelfMade are astonishing!",
-                            GroupId = 10,
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(3395)
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8599),
+                            ParentId = 44
                         },
                         new
                         {
                             Id = 46,
                             AuthorId = 2,
                             Body = "The demonstrations erupted nearly a month ago over the death of 22-year-old Mahsa Amini in police custody",
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(3400),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8600),
                             Title = "Protests in Iran: 'The younger generation are starting a revolution'",
                             TopicId = 1
                         },
@@ -719,7 +729,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             Id = 47,
                             AuthorId = 2,
                             Body = "Prized for the lightweight, elastic bark, cork oaks can also store large amounts of carbon during their long lifetimes. Now there are moves to find new uses for this material.",
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(3407),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8603),
                             Title = "Why cork is making a comeback",
                             TopicId = 1
                         },
@@ -728,7 +738,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             Id = 48,
                             AuthorId = 2,
                             Body = "England missed the chance to complete a series clean sweep over Australia when their third Twenty20 match in Canberra was abandoned because of rain.",
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(3413),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8605),
                             Title = "England in Australia: Third Twenty20 abandoned because of rain in Canberra",
                             TopicId = 1
                         },
@@ -737,7 +747,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             Id = 49,
                             AuthorId = 2,
                             Body = "Between 1809 and 1814 the island became a prison for 11,000 defeated Napoleonic soldiers. Conditions were grim and up to 5,000 were estimated to have died of starvation, dehydration, and various illnesses.",
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(3419),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8607),
                             Title = "Cabrera: The heavenly island that became hell on earth",
                             TopicId = 1
                         },
@@ -746,7 +756,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             Id = 50,
                             AuthorId = 2,
                             Body = "Kwasi Kwarteng - who is out of his job as the UK's chancellor - has just confirmed that he was sacked by Prime Minister Liz Truss rather than choosing to leave.",
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(3424),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8609),
                             Title = "Kwarteng confirms he was asked to 'stand aside'",
                             TopicId = 1
                         },
@@ -755,7 +765,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             Id = 51,
                             AuthorId = 1,
                             Body = "The woman walks to the rear of the bus and sits down, fuming. She says to a man next to her: “The driver just insulted me!” The man says: “You go up there and tell him off. Go on, I’ll hold your monkey for you.”",
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(3430),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8611),
                             Title = "A woman gets on a bus with her baby. The bus driver says: 'Ugh, that’s the ugliest baby I’ve ever seen!'",
                             TopicId = 2
                         },
@@ -764,7 +774,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             Id = 52,
                             AuthorId = 2,
                             Body = "Haha, great one!",
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(3436),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8613),
                             ParentId = 51
                         },
                         new
@@ -772,7 +782,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             Id = 53,
                             AuthorId = 1,
                             Body = "He said, 'How flexible are you?' I said, 'I can’t make Tuesdays.'",
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(3442),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8615),
                             Title = "I said to the Gym instructor 'Can you teach me to do the splits?'",
                             TopicId = 2
                         },
@@ -781,7 +791,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             Id = 54,
                             AuthorId = 2,
                             Body = "Haha, great one!",
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(3447),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8618),
                             ParentId = 53
                         },
                         new
@@ -789,7 +799,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             Id = 55,
                             AuthorId = 1,
                             Body = "They charged one – and let the other one off.",
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(3453),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8620),
                             Title = "Police arrested two kids yesterday, one was drinking battery acid, the other was eating fireworks.",
                             TopicId = 2
                         },
@@ -798,7 +808,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             Id = 56,
                             AuthorId = 2,
                             Body = "Haha, great one!",
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(3459),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8622),
                             ParentId = 55
                         },
                         new
@@ -806,7 +816,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             Id = 57,
                             AuthorId = 1,
                             Body = "I’ve lost three days already.",
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(3464),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8624),
                             Title = "I’m on a whiskey diet.",
                             TopicId = 2
                         },
@@ -815,7 +825,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             Id = 58,
                             AuthorId = 2,
                             Body = "Haha, great one!",
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(3550),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8626),
                             ParentId = 57
                         },
                         new
@@ -823,7 +833,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             Id = 59,
                             AuthorId = 1,
                             Body = "Isn't that just amazing!",
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(3557),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8628),
                             Title = "Fun fact: Fleas can jump 350 times its body length.",
                             TopicId = 3
                         },
@@ -832,7 +842,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             Id = 60,
                             AuthorId = 2,
                             Body = "Isn't that just amazing!",
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(3562),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8633),
                             Title = "Fun fact: Hummingbirds are the only birds that can fly backwards.",
                             TopicId = 3
                         },
@@ -841,7 +851,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             Id = 61,
                             AuthorId = 1,
                             Body = "Isn't that just amazing!",
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(3568),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8635),
                             Title = "Fun fact: Crocodiles cannot stick their tongue out.",
                             TopicId = 3
                         },
@@ -850,7 +860,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             Id = 62,
                             AuthorId = 2,
                             Body = "Isn't that just amazing!",
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(3574),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8637),
                             Title = "Fun fact: Starfish do not have a brain.",
                             TopicId = 3
                         },
@@ -859,7 +869,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             Id = 63,
                             AuthorId = 2,
                             Body = "https://www.bbcgoodfood.com/recipes/caponata-pasta",
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(3580),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8639),
                             Title = "Recipe: Simple Pasta",
                             TopicId = 4
                         },
@@ -868,7 +878,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             Id = 64,
                             AuthorId = 2,
                             Body = "https://www.bbcgoodfood.com/recipes/coconut-squash-dhansak",
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(3586),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8641),
                             Title = "Recipe: Coconut & squash dhansak",
                             TopicId = 4
                         },
@@ -877,7 +887,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             Id = 65,
                             AuthorId = 2,
                             Body = "https://www.bbcgoodfood.com/recipes/veggie-fajitas",
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(3592),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8643),
                             Title = "Recipe: Veggie Fajitas",
                             TopicId = 4
                         },
@@ -886,7 +896,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             Id = 66,
                             AuthorId = 2,
                             Body = "Brown wool caps are hot in every sense of the word",
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(3601),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8646),
                             Title = "Top ten hottest caps right now!",
                             TopicId = 5
                         },
@@ -895,7 +905,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             Id = 67,
                             AuthorId = 3,
                             Body = "I want to find a nice fall cap!",
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(3606),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8648),
                             Title = "Anyone now any good places to get caps?",
                             TopicId = 5
                         },
@@ -904,7 +914,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             Id = 68,
                             AuthorId = 2,
                             Body = "Vanity has some nice ones",
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(3612),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8650),
                             ParentId = 67
                         },
                         new
@@ -912,7 +922,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             Id = 69,
                             AuthorId = 2,
                             Body = "Such a cool song!",
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(3618),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8652),
                             Title = "I Wanna Be Your Dog – The Stooges",
                             TopicId = 6
                         },
@@ -921,7 +931,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             Id = 70,
                             AuthorId = 1,
                             Body = "I love this song!",
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(3623),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8654),
                             ParentId = 69
                         },
                         new
@@ -929,7 +939,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             Id = 71,
                             AuthorId = 1,
                             Body = "Proper banger!",
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(3628),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8656),
                             Title = "Anarchy in the UK – Sex Pistols",
                             TopicId = 6
                         },
@@ -938,7 +948,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             Id = 72,
                             AuthorId = 2,
                             Body = "I love this song!",
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(3634),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8658),
                             ParentId = 71
                         },
                         new
@@ -946,7 +956,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             Id = 73,
                             AuthorId = 2,
                             Body = "Such a cool song!",
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(3640),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8660),
                             Title = "Self Esteem – The Offspring",
                             TopicId = 6
                         },
@@ -955,7 +965,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             Id = 74,
                             AuthorId = 1,
                             Body = "I love this song!",
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(3645),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8662),
                             ParentId = 73
                         },
                         new
@@ -963,7 +973,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             Id = 75,
                             AuthorId = 2,
                             Body = "Such a cool song!",
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(3651),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8664),
                             Title = "American Idiot – Green Day",
                             TopicId = 6
                         },
@@ -972,7 +982,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             Id = 76,
                             AuthorId = 1,
                             Body = "I love this song!",
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(3656),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8666),
                             ParentId = 75
                         },
                         new
@@ -980,7 +990,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             Id = 77,
                             AuthorId = 2,
                             Body = "Personally I like pour over best, but what do you guys like?",
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(3663),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8726),
                             Title = "Pour over or french press?",
                             TopicId = 7
                         },
@@ -989,7 +999,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             Id = 78,
                             AuthorId = 1,
                             Body = "I use french press myself, but in weekends I use a Bialetti!",
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(3669),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8728),
                             ParentId = 77
                         },
                         new
@@ -997,7 +1007,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             Id = 79,
                             AuthorId = 1,
                             Body = "My Moccamaster makes just as good cooffee as any other fancy coffee bars",
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(3675),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8730),
                             Title = "Is barrista coffee overrated?",
                             TopicId = 7
                         },
@@ -1006,7 +1016,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             Id = 80,
                             AuthorId = 2,
                             Body = "Arabica has been the most famous for a long time, but I like RObusta myself.",
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(3680),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8732),
                             Title = "What are the best beans? Arabica or Robusta",
                             TopicId = 7
                         },
@@ -1015,7 +1025,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             Id = 81,
                             AuthorId = 1,
                             Body = "I like arabica myself!",
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(3686),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8734),
                             ParentId = 80
                         },
                         new
@@ -1023,7 +1033,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             Id = 82,
                             AuthorId = 2,
                             Body = "I think they would look nice!",
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(3691),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8736),
                             Title = "Should we allow for skyscrapers in Bergen",
                             TopicId = 8
                         },
@@ -1032,7 +1042,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             Id = 83,
                             AuthorId = 2,
                             Body = "We want Bergen to become the first European city to be properly car free!",
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(3697),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8738),
                             Title = "Car free Bergen!",
                             TopicId = 8
                         },
@@ -1041,7 +1051,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             Id = 84,
                             AuthorId = 4,
                             Body = "People don't know what they talk about. Me neither, to be fair.",
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(3703),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8740),
                             Title = "Bergen politics is bad!",
                             TopicId = 8
                         },
@@ -1050,7 +1060,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             Id = 85,
                             AuthorId = 4,
                             Body = "I was so upset when he didn't win!",
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(3708),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8742),
                             Title = "Spaceman is the best song!",
                             TopicId = 9
                         },
@@ -1059,7 +1069,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             Id = 86,
                             AuthorId = 3,
                             Body = "I hope GB will deliver in their hosting!",
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(3713),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8744),
                             Title = "I am so looking forward to next years ESC!",
                             TopicId = 9
                         },
@@ -1068,7 +1078,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             Id = 87,
                             AuthorId = 1,
                             Body = "As Ukraine has been attacked by Russia and is not a safe place currently, it has to be hosted in the UK",
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(3719),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8746),
                             Title = "It has been decided that UK will host the ESC 2023",
                             TopicId = 9
                         },
@@ -1077,7 +1087,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             Id = 88,
                             AuthorId = 1,
                             Body = "The second byte replies, 'No, just feeling a bit off.'",
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(3725),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8748),
                             Title = "Two bytes meet.  The first byte asks, 'Are you ill?'",
                             TopicId = 10
                         },
@@ -1086,7 +1096,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             Id = 89,
                             AuthorId = 2,
                             Body = "Haha, great one",
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(3730),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8750),
                             ParentId = 88
                         },
                         new
@@ -1094,7 +1104,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             Id = 90,
                             AuthorId = 1,
                             Body = "'Yeah,' reply the bytes.  'Make us a double.'",
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(3736),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8752),
                             Title = "Eight bytes walk into a bar.  The bartender asks, 'Can I get you anything?'",
                             TopicId = 10
                         },
@@ -1103,7 +1113,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             Id = 91,
                             AuthorId = 1,
                             Body = "He read the shampoo bottle instructions: Lather. Rinse. Repeat.",
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(3741),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8754),
                             Title = "How did the programmer die in the shower?",
                             TopicId = 10
                         },
@@ -1112,7 +1122,7 @@ namespace Alumni_Network_Portal_BE.Migrations
                             Id = 92,
                             AuthorId = 2,
                             Body = "Haha, great one",
-                            LastUpdated = new DateTime(2022, 10, 14, 16, 13, 44, 636, DateTimeKind.Local).AddTicks(3747),
+                            LastUpdated = new DateTime(2022, 10, 20, 10, 9, 3, 877, DateTimeKind.Local).AddTicks(8756),
                             ParentId = 91
                         });
                 });
