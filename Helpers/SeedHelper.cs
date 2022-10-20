@@ -1097,6 +1097,7 @@ namespace Alumni_Network_Portal_BE.Helpers
                 StartTime = new DateTime(2022, 10, 29, 19, 0, 0),
                 EndTime = new DateTime(2022, 10, 29, 23, 0, 0),
                 AllowGuests = true,
+                AuthorId = 2,
             });
             events.Add(new Event()
             {
@@ -1107,6 +1108,7 @@ namespace Alumni_Network_Portal_BE.Helpers
                 StartTime = new DateTime(2022, 10, 28, 12, 0, 0),
                 EndTime = new DateTime(2022, 10, 28, 16, 0, 0),
                 AllowGuests = true,
+                AuthorId = 2,
             });
             events.Add(new Event()
             {
@@ -1117,6 +1119,7 @@ namespace Alumni_Network_Portal_BE.Helpers
                 StartTime = new DateTime(2022, 10, 28, 16, 0, 0),
                 EndTime = new DateTime(2022, 10, 28, 22, 0, 0),
                 AllowGuests = true,
+                AuthorId = 2,
             });
             events.Add(new Event()
             {
@@ -1127,6 +1130,7 @@ namespace Alumni_Network_Portal_BE.Helpers
                 StartTime = new DateTime(2023, 7, 5, 19, 0, 0),
                 EndTime = new DateTime(2023, 7, 5, 22, 0, 0),
                 AllowGuests = true,
+                AuthorId = 2,
             });
             events.Add(new Event()
             {
@@ -1137,6 +1141,7 @@ namespace Alumni_Network_Portal_BE.Helpers
                 StartTime = new DateTime(2022, 11, 1, 17, 0, 0),
                 EndTime = new DateTime(2022, 11, 1, 19, 0, 0),
                 AllowGuests = true,
+                AuthorId = 2,
             });
             events.Add(new Event()
             {
@@ -1147,6 +1152,7 @@ namespace Alumni_Network_Portal_BE.Helpers
                 StartTime = new DateTime(2022, 11, 2, 17, 0, 0),
                 EndTime = new DateTime(2022, 11, 2, 21, 0, 0),
                 AllowGuests = true,
+                AuthorId = 2,
             });
             events.Add(new Event()
             {
@@ -1157,6 +1163,7 @@ namespace Alumni_Network_Portal_BE.Helpers
                 StartTime = new DateTime(2022, 10, 28, 17, 0, 0),
                 EndTime = new DateTime(2022, 10, 28, 21, 0, 0),
                 AllowGuests = false,
+                AuthorId = 2,
             });
             events.Add(new Event()
             {
@@ -1167,6 +1174,7 @@ namespace Alumni_Network_Portal_BE.Helpers
                 StartTime = new DateTime(2022, 11, 3, 17, 0, 0),
                 EndTime = new DateTime(2022, 11, 3, 21, 0, 0),
                 AllowGuests = false,
+                AuthorId = 2,
             });
             events.Add(new Event()
             {
@@ -1177,6 +1185,7 @@ namespace Alumni_Network_Portal_BE.Helpers
                 StartTime = new DateTime(2022, 10, 31, 18, 0, 0),
                 EndTime = new DateTime(2022, 10, 31, 20, 0, 0),
                 AllowGuests = true,
+                AuthorId = 2,
             });
             events.Add(new Event()
             {
@@ -1187,6 +1196,7 @@ namespace Alumni_Network_Portal_BE.Helpers
                 StartTime = new DateTime(2022, 10, 30, 10, 0, 0),
                 EndTime = new DateTime(2022, 10, 30, 14, 0, 0),
                 AllowGuests = true,
+                AuthorId = 2,
             });
             return events;
         }

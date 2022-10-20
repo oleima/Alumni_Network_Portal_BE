@@ -22,6 +22,6 @@ namespace Alumni_Network_Portal_BE.Models.DTOs.EventDTO
         public ICollection<GroupUserReadDTO>? Groups { get; set; } //Many-Many
         public ICollection<PostGroupReadDTO>? Posts { get; set; } //One-Many
         public int? AuthorId { get; set; }
-        public User? Author { get; set; } //One-Many
+        public UserPostReadDTO? Author { get; set; } //One-Many
     }
 }
