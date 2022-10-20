@@ -32,6 +32,7 @@ namespace Alumni_Network_Portal_BE.Services.UserServices
             .Include(c => c.RecievedPosts).ThenInclude(c => c.Author)
             .Include(c => c.InvitedEvents)
             .Include(c => c.AuthoredEvents)
+            .Include(c => c.RespondedEvents)
             .Where(c => c.Id == user.Id)
             .FirstOrDefaultAsync();
         }
@@ -41,7 +42,11 @@ namespace Alumni_Network_Portal_BE.Services.UserServices
             return await _context.Users
             .Include(c => c.Groups)
             .Include(c => c.Topics)
+            .Include(c => c.AuthoredPosts)
+            .Include(c => c.RecievedPosts).ThenInclude(c => c.Author)
+            .Include(c => c.InvitedEvents)
             .Include(c => c.AuthoredEvents)
+            .Include(c => c.RespondedEvents)
             .Where(c => c.Id == id)
             .FirstOrDefaultAsync();
         }

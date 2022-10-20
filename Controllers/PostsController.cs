@@ -7,10 +7,14 @@ using Alumni_Network_Portal_BE.Models.Domain;
 using Microsoft.AspNetCore.Authorization;
 using Alumni_Network_Portal_BE.Models.DTOs.Pages;
 using Newtonsoft.Json;
+using System.Net.Mime;
 
 namespace Alumni_Network_Portal_BE.Controllers
 {
     [Route("api/[controller]")]
+    [Produces(MediaTypeNames.Application.Json)]
+    [Consumes(MediaTypeNames.Application.Json)]
+    [ApiConventionType(typeof(DefaultApiConventions))]
     [ApiController]
     public class PostsController : ControllerBase
     {

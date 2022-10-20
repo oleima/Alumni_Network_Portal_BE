@@ -6,10 +6,14 @@ using Alumni_Network_Portal_BE.Services.GroupServices;
 using Alumni_Network_Portal_BE.Helpers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
+using System.Net.Mime;
 
 namespace Alumni_Network_Portal_BE.Controllers
 {
     [Route("api/[controller]")]
+    [Produces(MediaTypeNames.Application.Json)]
+    [Consumes(MediaTypeNames.Application.Json)]
+    [ApiConventionType(typeof(DefaultApiConventions))]
     [ApiController]
     public class GroupsController : ControllerBase
     {

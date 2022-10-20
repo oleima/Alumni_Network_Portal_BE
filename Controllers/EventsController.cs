@@ -15,11 +15,15 @@ using Microsoft.AspNetCore.Authorization;
 using Alumni_Network_Portal_BE.Helpers;
 using System.Text.RegularExpressions;
 using Alumni_Network_Portal_BE.Models.DTOs.PostDTO;
+using System.Net.Mime;
 
 namespace Alumni_Network_Portal_BE.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Produces(MediaTypeNames.Application.Json)]
+    [Consumes(MediaTypeNames.Application.Json)]
+    [ApiConventionType(typeof(DefaultApiConventions))]
     public class EventsController : ControllerBase
     {
         private readonly IEventService _eventService;

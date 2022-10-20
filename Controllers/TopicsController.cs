@@ -12,11 +12,15 @@ using AutoMapper;
 using Alumni_Network_Portal_BE.Models.DTOs.TopicDTO;
 using Alumni_Network_Portal_BE.Helpers;
 using Microsoft.AspNetCore.Authorization;
+using System.Net.Mime;
 
 namespace Alumni_Network_Portal_BE.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Produces(MediaTypeNames.Application.Json)]
+    [Consumes(MediaTypeNames.Application.Json)]
+    [ApiConventionType(typeof(DefaultApiConventions))]
     public class TopicsController : ControllerBase
     {
         private readonly ITopicService _topicService;
