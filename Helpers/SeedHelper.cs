@@ -1198,6 +1198,17 @@ namespace Alumni_Network_Portal_BE.Helpers
                 AllowGuests = true,
                 AuthorId = 2,
             });
+            events.Add(new Event()
+            {
+                Id = 11,
+                Name = "Knitting & listening to smooth Jazz",
+                Description = "Get together and collectively knit to the smooth, arythmic rythm of Jazz",
+                LastUpdated = DateTime.Now,
+                StartTime = new DateTime(2022, 11, 15, 12, 0, 0),
+                EndTime = new DateTime(2022, 11, 15, 14, 0, 0),
+                AllowGuests = true,
+                AuthorId = 3,
+            });
             return events;
         }
     }

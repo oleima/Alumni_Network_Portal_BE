@@ -16,6 +16,7 @@ using Alumni_Network_Portal_BE.Helpers;
 using System.Text.RegularExpressions;
 using Alumni_Network_Portal_BE.Models.DTOs.PostDTO;
 using System.Net.Mime;
+using Alumni_Network_Portal_BE.Models.DTOs.GroupDTO;
 
 namespace Alumni_Network_Portal_BE.Controllers
 {
@@ -42,6 +43,14 @@ namespace Alumni_Network_Portal_BE.Controllers
         {
             string keycloakId = this.User.GetId();
             return _mapper.Map<List<EventReadDTO>>(await _eventService.GetEvents(keycloakId));
+        }
+
+        [Authorize]
+        [HttpGet("{id}")]
+        public async Task<ActionResult<EventReadDTO>> GetEventById(int id)
+        {
+            string keycloakId = this.User.GetId();
+            return  _mapper.Map<EventReadDTO>(await _eventService.GetEventById(keycloakId, id));
         }
 
         [Authorize]

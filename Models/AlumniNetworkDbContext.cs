@@ -214,7 +214,8 @@ namespace Alumni_Network_Portal_BE.Models
                             new { GroupId = 7, EventId = 7 },
                             new { GroupId = 8, EventId = 8 },
                             new { GroupId = 9, EventId = 9 },
-                            new { GroupId = 10, EventId = 10 }
+                            new { GroupId = 10, EventId = 10 },
+                            new { GroupId = 10, EventId = 11 }
                             );
                     });
 

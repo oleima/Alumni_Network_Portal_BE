@@ -5,6 +5,7 @@ namespace Alumni_Network_Portal_BE.Services.EventServices
     public interface IEventService
     {
         public Task<IEnumerable<Event>> GetEvents(string keycloakId);
+        public Task<Event> GetEventById(string keycloakId, int eventId);
         public Task<Event> AddEvent(Event ev, string keycloakId);
         public Task UpdateEvent(Event ev, string keycloakId, int id);
         public Task CreateGroupEventInvitation(int eventId, int groupId);
