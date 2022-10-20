@@ -25,16 +25,26 @@ namespace Alumni_Network_Portal_BE.Services.UserServices
         {
             User user = _context.Users.First(u => u.KeycloakId == keycloakId);
 
-            return await _context.Users
-            .Include(c => c.Groups)
-            .Include(c => c.Topics)
-            .Include(c => c.AuthoredPosts)
-            .Include(c => c.RecievedPosts).ThenInclude(c => c.Author)
-            .Include(c => c.InvitedEvents)
-            .Include(c => c.AuthoredEvents)
-            .Include(c => c.RespondedEvents)
-            .Where(c => c.Id == user.Id)
-            .FirstOrDefaultAsync();
+            var userData = await _context.Users
+                .Where(c => c.Id == user.Id)
+                .Include(c => c.Groups)
+                .Include(c => c.Topics)
+                .FirstOrDefaultAsync();
+            userData = await _context.Users
+                .Where(c => c.Id == user.Id)
+                .Include(c => c.AuthoredPosts)
+                .Include(c => c.RecievedPosts).ThenInclude(c => c.Author)
+                .FirstOrDefaultAsync();
+            userData = await _context.Users
+                .Where(c => c.Id == user.Id)
+                .Include(c => c.InvitedEvents)
+                .Include(c => c.AuthoredEvents)
+                .FirstOrDefaultAsync();
+            userData =  await _context.Users
+                .Where(c => c.Id == user.Id)
+                .Include(c => c.RespondedEvents)
+                .FirstOrDefaultAsync();
+            return userData;
         }
 
         public async Task<User> GetByIdAsync(int id)
@@ -43,9 +53,6 @@ namespace Alumni_Network_Portal_BE.Services.UserServices
             .Include(c => c.Groups)
             .Include(c => c.Topics)
             .Include(c => c.AuthoredPosts)
-            .Include(c => c.RecievedPosts).ThenInclude(c => c.Author)
-            .Include(c => c.InvitedEvents)
-            .Include(c => c.AuthoredEvents)
             .Include(c => c.RespondedEvents)
             .Where(c => c.Id == id)
             .FirstOrDefaultAsync();
