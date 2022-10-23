@@ -31,7 +31,7 @@ update-database
 [API Documentation](API_Documentation.pdf) 
 
 ## Database Schema
-![ScreenShot](https://raw.github.com/oleima/Alumni_Network_Portal_BE/Database.png)
+![Image](../master/Database.PNG)
 ## Contributors
 | Name | Linkedin |
 | ------ | ------ |
