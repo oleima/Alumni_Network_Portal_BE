@@ -1,8 +1,6 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
-using static System.Net.WebRequestMethods;
-
 using Alumni_Network_Portal_BE.Models;
 using Microsoft.EntityFrameworkCore;
 using Alumni_Network_Portal_BE.Services.UserServices;
@@ -62,17 +60,6 @@ builder.Services.AddSwaggerGen(options =>
         Version = "v1",
         Title = "Alumni Network API",
         Description = "Get information about users, posts, groups and events",
-        TermsOfService = new Uri("https://example.com/terms"), //TODO
-        Contact = new OpenApiContact
-        {
-            Name = "Example Contact",
-            Url = new Uri("https://example.com/contact")
-        },
-        License = new OpenApiLicense
-        {
-            Name = "Example License",
-            Url = new Uri("https://example.com/license")
-        }
     });
     options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
@@ -100,7 +87,7 @@ builder.Services.AddSwaggerGen(options =>
     });
 });
 
-//TODO Add cors specific to frontend
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(name: "AllowAll", builder =>
@@ -108,7 +95,8 @@ builder.Services.AddCors(options =>
         builder
         .AllowAnyOrigin()
         .AllowAnyMethod()
-        .AllowAnyHeader();
+        .AllowAnyHeader()
+        .WithExposedHeaders("X-Pagination");
     });
 });
 
@@ -126,7 +114,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseCors("AllowAll"); //TOO Cors specific to frontend
+app.UseCors("AllowAll"); // Cors stay open, but needs to be authorized by keycloaktoken to access endpoints
 app.UseAuthentication();
 app.UseAuthorization();
 

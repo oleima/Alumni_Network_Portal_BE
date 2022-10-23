@@ -12,7 +12,13 @@ namespace Alumni_Network_Portal_BE.Profiles
             //Mapping from post to the respective DTOs
             CreateMap<Post, PostReadDTO>();
 
+            CreateMap<Post, PostGroupReadDTO>();
+
+            CreateMap<Post, PostUserReadDTO>();
+
             CreateMap<PostCreateDTO, Post>();
+
+            CreateMap<PostUpdateDTO, Post>();
 
         }
     }

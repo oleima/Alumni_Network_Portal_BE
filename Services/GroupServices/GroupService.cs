@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Alumni_Network_Portal_BE.Services.GroupServices
 {
+    ///<inheritdoc[cref = "IGroupService"]/>
     public class GroupService : IGroupService
     {
         private readonly AlumniNetworkDbContext _context;
@@ -25,6 +26,8 @@ namespace Alumni_Network_Portal_BE.Services.GroupServices
 
             return await _context.Groups
                 .Include(c => c.Users)
+                .Include(t => t.Posts)
+                .Include(t => t.Events)
                 .Where(c => c.IsPrivate == false || c.Users.Contains(user))
                 .ToListAsync();
         }
@@ -34,6 +37,8 @@ namespace Alumni_Network_Portal_BE.Services.GroupServices
             User user = _context.Users.First(u => u.KeycloakId == keycloakId);
 
             Group group = await _context.Groups
+                .Include(t => t.Posts)
+                .Include(t => t.Events)
                 .Include(c => c.Users)
                 .Where(c => c.Id == id)
                 .FirstOrDefaultAsync();
@@ -50,18 +55,15 @@ namespace Alumni_Network_Portal_BE.Services.GroupServices
         {
             User user = _context.Users.First(u => u.KeycloakId == keycloakId);
 
-            List<int> list = new List<int>();
-            list.Add(user.Id);
+            group.Users = new List <User>() {user} ;
 
             _context.Groups.Add(group);
             await _context.SaveChangesAsync();
 
-            UpdateGroupUserAsync(group.Id, list, keycloakId);
-
             return group;
         }
 
-        public async Task UpdateGroupUserAsync(int groupId, List<int> users, string keycloakId)
+        public async Task UpdateGroupUserAsync(int groupId, string keycloakId)
         {
             User userUpdating = _context.Users.First(u => u.KeycloakId == keycloakId);
 
@@ -70,27 +72,43 @@ namespace Alumni_Network_Portal_BE.Services.GroupServices
                .Where(c => c.Id == groupId)
                .FirstAsync();
 
-            if (!groupToUpdate.Users.Contains(userUpdating) 
-                && groupToUpdate.IsPrivate 
-                && groupToUpdate.Users.Count>0)
+            if (groupToUpdate.IsPrivate )
             {
                 throw new Exception();
             }
 
 
-            List<User> usersList = new();
-
-            foreach(int userId in users)
+            if (!groupToUpdate.Users.Contains(userUpdating))
             {
-                User user = await _context.Users.FindAsync(userId);
-                if (user == null)
-                    throw new KeyNotFoundException();
-                usersList.Add(user);
+                groupToUpdate.Users.Add(userUpdating);
             }
-
-            groupToUpdate.Users = usersList;
+            else
+            {
+                throw new Exception();
+            }
             await _context.SaveChangesAsync();
         }
 
+        public async Task LeaveGroupAsync(int groupId, string keycloakId)
+        {
+            User userUpdate = _context.Users.First(u => u.KeycloakId == keycloakId);
+
+            Group groupToUpdate = await _context.Groups
+               .Include(c => c.Users)
+               .Where(c => c.Id == groupId)
+               .FirstAsync();
+
+            if (groupToUpdate.Users.Contains(userUpdate))
+            {
+                groupToUpdate.Users.Remove(userUpdate);
+            }
+            else
+            {
+                throw new Exception();
+
+            }
+
+            await _context.SaveChangesAsync();
+        }
     }
 }

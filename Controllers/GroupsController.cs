@@ -6,10 +6,14 @@ using Alumni_Network_Portal_BE.Services.GroupServices;
 using Alumni_Network_Portal_BE.Helpers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
+using System.Net.Mime;
 
 namespace Alumni_Network_Portal_BE.Controllers
 {
     [Route("api/[controller]")]
+    [Produces(MediaTypeNames.Application.Json)]
+    [Consumes(MediaTypeNames.Application.Json)]
+    [ApiConventionType(typeof(DefaultApiConventions))]
     [ApiController]
     public class GroupsController : ControllerBase
     {
@@ -33,7 +37,7 @@ namespace Alumni_Network_Portal_BE.Controllers
         // GET: api/Groups/5
         [Authorize]
         [HttpGet("{id}")]
-        public async Task<ActionResult<GroupReadDTO>> GetGroup(int id)
+        public async Task<ActionResult<GroupReadDTO>> GetGroupById(int id)
         {
             var keycloakId = this.User.GetId();
             Group group = await _groupService.GetByIdAsync(id,keycloakId);
@@ -51,8 +55,7 @@ namespace Alumni_Network_Portal_BE.Controllers
             return _mapper.Map<GroupReadDTO>(group);
         }
 
-        // Put: api/Groups/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        // POST: api/Groups
         [Authorize]
         [HttpPost]
         public async Task<ActionResult<Group>> CreateGroup(GroupCreateDTO groupDTO)
@@ -64,15 +67,15 @@ namespace Alumni_Network_Portal_BE.Controllers
 
             return CreatedAtAction("GetGroup",
                 new { id = domainGroup.Id },
-                _mapper.Map<GroupCreateDTO>(domainGroup));
+                _mapper.Map<GroupReadDTO>(domainGroup));
         }
 
         #region Updating linking table
 
-        // Post users to a specific movie in linking table
+        // POST: api/Groups/{id}/join
         [Authorize]
-        [HttpPut("{id}/Join")]
-        public async Task<IActionResult> UpdateGroupUser(int id, List<int> usersId)
+        [HttpPost("{id}/Join")]
+        public async Task<IActionResult> UpdateGroupUser(int id)
         {
             var keycloakId = this.User.GetId();
             if (!_groupService.Exists(id))
@@ -82,7 +85,7 @@ namespace Alumni_Network_Portal_BE.Controllers
 
             try
             {
-                await _groupService.UpdateGroupUserAsync(id, usersId, keycloakId);
+                await _groupService.UpdateGroupUserAsync(id, keycloakId);
             }
             catch (KeyNotFoundException)
             {
@@ -91,6 +94,28 @@ namespace Alumni_Network_Portal_BE.Controllers
             catch (Exception)
             {
                 return Forbid();
+            }
+
+            return NoContent();
+        }
+
+        // DELETE: api/Groups/{id}/leave
+        [Authorize]
+        [HttpDelete("{id}/Leave")]
+        public async Task<IActionResult> LeaveGroupUser(int id)
+        {
+            var keycloakId = this.User.GetId();
+            if ( !_groupService.Exists(id))
+            {
+                return NotFound();
+            }
+
+            try
+            {
+                await _groupService.LeaveGroupAsync(id, keycloakId);
+            } catch (Exception)
+            {
+                return BadRequest();
             }
 
             return NoContent();

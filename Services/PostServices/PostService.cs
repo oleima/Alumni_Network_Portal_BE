@@ -1,11 +1,14 @@
 ﻿using Alumni_Network_Portal_BE.Models;
 using Alumni_Network_Portal_BE.Models.Domain;
+using Alumni_Network_Portal_BE.Models.DTOs.Pages;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration.UserSecrets;
 using System.Text.RegularExpressions;
 using Group = Alumni_Network_Portal_BE.Models.Domain.Group;
 
 namespace Alumni_Network_Portal_BE.Services.PostServices
 {
+    ///<inheritdoc[cref = "IPostService"]/>
     public class PostService : IPostService
     {
         private readonly AlumniNetworkDbContext _context;
@@ -14,7 +17,15 @@ namespace Alumni_Network_Portal_BE.Services.PostServices
         {
             _context = context;
         }
-        //Fixme: Reverse orer to chronologically reversed
+
+        public  IEnumerable<Post> Paginate(IEnumerable<Post> posts, Pagination pagination)
+        {
+            return posts
+                .Skip((pagination.Page - 1) * pagination.ItemsPerPage)
+                .Take(pagination.ItemsPerPage)
+                .ToList();
+        }
+
         public async Task<IEnumerable<Post>> GetAllAsync(string keycloakId)
         {
             User user = _context.Users.First(u => u.KeycloakId == keycloakId);
@@ -22,7 +33,12 @@ namespace Alumni_Network_Portal_BE.Services.PostServices
             return await _context.Posts
                 .Include(c => c.Group)
                 .Include(c => c.Topic)
-                .Where(c=>c.Group.Users.Contains(user)|| c.Topic.Users.Contains(user))
+                .Include(c => c.Author)
+                .Include(c => c.Replies)
+                .Where(c => c.ParentId == null)
+                .Where(c => c.Group.Users.Contains(user) || c.Topic.Users.Contains(user))
+                .OrderByDescending(c => c.LastUpdated.Date)
+                .ThenBy(c => c.LastUpdated.TimeOfDay)
                 .ToListAsync();
         }
 
@@ -32,6 +48,8 @@ namespace Alumni_Network_Portal_BE.Services.PostServices
 
             return await _context.Posts
                 .Where(c => c.RecieverId==user.Id)
+                .OrderByDescending(c => c.LastUpdated.Date)
+                .ThenBy(c => c.LastUpdated.TimeOfDay)
                 .ToListAsync();
         }
 
@@ -41,6 +59,8 @@ namespace Alumni_Network_Portal_BE.Services.PostServices
 
             return await _context.Posts
                 .Where(c => c.RecieverId == user.Id && c.AuthorId == authorId)
+                .OrderByDescending(c => c.LastUpdated.Date)
+                .ThenBy(c => c.LastUpdated.TimeOfDay)
                 .ToListAsync();
         }
 
@@ -50,8 +70,13 @@ namespace Alumni_Network_Portal_BE.Services.PostServices
 
             return await _context.Posts
                 .Include(c => c.Group)
-                .Where(c => c.GroupId==groupId)
-                .Where(c => c.Group.Users.Contains(user) || !c.Group.IsPrivate)
+                .Include(c => c.Topic)
+                .Include(c => c.Author)
+                .Include(c => c.Replies)
+                .Where(c => c.GroupId == groupId)
+                .Where(c => c.ParentId == null)
+                .OrderByDescending(c => c.LastUpdated.Date)
+                .ThenBy(c => c.LastUpdated.TimeOfDay)
                 .ToListAsync();
         }
         public async Task<IEnumerable<Post>> GetTopicPostsAsync(int topicId, string keycloakId)
@@ -59,8 +84,14 @@ namespace Alumni_Network_Portal_BE.Services.PostServices
             User user = _context.Users.First(u => u.KeycloakId == keycloakId);
 
             return await _context.Posts
+                .Include(c => c.Group)
                 .Include(c => c.Topic)
+                .Include(c => c.Author)
+                .Include(c => c.Replies)
                 .Where(c => c.TopicId == topicId)
+                .Where(c => c.ParentId == null)
+                .OrderByDescending(c => c.LastUpdated.Date)
+                .ThenBy(c => c.LastUpdated.TimeOfDay)
                 .ToListAsync();
         }
         public async Task<IEnumerable<Post>> GetEventPostsAsync(int eventId, string keycloakId)
@@ -68,14 +99,23 @@ namespace Alumni_Network_Portal_BE.Services.PostServices
             User user = _context.Users.First(u => u.KeycloakId == keycloakId);
 
             return await _context.Posts
-                .Include(c => c.Event)
+                .Include(c => c.Group)
+                .Include(c => c.Topic)
+                .Include(c => c.Author)
+                .Include(c => c.Replies)
                 .Where(c => c.EventId == eventId)
-                .Where(c => c.Event.UsersResponded.Contains(user))
+                .Where(c => c.ParentId == null)
+                .OrderByDescending(c => c.LastUpdated.Date)
+                .ThenBy(c => c.LastUpdated.TimeOfDay)
                 .ToListAsync();
         }
         public async Task<Post> AddPostAsync(Post domainPost, string keycloakId)
         {
-            User user = _context.Users.First(u => u.KeycloakId == keycloakId);
+            User user = _context.Users
+                .Include(u => u.Groups)
+                .Include(u => u.Topics)
+                .Include(u => u.RespondedEvents)
+                .First(u => u.KeycloakId == keycloakId);
 
             if (domainPost.TopicId != null)
             {
@@ -104,12 +144,19 @@ namespace Alumni_Network_Portal_BE.Services.PostServices
                     throw new Exception();
                 }
             }
+            else if (domainPost.RecieverId != null || domainPost.ParentId != null)
+            {
+                if (domainPost.RecieverId == user.Id)
+                {
+                    throw new Exception();
+                }
+            }
             else
             {
                 throw new KeyNotFoundException();
             }
 
-
+            domainPost.AuthorId = user.Id;
             _context.Posts.Add(domainPost);
             await _context.SaveChangesAsync();
             return domainPost;
@@ -118,8 +165,13 @@ namespace Alumni_Network_Portal_BE.Services.PostServices
         }
         public async Task UpdateAsync(Post post)
         {
+            post.LastUpdated = DateTime.Now;
             _context.Entry(post).State = EntityState.Modified;
             await _context.SaveChangesAsync();
+        }
+        public bool Exists(int id)
+        {
+            return _context.Posts.Any(e => e.Id == id);
         }
     }
 }

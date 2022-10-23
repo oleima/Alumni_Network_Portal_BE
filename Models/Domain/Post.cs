@@ -8,10 +8,11 @@ namespace Alumni_Network_Portal_BE.Models.Domain
         public int Id { get; set; }
         // Fields
         [MaxLength(255)]
+        public string? Title { get; set; }
         [Required]
-        public string Title { get; set; }
+        public DateTime LastUpdated { get; set; }
 
-        [MaxLength(255)]
+        [MaxLength(525)]
         public string? Body { get; set; } //Nullable
 
         // Relationships
@@ -27,6 +28,8 @@ namespace Alumni_Network_Portal_BE.Models.Domain
         public Event? Event { get; set; }
         public int? ParentId { get; set; }
         public Post? Parent { get; set; }
+
+        public ICollection<Post>? Replies { get; set; }
 
 
     }

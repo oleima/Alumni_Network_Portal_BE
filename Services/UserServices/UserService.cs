@@ -1,10 +1,13 @@
 ﻿using Alumni_Network_Portal_BE.Helpers;
 using Alumni_Network_Portal_BE.Models;
 using Alumni_Network_Portal_BE.Models.Domain;
+using Alumni_Network_Portal_BE.Models.DTOs.UserDTO;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json.Linq;
 
 namespace Alumni_Network_Portal_BE.Services.UserServices
 {
+    ///<inheritdoc[cref = "IUserService"]/>
     public class UserService : IUserService
     {
         private readonly AlumniNetworkDbContext _context;
@@ -19,32 +22,84 @@ namespace Alumni_Network_Portal_BE.Services.UserServices
             return _context.Users.Any(e => e.Id == id);
         }
 
-        public async Task<IEnumerable<User>> GetAllAsync()
+        public async Task<User> GetAsync(string keycloakId)
         {
-            return await _context.Users
-            .Include(c => c.Groups)
-            .Include(c => c.Topics)
-            .ToListAsync();
+            User user = _context.Users.First(u => u.KeycloakId == keycloakId);
+
+            var userData = await _context.Users
+                .Where(c => c.Id == user.Id)
+                .Include(c => c.Groups)
+                .Include(c => c.Topics)
+                .FirstOrDefaultAsync();
+            userData = await _context.Users
+                .Where(c => c.Id == user.Id)
+                .Include(c => c.AuthoredPosts)
+                .Include(c => c.RecievedPosts).ThenInclude(c => c.Author)
+                .FirstOrDefaultAsync();
+            userData = await _context.Users
+                .Where(c => c.Id == user.Id)
+                .Include(c => c.InvitedEvents)
+                .Include(c => c.AuthoredEvents)
+                .FirstOrDefaultAsync();
+            userData =  await _context.Users
+                .Where(c => c.Id == user.Id)
+                .Include(c => c.RespondedEvents)
+                .FirstOrDefaultAsync();
+            return userData;
         }
 
         public async Task<User> GetByIdAsync(int id)
         {
             return await _context.Users
-                .Include(c => c.Groups)
-                .Where(c => c.Id == id)
-                .FirstOrDefaultAsync();
+            .Include(c => c.Groups)
+            .Include(c => c.Topics)
+            .Include(c => c.AuthoredPosts)
+            .Include(c => c.RespondedEvents)
+            .Where(c => c.Id == id)
+            .FirstOrDefaultAsync();
         }
 
-        public async Task UpdateAsync(User user)
+        public async Task UpdateAsync(User patchUser, User userToPatch)
         {
-            _context.Entry(user).State = EntityState.Modified;
+            if (patchUser.Username != null)
+            {
+                userToPatch.Username = patchUser.Username;
+            }
+            if (patchUser.Status != null)
+            {
+                userToPatch.Status = patchUser.Status;
+            }
+            if (patchUser.Bio != null)
+            {
+                userToPatch.Bio = patchUser.Bio;
+            }
+            if (patchUser.FunFact != null)
+            {
+                userToPatch.FunFact = patchUser.FunFact;
+            }
+            if (patchUser.Picture != null)
+            {
+                userToPatch.Picture = patchUser.Picture;
+            }
+            _context.Entry(userToPatch).State = EntityState.Modified;
             await _context.SaveChangesAsync();
+
         }
 
-        public async Task PostAsync(User user)
+        public async Task<User> PostAsync(string keycloakId, string username)
         {
+            User user = new User { KeycloakId = keycloakId, Username = username, Status = "" };
+
             _context.Add(user);
             await _context.SaveChangesAsync();
+            return user;
+            
+        }
+
+        public User getUserFromKeyCloak(string keycloakId)
+        {
+            User user = _context.Users.FirstOrDefaultAsync(u => u.KeycloakId == keycloakId).Result;
+            return user;
         }
     }
 }

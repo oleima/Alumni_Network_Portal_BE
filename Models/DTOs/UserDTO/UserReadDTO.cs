@@ -1,4 +1,8 @@
 ﻿using Alumni_Network_Portal_BE.Models.Domain;
+using Alumni_Network_Portal_BE.Models.DTOs.EventDTO;
+using Alumni_Network_Portal_BE.Models.DTOs.GroupDTO;
+using Alumni_Network_Portal_BE.Models.DTOs.PostDTO;
+using Alumni_Network_Portal_BE.Models.DTOs.TopicDTO;
 using System.ComponentModel.DataAnnotations;
 
 namespace Alumni_Network_Portal_BE.Models.DTOs.UserDTO
@@ -11,12 +15,13 @@ namespace Alumni_Network_Portal_BE.Models.DTOs.UserDTO
         public string Status { get; set; }
         public string? Bio { get; set; } //Nullable
         public string? FunFact { get; set; } //Nullable
-        public byte[]? Picture { get; set; }
-        public List<string>? AuthoredPosts { get; set; } //One-Many
-        public List<string>? RecievedPosts { get; set; } //One-Many
-        public List<string>? AuthoredEvents { get; set; } //One-Many
-        public List<string>? Topics { get; set; } //Many-Many
-        public List<string>? Groups { get; set; } //Many-Many
-        public List<string>? RespondedEvents { get; set; } //Many-Many
+        public string? Picture { get; set; }
+        public ICollection<PostUserReadDTO>? AuthoredPosts { get; set; } //One-Many
+        public ICollection<PostGroupReadDTO>? RecievedPosts { get; set; } //One-Many
+        public ICollection<EventUserReadDTO>? AuthoredEvents { get; set; } //One-Many
+        public ICollection<TopicUserReadDTO>? Topics { get; set; } //Many-Many
+        public ICollection<GroupUserReadDTO>? Groups { get; set; } //Many-Many
+        public ICollection<EventGroupReadDTO>? RespondedEvents { get; set; } //Many-Many
+        public ICollection<EventGroupReadDTO>? InvitedEvents { get; set; } //Many-Many
     }
 }

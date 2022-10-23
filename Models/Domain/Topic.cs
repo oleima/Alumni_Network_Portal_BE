@@ -9,10 +9,10 @@ namespace Alumni_Network_Portal_BE.Models.Domain
         // Fields
         [MaxLength(255)]
         [Required]
-        public string Name { get; set; }
+        public string Title { get; set; }
 
         [MaxLength(255)]
-        public string? Description { get; set; } //Nullable
+        public string? Body { get; set; } //Nullable
 
         // Relationships
         public ICollection<Post>? Posts { get; set; } //One-Many

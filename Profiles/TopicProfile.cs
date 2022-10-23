@@ -8,9 +8,9 @@ namespace Alumni_Network_Portal_BE.Profiles
     {
         public TopicProfile()
         {
-            CreateMap<Topic, TopicReadDTO>()
-                .ForMember(cdto => cdto.Users, opt => opt
-                .MapFrom(u => u.Users.Select(t => t.Username).ToArray()));
+            CreateMap<Topic, TopicReadDTO>();
+
+            CreateMap<Topic, TopicUserReadDTO>();
 
 
             CreateMap<TopicCreateDTO, Topic>();

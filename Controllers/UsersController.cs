@@ -5,15 +5,21 @@ using Alumni_Network_Portal_BE.Services.UserServices;
 using Alumni_Network_Portal_BE.Models.DTOs.UserDTO;
 using Alumni_Network_Portal_BE.Helpers;
 using Microsoft.AspNetCore.Authorization;
+using System.Xml.Linq;
+using System.Net.Mime;
 
 namespace Alumni_Network_Portal_BE.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Produces(MediaTypeNames.Application.Json)]
+    [Consumes(MediaTypeNames.Application.Json)]
+    [ApiConventionType(typeof(DefaultApiConventions))]
     public class UsersController : ControllerBase
     {
         private readonly IUserService _userService;
         private readonly IMapper _mapper;
+
         public UsersController(IMapper mapper, IUserService userService)
         {
             _userService = userService;
@@ -23,12 +29,19 @@ namespace Alumni_Network_Portal_BE.Controllers
         // GET: api/Users
         [Authorize]
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<UserReadDTO>>> GetUser()
+        public async Task<ActionResult<UserReadDTO>> GetUser()
         {
-            return _mapper.Map<List<UserReadDTO>>(await _userService.GetAllAsync());
+            string keycloakId = this.User.GetId();
+
+            if(_userService.getUserFromKeyCloak(keycloakId) == null)
+            {
+                return BadRequest();
+            }
+
+            return _mapper.Map<UserReadDTO>(await _userService.GetAsync(keycloakId));
         }
 
-        // GET: api/Users/5
+        // GET: api/Users/{id}
         [Authorize]
         [HttpGet("{id}")]
         public async Task<ActionResult<UserReadDTO>> GetUser(int id)
@@ -43,13 +56,15 @@ namespace Alumni_Network_Portal_BE.Controllers
             return _mapper.Map<UserReadDTO>(user);
         }
 
-        // PATCH: api/Users
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        // PATCH: api/Users/{id}
         [Authorize]
         [HttpPatch("{id}")]
-        public async Task<ActionResult> PatchUser(int id, UserUpdateDTO userDTO)
+        public async Task<ActionResult> PatchUser(int id, UserUpdateDTO userInput)
         {
-            if (id != userDTO.Id)
+            string keycloakId = this.User.GetId();
+            User userToPatch = _userService.getUserFromKeyCloak(keycloakId);
+
+            if (userToPatch.Id != id)
             {
                 return BadRequest();
             }
@@ -58,33 +73,35 @@ namespace Alumni_Network_Portal_BE.Controllers
             {
                 return NotFound();
             }
-
-            User domainUser = _mapper.Map<User>(userDTO);
-            await _userService.UpdateAsync(domainUser);
+            User patchUser = _mapper.Map<User>(userInput);
+            await _userService.UpdateAsync(patchUser,userToPatch);
 
             return NoContent();
         }
 
+        // POST: api/Users/
         [Authorize]
         [HttpPost]
-        public async Task<ActionResult> PostUser()
+        public async Task<ActionResult<User>> PostUser()
         {
-            //FIXME 
             var keycloakID = this.User.GetId();
+            var username = this.User.GetUsername();
             if (keycloakID == null)
             {
                 return NotFound();
             }
-            
-            User user = new User {
-                Username = "",
-                Status = "",
-                KeycloakId = keycloakID
-            };
 
-            await _userService.PostAsync(user);
+            if(_userService.getUserFromKeyCloak(keycloakID) != null)
+            {
+                return BadRequest();
+            }
 
-            return NoContent();
+            User domainUser = await _userService.PostAsync(keycloakID, username);
+
+            return CreatedAtAction("GetÙser",
+                new { id = domainUser.Id },
+                _mapper.Map<UserReadDTO>(domainUser));
+
         }
     }
 }

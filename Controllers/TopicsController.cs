@@ -12,11 +12,15 @@ using AutoMapper;
 using Alumni_Network_Portal_BE.Models.DTOs.TopicDTO;
 using Alumni_Network_Portal_BE.Helpers;
 using Microsoft.AspNetCore.Authorization;
+using System.Net.Mime;
 
 namespace Alumni_Network_Portal_BE.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Produces(MediaTypeNames.Application.Json)]
+    [Consumes(MediaTypeNames.Application.Json)]
+    [ApiConventionType(typeof(DefaultApiConventions))]
     public class TopicsController : ControllerBase
     {
         private readonly ITopicService _topicService;
@@ -27,14 +31,15 @@ namespace Alumni_Network_Portal_BE.Controllers
             _mapper = mapper;
         }
 
-        //TODO Authorization and exception handling
+        // GET: api/topics/
         [Authorize]
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<TopicReadDTO>>> GetTopics() //TODO Add search, limit and pagination
+        public async Task<ActionResult<IEnumerable<TopicReadDTO>>> GetTopics()
         {
             return _mapper.Map<List<TopicReadDTO>>(await _topicService.GetTopics());
         }
 
+        // GET: api/topics/{id}
         [Authorize]
         [HttpGet("{id}")]
         public async Task<ActionResult<TopicReadDTO>> GetTopic(int id)
@@ -42,6 +47,7 @@ namespace Alumni_Network_Portal_BE.Controllers
             return _mapper.Map<TopicReadDTO>(await _topicService.GetTopicById(id));
         }
 
+        // POST: api/topics/
         [Authorize]
         [HttpPost]
         public async Task<ActionResult> PostTopic(TopicCreateDTO topicDTO)
@@ -55,6 +61,7 @@ namespace Alumni_Network_Portal_BE.Controllers
 
         }
 
+        // POST: api/topics/{id}/join
         [Authorize]
         [HttpPost("{id}/join")]
         public async Task<ActionResult> JoinTopic(int id)
@@ -79,5 +86,29 @@ namespace Alumni_Network_Portal_BE.Controllers
 
         }
 
+        // DELETE: api/topics/{id}/leave
+        [Authorize]
+        [HttpDelete("{id}/Leave")]
+        public async Task<ActionResult> LeaveTopic(int id)
+        {
+            if (!_topicService.Exists(id))
+            {
+                return NotFound();
+            }
+
+            try
+            {
+                string keycloakID = this.User.GetId();
+                await _topicService.LeaveTopic(id, keycloakID);
+            }
+            catch (Exception)
+            {
+                return BadRequest("Error");
+            }
+
+            return NoContent();
+
+
+        }
     }
 }

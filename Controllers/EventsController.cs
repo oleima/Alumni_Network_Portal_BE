@@ -14,11 +14,17 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Alumni_Network_Portal_BE.Helpers;
 using System.Text.RegularExpressions;
+using Alumni_Network_Portal_BE.Models.DTOs.PostDTO;
+using System.Net.Mime;
+using Alumni_Network_Portal_BE.Models.DTOs.GroupDTO;
 
 namespace Alumni_Network_Portal_BE.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Produces(MediaTypeNames.Application.Json)]
+    [Consumes(MediaTypeNames.Application.Json)]
+    [ApiConventionType(typeof(DefaultApiConventions))]
     public class EventsController : ControllerBase
     {
         private readonly IEventService _eventService;
@@ -29,8 +35,7 @@ namespace Alumni_Network_Portal_BE.Controllers
             _mapper = mapper;
         }
 
-        //FIXME Different DTOs? Return object on delete?
-
+        // GET: api/events
         [Authorize]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<EventReadDTO>>> GetEvents()
@@ -39,24 +44,43 @@ namespace Alumni_Network_Portal_BE.Controllers
             return _mapper.Map<List<EventReadDTO>>(await _eventService.GetEvents(keycloakId));
         }
 
+        // GET: api/events/{id}
         [Authorize]
-        [HttpPost]
-        public async Task<ActionResult<EventCreateDTO>> CreateEvent(EventCreateDTO ev)
+        [HttpGet("{id}")]
+        public async Task<ActionResult<EventReadDTO>> GetEventById(int id)
         {
-            Event domainEvent = _mapper.Map<Event>(ev);
+            string keycloakId = this.User.GetId();
 
-            domainEvent = await _eventService.CreateEvent(domainEvent);
+            if(!_eventService.Exists(id))
+            {
+                return NotFound();
+            }
 
-            return CreatedAtAction("GetEvent",
-                new { id = domainEvent.Id },
-                _mapper.Map<EventReadDTO>(domainEvent));
+            return  _mapper.Map<EventReadDTO>(await _eventService.GetEventById(keycloakId, id));
         }
 
+        // POST: api/events
         [Authorize]
-        [HttpPut("{id}")]
+        [HttpPost]
+        public async Task<ActionResult<Event>> CreateEvent(EventCreateDTO ev)
+        {
+            string keycloakId = this.User.GetId();
+            Event domainEvent = _mapper.Map<Event>(ev);
+
+            domainEvent = await _eventService.AddEvent(domainEvent, keycloakId);
+            return CreatedAtAction("GetEvents",
+                new { Id = domainEvent.Id },
+                _mapper.Map<EventUserReadDTO>(domainEvent));
+        }
+
+        // PATCH: api/events/{id}
+        [Authorize]
+        [HttpPatch("{id}")]
         public async Task<IActionResult> UpdateEvent(int id, EventUpdateDTO ev)
         {
-            if(id != ev.Id)
+            string keycloakId = this.User.GetId();
+
+            if (id != ev.Id)
             {
                 return BadRequest();
             }
@@ -66,11 +90,12 @@ namespace Alumni_Network_Portal_BE.Controllers
                 return NotFound();
             }
             Event domainEvent = _mapper.Map<Event>(ev);
-            await _eventService.UpdateEvent(domainEvent);
+            await _eventService.UpdateEvent(domainEvent, keycloakId, id);
 
             return NoContent();
         }
 
+        // POST: api/events/{eventId}/invite/group/{groupId}
         [Authorize]
         [HttpPost("{eventId}/invite/group/{groupId}")]
         public async Task<IActionResult> CreateGroupEventInvitation(int eventId, int groupId)
@@ -84,15 +109,15 @@ namespace Alumni_Network_Portal_BE.Controllers
             {
                 await _eventService.CreateGroupEventInvitation(eventId, groupId);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-
-                // Error hanalding
+                return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
             }
 
             return NoContent();
         }
 
+        // DELETE: api/events/{eventId}/invite/group/{groupId}
         [Authorize]
         [HttpDelete("{eventId}/invite/group/{groupId}")]
         public async Task<IActionResult> DeleteGroupEventInvitation(int eventId, int groupId)
@@ -106,6 +131,7 @@ namespace Alumni_Network_Portal_BE.Controllers
             return NoContent();
         }
 
+        // POST: api/events/{eventId}/invite/topic/{topicId}
         [Authorize]
         [HttpPost("{eventId}/invite/topic/{topicId}")]
         public async Task<IActionResult> CreateTopicEventInvitation(int eventId, int topicId)
@@ -119,15 +145,15 @@ namespace Alumni_Network_Portal_BE.Controllers
             {
                 await _eventService.CreateTopicEventInvitation(eventId, topicId);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-
-                // Error hanalding
+                return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
             }
 
             return NoContent();
         }
 
+        // DELETE: api/events/{eventId}/invite/topic/{topicId}
         [Authorize]
         [HttpDelete("{eventId}/invite/topic/{topicId}")]
         public async Task<IActionResult> DeleteTopicEventInvitation(int eventId, int topicId)
@@ -141,6 +167,7 @@ namespace Alumni_Network_Portal_BE.Controllers
             return NoContent();
         }
 
+        // POST: api/events/{eventId}/invite/user/{userId}
         [Authorize]
         [HttpPost("{eventId}/invite/user/{userId}")]
         public async Task<IActionResult> CreateUserEventInvitation(int eventId, int userId)
@@ -154,15 +181,15 @@ namespace Alumni_Network_Portal_BE.Controllers
             {
                 await _eventService.CreateUserEventInvitation(eventId, userId);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-
-                // Error hanalding
+                return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
             }
 
             return NoContent();
         }
 
+        // DELETE: api/events/{eventId}/invite/user/{userId}
         [Authorize]
         [HttpDelete("{eventId}/invite/user/{userId}")]
         public async Task<IActionResult> DeleteUserEventInvitation(int eventId, int userId)
@@ -176,6 +203,7 @@ namespace Alumni_Network_Portal_BE.Controllers
             return NoContent();
         }
 
+        // POST: api/events/{eventId}/rsvp
         [Authorize]
         [HttpPost("{eventId}/rsvp")]
         public async Task<IActionResult> CreateEventRSVP(int eventId)
@@ -190,10 +218,9 @@ namespace Alumni_Network_Portal_BE.Controllers
                 string keycloakId = this.User.GetId();
                 await _eventService.CreateEventRSVP(eventId, keycloakId);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-
-                // Error hanalding
+                return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
             }
 
             return NoContent();
