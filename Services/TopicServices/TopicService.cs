@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Alumni_Network_Portal_BE.Services.TopicServices
 {
+    ///<inheritdoc[cref = "ITopicService"]/>
     public class TopicService : ITopicService
     {
         private readonly AlumniNetworkDbContext _context;

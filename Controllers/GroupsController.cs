@@ -55,8 +55,7 @@ namespace Alumni_Network_Portal_BE.Controllers
             return _mapper.Map<GroupReadDTO>(group);
         }
 
-        // Put: api/Groups/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        // POST: api/Groups
         [Authorize]
         [HttpPost]
         public async Task<ActionResult<Group>> CreateGroup(GroupCreateDTO groupDTO)
@@ -73,7 +72,7 @@ namespace Alumni_Network_Portal_BE.Controllers
 
         #region Updating linking table
 
-        // Post users to a specific movie in linking table
+        // POST: api/Groups/{id}/join
         [Authorize]
         [HttpPost("{id}/Join")]
         public async Task<IActionResult> UpdateGroupUser(int id)
@@ -100,6 +99,7 @@ namespace Alumni_Network_Portal_BE.Controllers
             return NoContent();
         }
 
+        // DELETE: api/Groups/{id}/leave
         [Authorize]
         [HttpDelete("{id}/Leave")]
         public async Task<IActionResult> LeaveGroupUser(int id)

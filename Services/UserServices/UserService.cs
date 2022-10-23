@@ -7,6 +7,7 @@ using Newtonsoft.Json.Linq;
 
 namespace Alumni_Network_Portal_BE.Services.UserServices
 {
+    ///<inheritdoc[cref = "IUserService"]/>
     public class UserService : IUserService
     {
         private readonly AlumniNetworkDbContext _context;

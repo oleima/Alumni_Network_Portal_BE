@@ -41,7 +41,7 @@ namespace Alumni_Network_Portal_BE.Controllers
             return _mapper.Map<UserReadDTO>(await _userService.GetAsync(keycloakId));
         }
 
-        // GET: api/Users/5
+        // GET: api/Users/{id}
         [Authorize]
         [HttpGet("{id}")]
         public async Task<ActionResult<UserReadDTO>> GetUser(int id)
@@ -56,8 +56,7 @@ namespace Alumni_Network_Portal_BE.Controllers
             return _mapper.Map<UserReadDTO>(user);
         }
 
-        // PATCH: api/Users
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        // PATCH: api/Users/{id}
         [Authorize]
         [HttpPatch("{id}")]
         public async Task<ActionResult> PatchUser(int id, UserUpdateDTO userInput)
@@ -74,21 +73,17 @@ namespace Alumni_Network_Portal_BE.Controllers
             {
                 return NotFound();
             }
-
-           
-
-
             User patchUser = _mapper.Map<User>(userInput);
             await _userService.UpdateAsync(patchUser,userToPatch);
 
             return NoContent();
         }
 
+        // POST: api/Users/
         [Authorize]
         [HttpPost]
         public async Task<ActionResult<User>> PostUser()
         {
-            //FIXME 
             var keycloakID = this.User.GetId();
             var username = this.User.GetUsername();
             if (keycloakID == null)

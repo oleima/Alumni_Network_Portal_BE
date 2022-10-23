@@ -27,9 +27,11 @@ To start the project locally it is required to have the secret IssuerUI and KeyU
 In Package Manager Console:
 update-database
 ```
-## User manual and API Documentation
-[User Manual](PATH) 
-[API Documentation](PATH) 
+## API Documentation
+[API Documentation](API_Documentation.pdf) 
+
+## Database Schema
+![Screenshot](Database.png)
 ## Contributors
 | Name | Linkedin |
 | ------ | ------ |

@@ -8,6 +8,7 @@ using Group = Alumni_Network_Portal_BE.Models.Domain.Group;
 
 namespace Alumni_Network_Portal_BE.Services.PostServices
 {
+    ///<inheritdoc[cref = "IPostService"]/>
     public class PostService : IPostService
     {
         private readonly AlumniNetworkDbContext _context;
@@ -16,7 +17,6 @@ namespace Alumni_Network_Portal_BE.Services.PostServices
         {
             _context = context;
         }
-        //Fixme: Reverse orer to chronologically reversed
 
         public  IEnumerable<Post> Paginate(IEnumerable<Post> posts, Pagination pagination)
         {
@@ -105,7 +105,6 @@ namespace Alumni_Network_Portal_BE.Services.PostServices
                 .Include(c => c.Replies)
                 .Where(c => c.EventId == eventId)
                 .Where(c => c.ParentId == null)
-                .Where(c => c.Event.UserInvited.Contains(user))
                 .OrderByDescending(c => c.LastUpdated.Date)
                 .ThenBy(c => c.LastUpdated.TimeOfDay)
                 .ToListAsync();

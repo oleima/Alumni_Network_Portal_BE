@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Alumni_Network_Portal_BE.Services.GroupServices
 {
+    ///<inheritdoc[cref = "IGroupService"]/>
     public class GroupService : IGroupService
     {
         private readonly AlumniNetworkDbContext _context;

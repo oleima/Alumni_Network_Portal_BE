@@ -27,6 +27,7 @@ namespace Alumni_Network_Portal_BE.Controllers
         }
 
         #region Generic CRUD with DTOs
+        // GET: api/posts/
         [Authorize]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<PostReadDTO>>> GetPosts([FromQuery]Pagination ?pagination)
@@ -43,6 +44,8 @@ namespace Alumni_Network_Portal_BE.Controllers
                 
             return _mapper.Map<List<PostReadDTO>>(await _postService.GetAllAsync(keycloakId));
         }
+
+        // GET: api/posts/user
         [Authorize]
         [HttpGet("user")]
         public async Task<ActionResult<IEnumerable<PostReadDTO>>> GetRecievedPosts([FromQuery] Pagination? pagination)
@@ -60,6 +63,8 @@ namespace Alumni_Network_Portal_BE.Controllers
 
             return _mapper.Map<List<PostReadDTO>>(await _postService.GetMessagesAsync(keycloakId));
         }
+
+        // GET: api/posts/user/{id}
         [Authorize]
         [HttpGet("user/{id}")]
         public async Task<ActionResult<IEnumerable<PostReadDTO>>> GetRecievedFromAuthorPosts(int id, [FromQuery] Pagination? pagination)
@@ -77,6 +82,8 @@ namespace Alumni_Network_Portal_BE.Controllers
 
             return _mapper.Map<List<PostReadDTO>>(await _postService.GetMessagesFromAuthorAsync(id,keycloakId));
         }
+
+        // GET: api/posts/group/{id}
         [Authorize]
         [HttpGet("group/{id}")]
         public async Task<ActionResult<IEnumerable<PostReadDTO>>> GetGroupPosts(int id, [FromQuery] Pagination? pagination)
@@ -94,6 +101,8 @@ namespace Alumni_Network_Portal_BE.Controllers
 
             return _mapper.Map<List<PostReadDTO>>(await _postService.GetGroupPostsAsync(id, keycloakId));
         }
+
+        // GET: api/posts/topic/{id}
         [Authorize]
         [HttpGet("topic/{id}")]
         public async Task<ActionResult<IEnumerable<PostReadDTO>>> GetTopicPosts(int id, [FromQuery] Pagination? pagination)
@@ -111,6 +120,8 @@ namespace Alumni_Network_Portal_BE.Controllers
 
             return _mapper.Map<List<PostReadDTO>>(await _postService.GetTopicPostsAsync(id, keycloakId));
         }
+
+        // GET: api/posts/event/{id}
         [Authorize]
         [HttpGet("event/{id}")]
         public async Task<ActionResult<IEnumerable<PostReadDTO>>> GetEventPosts(int id, [FromQuery] Pagination? pagination)
@@ -128,6 +139,8 @@ namespace Alumni_Network_Portal_BE.Controllers
 
             return _mapper.Map<List<PostReadDTO>>(await _postService.GetEventPostsAsync(id, keycloakId));
         }
+
+        // POST: api/posts/
         [Authorize]
         [HttpPost]
         public async Task<ActionResult<Post>> CreatePost(PostCreateDTO dtoPost)
@@ -154,6 +167,7 @@ namespace Alumni_Network_Portal_BE.Controllers
 
         }
 
+        // PUT: api/posts/{id}
         [Authorize]
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdatePost(int id, PostUpdateDTO dtoPost)

@@ -5,6 +5,10 @@ namespace Alumni_Network_Portal_BE.Helpers
 {
     public class SeedHelper
     {
+        /// <summary>
+        /// Seed data for users
+        /// </summary>
+        /// <returns>List of the seeded users</returns>
         public static List<User> GetUserSeed()
         {
             List<User> users = new List<User>();
@@ -46,6 +50,10 @@ namespace Alumni_Network_Portal_BE.Helpers
             });
             return users;
         }
+        /// <summary>
+        /// Seed data for group
+        /// </summary>
+        /// <returns>List of seeded groups</returns>
         public static List<Group> GetGroupSeed()
         {
             List<Group> groups = new List<Group>();
@@ -121,6 +129,10 @@ namespace Alumni_Network_Portal_BE.Helpers
             });
             return groups;
         }
+        /// <summary>
+        /// Seed data for posts
+        /// </summary>
+        /// <returns>List of seeded posts</returns>
         public static List<Post> GetPostSeed()
         {
             List<Post> posts = new List<Post>();
@@ -1020,6 +1032,10 @@ namespace Alumni_Network_Portal_BE.Helpers
 
             return posts;
         }
+        /// <summary>
+        /// Seed data for topics
+        /// </summary>
+        /// <returns>List of seeded topics</returns>
         public static List<Topic> GetTopicSeed()
         {
             List<Topic> topics = new List<Topic>();
@@ -1085,6 +1101,10 @@ namespace Alumni_Network_Portal_BE.Helpers
             });
             return topics;
         }
+        /// <summary>
+        /// Seed data for events
+        /// </summary>
+        /// <returns>List of seeded events</returns>
         public static List<Event> GetEventSeed()
         {
             List<Event> events = new List<Event>();

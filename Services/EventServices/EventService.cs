@@ -6,6 +6,7 @@ using Group = Alumni_Network_Portal_BE.Models.Domain.Group;
 
 namespace Alumni_Network_Portal_BE.Services.EventServices
 {
+    ///<inheritdoc[cref = "IEventService"]/>
     public class EventService : IEventService
     {
         private readonly AlumniNetworkDbContext _context;
