@@ -31,7 +31,7 @@ update-database
 [API Documentation](API_Documentation.pdf) 
 
 ## Database Schema
-![Screenshot](Database.png)
+![Model](Database.png)
 ## Contributors
 | Name | Linkedin |
 | ------ | ------ |
